@@ -7,7 +7,7 @@
     tools:context="com.example.you.lsmisclient.lab.LabActivity"
     android:orientation="vertical">
     <TextView
-            android:text="实验室信息"
+            android:text="实验室分览"
             android:gravity="center"
             android:background="@color/colorPrimary"
             android:textSize="20dp"

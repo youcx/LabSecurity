@@ -6,4 +6,5 @@ package com.example.you.lsmisclient.http;
  */
 
 public class HttpTask {
+    private static final String TAG = "HttpTask>>>>>>>";
 }

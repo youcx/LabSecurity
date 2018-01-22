@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +25,8 @@ import butterknife.ButterKnife;
 public class MineFragment extends Fragment implements View.OnClickListener{
 
     //控件绑定
-    @BindView(R.id.passwd_change)
-    TextView passwd_change;
+    @BindView(R.id.quit)
+    CardView quit;
     @BindView(R.id.about)
     TextView about;
     @BindView(R.id.settings)
@@ -45,7 +46,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         //绑定控件
         ButterKnife.bind(this,view);
         //TextView点击监听
-        passwd_change.setOnClickListener(this);
+        quit.setOnClickListener(this);
         about.setOnClickListener(this);
         setttings.setOnClickListener(this);
         return view;
@@ -55,7 +56,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.passwd_change:
+            case R.id.quit:
                 changePasswdDialog();
                 break;
             case R.id.about:

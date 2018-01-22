@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.check.SecurityCheckActivity;
+import com.example.you.lsmisclient.list.CollegeListActivity;
+import com.example.you.lsmisclient.list.HazardListActivity;
+import com.example.you.lsmisclient.list.LevelListActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,13 +39,19 @@ public class LabActivity extends AppCompatActivity implements View.OnClickListen
         switch (v.getId())
         {
             case R.id.browse_as_college:
-                Toast.makeText(this,"学院分览",Toast.LENGTH_SHORT).show();
+                Intent intent1=new Intent(this,CollegeListActivity.class);
+                startActivity(intent1);
+               // Toast.makeText(this,"学院分览",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.browse_as_level:
-                Toast.makeText(this,"级别分览",Toast.LENGTH_SHORT).show();
+                Intent intent2=new Intent(this,LevelListActivity.class);
+                startActivity(intent2);
+               // Toast.makeText(this,"级别分览",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.browse_as_hazard:
-                Toast.makeText(this,"危险源分览",Toast.LENGTH_SHORT).show();
+                Intent intent3=new Intent(this,HazardListActivity.class);
+                startActivity(intent3);
+                //Toast.makeText(this,"危险源分览",Toast.LENGTH_SHORT).show();
                 break;
 
         }
