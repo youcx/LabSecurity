@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_margin="6dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/lab_name"
+            android:text="ACM"
+            android:textColor="@color/cardview_dark_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/lab_college"
+            android:text="信息工程学院"
+            android:layout_below="@+id/lab_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/lab_level"
+            android:text="国家重点"
+            android:layout_toRightOf="@+id/lab_college"
+            android:layout_alignTop="@+id/lab_college"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/lab_hazard"
+            android:text="辐射"
+            android:layout_toRightOf="@+id/lab_level"
+            android:layout_alignTop="@+id/lab_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/lab_safeperson_show"
+            android:text="安全督察员 : "
+            android:textColor="@color/cardview_dark_background"
+            android:layout_below="@+id/lab_college"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/lab_safeperson"
+            android:text="老师1"
+            android:textColor="@color/cardview_dark_background"
+            android:layout_toRightOf="@+id/lab_safeperson_show"
+            android:layout_alignTop="@+id/lab_safeperson_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/lab_teacher_show"
+            android:text="实验室负责人 : "
+            android:textColor="@color/cardview_dark_background"
+            android:layout_below="@+id/lab_safeperson_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/lab_teacher"
+            android:text="老师2"
+            android:textColor="@color/cardview_dark_background"
+            android:layout_toRightOf="@+id/lab_teacher_show"
+            android:layout_alignTop="@+id/lab_teacher_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
