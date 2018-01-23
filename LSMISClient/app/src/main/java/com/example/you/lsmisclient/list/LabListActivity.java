@@ -11,6 +11,7 @@ import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.adapter.LabAdapter;
 import com.example.you.lsmisclient.bean.Lab;
 import com.example.you.lsmisclient.lab.LabInfoActivity;
+import com.example.you.lsmisclient.lab.LabInfoChangeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class LabListActivity extends AppCompatActivity {
         labAdapter.setLabItemClickListener(new LabAdapter.LabItemClickListener() {
             @Override
             public void onLabItemClickListener(View view, Lab lab) {
-                Intent intent=new Intent(getBaseContext(), LabInfoActivity.class);
+                Intent intent=new Intent(getBaseContext(), LabInfoChangeActivity.class);
                 startActivity(intent);
             }
         });
@@ -52,8 +53,8 @@ public class LabListActivity extends AppCompatActivity {
     private void initLab()
     {
         datas=new ArrayList<Lab>();
-        datas.add(new Lab("ACM","信息工程学院","院级","辐射","老师1","老师2"));
-        datas.add(new Lab("306","信息工程学院","院级","辐射","老师1","老师3"));
-        datas.add(new Lab("402","信息工程学院","院级","辐射","老师1","老师4"));
+        datas.add(new Lab("ACM","信息工程学院","国家级","辐射","老师1","老师2"));
+        datas.add(new Lab("306","信息工程学院","院级","放射物","老师1","老师3"));
+        datas.add(new Lab("402","生命学院","院级","易燃易爆","老师1","老师4"));
     }
 }

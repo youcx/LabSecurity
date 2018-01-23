@@ -23,14 +23,26 @@ public class LabInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lab_info);
         OkHttpClient client=new OkHttpClient();
+        //String json1="{\"area\":\"\", \"labLevelId\":\"\", \"buildId\":\"\", \"departmentId\":\"\", \"labName\":\"\", \"denoterInfor\":\"\", \"responseName\":\"\", \"responsePhone\":\"\", \"managerName\":\"\", \"managerPhone\":\"\", \"labStatus\":\"\", \"submitPersonName\":\"\"}";
         String json1="{\n" +
-                "\t\"password\":123456,\n" +
-                "\t\"phoneNum\":18683667326\n" +
+                "\t\"labLevelId\":3,\n" +
+                "\t\"labName\":\"ACM\",\n" +
+                "\t\"labAddr\":\"东六\",\n" +
+                "\t\"buildId\":11,\n" +
+                "\t\"departmentId\":12,\n" +
+                "\t\"denoterInfor\":\"ACM工作室\",\n" +
+                "\t\"area\":11,\n" +
+                "\t\"responseName\":\"郑小东\",\n" +
+                "\t\"responsePhone\":\"11\",\n" +
+                "\t\"managerName\":\"年后\",\n" +
+                "\t\"managerPhone\":\"22\",\n" +
+                "\t\"labStatus\":1,\n" +
+                "\t\"submitPersonName\":\"SWUST\"\n" +
                 "}";
         RequestBody body=RequestBody.create(MediaType.parse("application/json; charset=utf-8"),json1);
         Request request=new Request.Builder()
                 .post(body)
-                .url("http://222.196.33.254:8080/rm_httpserver/login")
+                .url("http://192.168.43.174/labinfor/addinfor")
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override

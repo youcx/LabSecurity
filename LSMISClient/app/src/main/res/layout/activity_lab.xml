@@ -119,5 +119,35 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#eeeeee"/>
+    <LinearLayout
+        android:id="@+id/browse_as_all"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:onClick="onClick"
+        android:clickable="true">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:src="@mipmap/barchart_72px_"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:text="所有实验室"
+                android:textSize="20dp"
+                android:textColor="@color/cardview_dark_background"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="浏览所有实验室信息"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -12,6 +12,7 @@ import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.check.SecurityCheckActivity;
 import com.example.you.lsmisclient.list.CollegeListActivity;
 import com.example.you.lsmisclient.list.HazardListActivity;
+import com.example.you.lsmisclient.list.LabListActivity;
 import com.example.you.lsmisclient.list.LevelListActivity;
 
 import butterknife.BindView;
@@ -51,7 +52,11 @@ public class LabActivity extends AppCompatActivity implements View.OnClickListen
             case R.id.browse_as_hazard:
                 Intent intent3=new Intent(this,HazardListActivity.class);
                 startActivity(intent3);
+                break;
                 //Toast.makeText(this,"危险源分览",Toast.LENGTH_SHORT).show();
+            case R.id.browse_as_all:
+                Intent intent4=new Intent(this, LabListActivity.class);
+                startActivity(intent4);
                 break;
 
         }

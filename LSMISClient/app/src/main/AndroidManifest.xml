@@ -32,7 +32,9 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".list.LabListActivity" />
-        <activity android:name=".lab.LabInfoActivity"></activity>
+        <activity android:name=".lab.LabInfoActivity" />
+        <activity android:name=".lab.LabInfoChangeActivity" />
+        <activity android:name=".contacts.ContactsActivity"></activity>
     </application>
 
 </manifest>

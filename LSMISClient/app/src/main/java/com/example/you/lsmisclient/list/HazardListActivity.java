@@ -28,7 +28,8 @@ public class HazardListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hazard_list); //绑定控件
+        setContentView(R.layout.activity_hazard_list);
+        //绑定控件
         ButterKnife.bind(this);
         //init
         initHazard();

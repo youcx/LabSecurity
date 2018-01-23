@@ -16,6 +16,7 @@ import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.bean.MyCard;
 import com.example.you.lsmisclient.check.SecurityCheckActivity;
 import com.example.you.lsmisclient.check.SelectCheckMissionActivity;
+import com.example.you.lsmisclient.contacts.ContactsActivity;
 import com.example.you.lsmisclient.lab.LabActivity;
 
 import java.util.ArrayList;
@@ -60,6 +61,10 @@ public class HomeFragment extends Fragment {
                 }else if(myCard.getCard_name().equals("安全检查"))
                 {
                     Intent intent=new Intent(getActivity(), SelectCheckMissionActivity.class);
+                    startActivity(intent);
+                }else if(myCard.getCard_name().equals("责任人"))
+                {
+                    Intent intent =new Intent(getActivity(), ContactsActivity.class);
                     startActivity(intent);
                 }
             }
