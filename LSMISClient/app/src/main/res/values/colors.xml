@@ -3,4 +3,5 @@
     <color name="colorPrimary">#5CACEE</color>
     <color name="colorPrimaryDark">#5CACEE</color>
     <color name="colorAccent">#5CACEE</color>
+    <color name="titleColor">#eeeeee</color>
 </resources>

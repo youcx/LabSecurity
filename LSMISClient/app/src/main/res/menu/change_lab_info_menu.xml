@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/toolbar_scan"
-        android:title="扫描二维码"
-        android:icon="@mipmap/ic_scan_qr"
+        android:id="@+id/change_labinfo_menu"
+        android:icon="@mipmap/ic_edit_"
+        android:title=""
         app:showAsAction="always"/>
 
 </menu>

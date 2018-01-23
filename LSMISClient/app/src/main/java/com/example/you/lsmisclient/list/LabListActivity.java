@@ -39,7 +39,7 @@ public class LabListActivity extends AppCompatActivity {
         labAdapter.setLabItemClickListener(new LabAdapter.LabItemClickListener() {
             @Override
             public void onLabItemClickListener(View view, Lab lab) {
-                Intent intent=new Intent(getBaseContext(), LabInfoChangeActivity.class);
+                Intent intent=new Intent(getBaseContext(), LabInfoActivity.class);
                 startActivity(intent);
             }
         });

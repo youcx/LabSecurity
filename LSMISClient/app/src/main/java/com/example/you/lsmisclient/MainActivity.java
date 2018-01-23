@@ -1,5 +1,6 @@
 package com.example.you.lsmisclient;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import com.example.you.lsmisclient.fragment.AboutFragment;
 import com.example.you.lsmisclient.fragment.HomeFragment;
 import com.example.you.lsmisclient.fragment.ManageFragment;
 import com.example.you.lsmisclient.fragment.MineFragment;
+import com.example.you.lsmisclient.qr.CaptureActivity;
 
 import java.util.ArrayList;
 
@@ -142,7 +144,8 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.toolbar_scan:
-                showToast("开始扫描");
+                Intent intent=new Intent(this, CaptureActivity.class);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
