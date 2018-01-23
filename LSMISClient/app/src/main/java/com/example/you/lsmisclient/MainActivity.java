@@ -19,12 +19,12 @@ import com.example.you.lsmisclient.fragment.AboutFragment;
 import com.example.you.lsmisclient.fragment.HomeFragment;
 import com.example.you.lsmisclient.fragment.ManageFragment;
 import com.example.you.lsmisclient.fragment.MineFragment;
-import com.example.you.lsmisclient.qr.CaptureActivity;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.example.you.lsmisclient.qr.QrScannerActivity;
 
 public class MainActivity extends AppCompatActivity {
     //绑定控件
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.toolbar_scan:
-                Intent intent=new Intent(this, CaptureActivity.class);
+                Intent intent=new Intent(this, QrScannerActivity.class);
                 startActivity(intent);
                 break;
         }
