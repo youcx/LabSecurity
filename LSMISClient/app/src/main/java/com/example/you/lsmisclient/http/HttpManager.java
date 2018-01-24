@@ -22,8 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpManager {
     //服务端基地址
-   // public static final String BASE_URL="http://192.168.43.174:/";
-    public static final String BASE_URL="http://www.izaodao.com/Api/";
+    public static final String BASE_URL="http://119.29.201.35:8080/";
+    //public static final String BASE_URL="http://www.izaodao.com/Api/";
     //请求超时时间
     private static final int DEFAULT_TIME_OUT=5;
     //retrofit

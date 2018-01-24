@@ -28,7 +28,7 @@ public interface HttpApi {
      * @param labInfo
      * @return
      */
-    @POST("labinfor/addinfor")
+    @POST("labinfor/submitinfor")
     Observable<Result> changeLabInfo(@Body LabInfo labInfo);
 
     /**

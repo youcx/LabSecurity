@@ -1,6 +1,10 @@
 package com.example.you.lsmisclient.lab;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,8 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.you.lsmisclient.R;
+import com.example.you.lsmisclient.fragment.HomeFragment;
+import com.example.you.lsmisclient.fragment.LabBaseInfoFragment;
+import com.example.you.lsmisclient.fragment.LabSecurityInfoFragment;
+import com.example.you.lsmisclient.fragment.ManageFragment;
+import com.example.you.lsmisclient.fragment.MineFragment;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +36,10 @@ public class LabInfoActivity extends AppCompatActivity {
     //绑定控件
     @BindView(R.id.lab_info_toolbar)
     Toolbar labInfoToolbar;
+    @BindView(R.id.lab_info_tablayout)
+    TabLayout labInfoTabLayout;
+    @BindView(R.id.lab_info_viewpager)
+    ViewPager labInfoViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +50,32 @@ public class LabInfoActivity extends AppCompatActivity {
         //toolbar
         labInfoToolbar.setTitle("实验室信息");
         setSupportActionBar(labInfoToolbar);
+        //Fragment
+        final ArrayList<Fragment> fgList=new ArrayList<>(2);
+        fgList.add(new LabBaseInfoFragment());
+        fgList.add(new LabSecurityInfoFragment());
+        //Fragment适配器
+        FragmentPagerAdapter mFragmentPagerAdapter=new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fgList.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return fgList.size();
+            }
+        };
+        //ViewPager设置
+        labInfoViewPager.setAdapter(mFragmentPagerAdapter);
+        //labInfoViewPager.setOffscreenPageLimit(1);//预加载剩下三页
+        //labInfoTabLayout.addTab(newTab());
+        labInfoTabLayout.setupWithViewPager(labInfoViewPager);
+        labInfoTabLayout.getTabAt(0).setText("基本信息");
+        labInfoTabLayout.getTabAt(1).setText("安全信息");
+
+
+
     }
 
     @Override
