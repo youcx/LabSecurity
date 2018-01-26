@@ -5,15 +5,16 @@ package com.example.you.lsmisclient.bean;
  */
 
 public class Result<T> {
-    private T result;
+    private T data;
     private int status;
     private String message;
-    public T getResult() {
-        return result;
+
+    public T getData() {
+        return data;
     }
 
-    public void setResult(T result) {
-        this.result = result;
+    public void setData(T data) {
+        this.data = data;
     }
 
     public String getMessage() {
@@ -34,10 +35,10 @@ public class Result<T> {
 
     @Override
     public String toString() {
-        return "Result{" +
-                "message='" + message + '\'' +
-                ", result=" + result +
-                ", status=" + status +
-                '}';
+        return "{\"Result\":{"
+                + "\"data\":" + data
+                + ", \"status\":\"" + status + "\""
+                + ", \"message\":\"" + message + "\""
+                + "}}";
     }
 }

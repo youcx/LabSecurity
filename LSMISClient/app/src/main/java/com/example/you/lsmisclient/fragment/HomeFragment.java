@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
                     startActivity(intent);
                 }else if(myCard.getCard_name().equals("安全检查"))
                 {
-                    Intent intent=new Intent(getActivity(), SelectCheckMissionActivity.class);
+                    Intent intent=new Intent(getActivity(), SecurityCheckActivity.class);
                     startActivity(intent);
                 }else if(myCard.getCard_name().equals("责任人"))
                 {

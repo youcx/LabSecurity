@@ -7,10 +7,29 @@ package com.example.you.lsmisclient.bean;
 public class LabLevel {
     String levelName;
     String labCount;
+    int labLevel;
 
-    public LabLevel(String levelName, String labCount) {
+    public LabLevel(String labCount, String levelName) {
         this.labCount = labCount;
         this.levelName = levelName;
+    }
+
+    public LabLevel(String labCount, int labLevel, String levelName) {
+        this.labCount = labCount;
+        this.labLevel = labLevel;
+        this.levelName = levelName;
+    }
+
+    public LabLevel(String levelName) {
+        this.levelName = levelName;
+    }
+
+    public int getLabLevel() {
+        return labLevel;
+    }
+
+    public void setLabLevel(int labLevel) {
+        this.labLevel = labLevel;
     }
 
     public String getLabCount() {

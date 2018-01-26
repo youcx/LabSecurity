@@ -5,14 +5,21 @@ package com.example.you.lsmisclient.bean;
  */
 
 public class LabInfo {
+    int ID;
     String labLevelId;
-    String buildId;
-    String departmentId;
     String labName;
+    String buildId;
+    //实验室具体等级
+    String detailLevelName;
+    //实验室等级《国家级等》
+    String mainLevelName;
+    //所属学院id和名称
+    String departmentId;
+    String departmentName;
     String labAddr;
     String denoterInfor;
     String area;
-    String responseName;
+    String responserName;
     String responsePhone;
     String managerName;
     String managerPhone;
@@ -20,6 +27,38 @@ public class LabInfo {
     String submitPersonName;
 
     public LabInfo() {
+    }
+
+    public String getMainLevelName() {
+        return mainLevelName;
+    }
+
+    public void setMainLevelName(String mainLevelName) {
+        this.mainLevelName = mainLevelName;
+    }
+
+    public String getDetailLevelName() {
+        return detailLevelName;
+    }
+
+    public void setDetailLevelName(String detailLevelName) {
+        this.detailLevelName = detailLevelName;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getLabAddr() {
@@ -102,12 +141,12 @@ public class LabInfo {
         this.managerPhone = managerPhone;
     }
 
-    public String getResponseName() {
-        return responseName;
+    public String getResponserName() {
+        return responserName;
     }
 
-    public void setResponseName(String responseName) {
-        this.responseName = responseName;
+    public void setResponserName(String responserName) {
+        this.responserName = responserName;
     }
 
     public String getResponsePhone() {
@@ -130,12 +169,17 @@ public class LabInfo {
     public String toString() {
         return "{\"LabInfo\":{"
                 + "\"area\":\"" + area + "\""
+                + ", \"ID\":\"" + ID + "\""
                 + ", \"labLevelId\":\"" + labLevelId + "\""
-                + ", \"buildId\":\"" + buildId + "\""
-                + ", \"departmentId\":\"" + departmentId + "\""
                 + ", \"labName\":\"" + labName + "\""
+                + ", \"buildId\":\"" + buildId + "\""
+                + ", \"detailLevelName\":\"" + detailLevelName + "\""
+                + ", \"mainLevelName\":\"" + mainLevelName + "\""
+                + ", \"departmentId\":\"" + departmentId + "\""
+                + ", \"departmentName\":\"" + departmentName + "\""
+                + ", \"labAddr\":\"" + labAddr + "\""
                 + ", \"denoterInfor\":\"" + denoterInfor + "\""
-                + ", \"responseName\":\"" + responseName + "\""
+                + ", \"responserName\":\"" + responserName + "\""
                 + ", \"responsePhone\":\"" + responsePhone + "\""
                 + ", \"managerName\":\"" + managerName + "\""
                 + ", \"managerPhone\":\"" + managerPhone + "\""

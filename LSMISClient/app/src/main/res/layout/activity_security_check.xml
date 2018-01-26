@@ -1,13 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_security_check"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.example.you.lsmisclient.check.SecurityCheckActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/security_check_toolbar"
+        app:titleTextColor="#eeeeee"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@mipmap/background_toolbar"></android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/background4"
+        android:orientation="vertical">
+        <android.support.v7.widget.CardView
+            android:id="@+id/security_check_start"
+            card:cardCornerRadius="40dp"
+            app:cardElevation="10dp"
+            android:onClick="onClick"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="20dp">
+            <TextView
+                android:text="开始检查"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/security_check_review"
+            android:onClick="onClick"
+            android:clickable="true"
+            card:cardCornerRadius="40dp"
+            app:cardElevation="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="20dp">
+            <TextView
+                android:text="整改复查"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-</RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+
+</LinearLayout>

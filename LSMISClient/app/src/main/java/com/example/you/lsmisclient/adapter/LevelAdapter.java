@@ -100,6 +100,7 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelViewHol
         return super.getItemId(position);
     }
 
+
     /**
      * 自定义ViewHolder，持有每个item的界面元素
      */

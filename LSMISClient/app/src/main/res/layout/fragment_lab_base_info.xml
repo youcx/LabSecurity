@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.you.lsmisclient.fragment.LabBaseInfoFragment">
+    <ProgressBar
+        android:id="@+id/lab_baseinfo_progressbar"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
     <ImageView
         android:src="@mipmap/lab_info_pic"
         android:layout_width="match_parent"
@@ -28,13 +32,14 @@
                 android:layout_margin="5dp"
                 android:textColor="@color/cardview_dark_background"
                 android:textSize="15dp"
-                android:text="实验室id"/>
+                android:text="实验室级别id"/>
             <TextView
+                android:id="@+id/lab_levelid_tv"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="123" />
+                android:text="" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"
@@ -49,11 +54,12 @@
                 android:textSize="15dp"
                 android:text="实验室名称"/>
             <TextView
+                android:id="@+id/labName_tv"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="ACM" />
+                android:text="" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"
@@ -66,13 +72,95 @@
                 android:layout_margin="5dp"
                 android:textColor="@color/cardview_dark_background"
                 android:textSize="15dp"
-                android:text="楼层id"/>
+                android:text="实验室地址"/>
             <TextView
+                android:id="@+id/labAddr_tv"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="5" />
+                android:text="" />
+            <View
+                android:layout_columnSpan="2"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <TextView
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:paddingLeft="40dp"
+                android:gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="15dp"
+                android:text="学院名称"/>
+            <TextView
+                android:id="@+id/departmentName_tv"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:gravity="center_vertical"
+                android:textSize="15dp"
+                android:text="" />
+            <View
+                android:layout_columnSpan="2"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <TextView
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:paddingLeft="40dp"
+                android:gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="15dp"
+                android:text="实验室等级"/>
+            <TextView
+                android:id="@+id/mainLevelName_tv"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:gravity="center_vertical"
+                android:textSize="15dp"
+                android:text="" />
+            <View
+                android:layout_columnSpan="2"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <TextView
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:paddingLeft="40dp"
+            android:gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="15dp"
+            android:text="实验室具体等级"/>
+            <TextView
+                android:id="@+id/detailLevelName_tv"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:gravity="center_vertical"
+                android:textSize="15dp"
+                android:text="" />
+            <View
+                android:layout_columnSpan="2"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+
+            <TextView
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:paddingLeft="40dp"
+                android:gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="15dp"
+                android:text="楼层id"/>
+            <TextView
+                android:id="@+id/buildId_tv"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:gravity="center_vertical"
+                android:textSize="15dp"
+                android:text="" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"
@@ -87,11 +175,12 @@
                 android:textSize="15dp"
                 android:text="院系id"/>
             <TextView
+                android:id="@+id/departmentId_tv"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="信息工程学院" />
+                android:text="" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"
@@ -107,11 +196,12 @@
                 android:textSize="15dp"
                 android:text="标识牌信息"/>
             <TextView
+                android:id="@+id/denoterInfor_tv"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="123" />
+                android:text="" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"
@@ -126,11 +216,12 @@
                 android:textSize="15dp"
                 android:text="实验室面积"/>
             <TextView
+                android:id="@+id/area_tv"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="123" />
+                android:text="" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"
@@ -145,11 +236,12 @@
                 android:textSize="15dp"
                 android:text="实验室负责人姓名"/>
             <TextView
+                android:id="@+id/responseName_tv"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="123" />
+                android:text="" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"
@@ -164,11 +256,12 @@
                 android:textSize="15dp"
                 android:text="实验室负责人电话"/>
             <TextView
+                android:id="@+id/responsePhone_tv"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="12345678978" />
+                android:text="" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"
@@ -183,11 +276,12 @@
                 android:textSize="15dp"
                 android:text="实验室安全管理员姓名"/>
             <TextView
+                android:id="@+id/managerName_tv"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="123" />
+                android:text="" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"
@@ -202,11 +296,12 @@
                 android:textSize="15dp"
                 android:text="实验室安全管理员电话"/>
             <TextView
+                android:id="@+id/managerPhone_tv"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="123" />
+                android:text="" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"
@@ -221,11 +316,12 @@
                 android:textSize="15dp"
                 android:text="实验室状态"/>
             <TextView
+                android:id="@+id/labStatus_tv"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="123" />
+                android:text="" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"
@@ -240,11 +336,12 @@
                 android:textSize="15dp"
                 android:text="提交人姓名"/>
             <TextView
+                android:id="@+id/submitPersonName_tv"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="123" />
+                android:text="" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"

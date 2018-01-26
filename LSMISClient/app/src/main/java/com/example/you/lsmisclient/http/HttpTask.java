@@ -1,6 +1,7 @@
 package com.example.you.lsmisclient.http;
 
 import com.example.you.lsmisclient.R;
+import com.example.you.lsmisclient.bean.LabId;
 import com.example.you.lsmisclient.bean.LabInfo;
 import com.example.you.lsmisclient.bean.Result;
 
@@ -22,25 +23,25 @@ public class HttpTask {
      * @param labInfo
      * @return
      */
-    public Observable<Result> changeLabInfo(LabInfo labInfo)
+    public Observable<Result> changeLabInfo(int labid,LabInfo labInfo)
     {
         return HttpManager
                 .getApi()
-                .changeLabInfo(labInfo)
+                .changeLabInfo(labid,labInfo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
      * 获取实验室信息
-     * @param labInfo
+     * @param labId
      * @return
      */
-    public Observable<Result> getLabInfo(LabInfo labInfo)
+    public Observable<Result<LabInfo>> getLabInfo(int labId)
     {
         return HttpManager
                 .getApi()
-                .getLabInfo(labInfo)
+                .getLabInfo(labId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
