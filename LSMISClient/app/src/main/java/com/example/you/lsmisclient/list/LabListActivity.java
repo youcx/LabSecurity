@@ -43,6 +43,15 @@ public class LabListActivity extends AppCompatActivity {
         //toolbar
         labListToolbar.setTitle("实验室列表");
         setSupportActionBar(labListToolbar);
+        //toolbarTextView.setText("实验室分览");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        labListToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //适配器初始化
         labAdapter=new LabAdapter(datas);
         labAdapter.setLabItemClickListener(new LabAdapter.LabItemClickListener() {

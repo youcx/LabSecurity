@@ -7,33 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.you.lsmisclient.check.SelectCheckMissionActivity">
-    <TextView
-        android:text="任务类型选择"
-        android:gravity="center"
-        android:background="@color/colorPrimary"
-        android:textSize="20dp"
-        android:textColor="@color/titleColor"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
-    <android.support.v7.widget.CardView
-        android:id="@+id/daily_mission"
-        android:layout_gravity="center"
-        android:onClick="onClick"
-        android:clickable="true"
-        app:cardCornerRadius="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="6dp">
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:text="日常任务"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+    <include
+        layout="@layout/widget_layout"
+        android:id="@+id/select_mission_toolbar"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/check_mission_recyclerview"
         android:layout_width="match_parent"

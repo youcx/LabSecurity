@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.adapter.CollegeAdapter;
@@ -20,6 +22,10 @@ import butterknife.ButterKnife;
 public class CollegeListActivity extends AppCompatActivity {
     @BindView(R.id.college_list_recyclerview)
     RecyclerView collegeListRecyclerView;
+    @BindView(R.id.college_list_toolbar)
+    Toolbar collegeListToolbar;
+    @BindView(R.id.toolbar_textview)
+    TextView toolbarTextView;
     //适配器
     CollegeAdapter collegeAdapter;
     //数据
@@ -31,6 +37,17 @@ public class CollegeListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_college_list);
         //绑定控件
         ButterKnife.bind(this);
+        toolbarTextView.setText("学院分览");
+        setSupportActionBar(collegeListToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        collegeListToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         //init
         initCollege();
         //适配器初始化

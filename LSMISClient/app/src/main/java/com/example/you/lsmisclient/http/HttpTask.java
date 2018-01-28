@@ -1,9 +1,13 @@
 package com.example.you.lsmisclient.http;
 
 import com.example.you.lsmisclient.R;
+import com.example.you.lsmisclient.bean.LabDetailLevel;
 import com.example.you.lsmisclient.bean.LabId;
 import com.example.you.lsmisclient.bean.LabInfo;
+import com.example.you.lsmisclient.bean.LabLevel;
 import com.example.you.lsmisclient.bean.Result;
+
+import java.util.List;
 
 import rx.Observable;
 import rx.Scheduler;
@@ -44,6 +48,46 @@ public class HttpTask {
                 .getLabInfo(labId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取实验室等级
+     * @return
+     */
+    public Observable<Result<List<LabLevel>>> getLabLevelList()
+    {
+        return HttpManager
+                .getApi()
+                .getLabLevelList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取实验室具体等级
+     * @param levelId
+     * @return
+     */
+    public Observable<Result<List<LabDetailLevel>>> getLabDetailLevel(int levelId)
+    {
+        return HttpManager
+                .getApi()
+                .getLabDetailLevel(levelId)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取学院列表
+     * @return
+     */
+    public Observable<Result<String>> getDepartmentList()
+    {
+        return HttpManager
+                .getApi()
+                .getDepartmentList()
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread());
     }
 
     /**

@@ -30,7 +30,7 @@ public class SecurityCheckActivity extends AppCompatActivity implements View.OnC
         switch (v.getId())
         {
             case R.id.security_check_start:
-                Intent missionSelect=new Intent(this,SelectCheckMissionActivity.class);
+                Intent missionSelect=new Intent(this,MissionTypeActivity.class);
                 startActivity(missionSelect);
                 break;
             case R.id.security_check_review:

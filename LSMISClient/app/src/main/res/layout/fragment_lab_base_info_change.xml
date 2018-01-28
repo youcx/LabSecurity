@@ -43,12 +43,10 @@
                 android:textColor="@color/cardview_dark_background"
                 android:textSize="15dp"
                 android:text="学院名称" />
-            <EditText
-                android:id="@+id/departmentName_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp" />
+            <Spinner
+                android:id="@+id/departmentName_spin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
             <TextView
                 app:layout_columnWeight="1"
                 app:layout_gravity="fill"
@@ -71,12 +69,11 @@
                 android:textColor="@color/cardview_dark_background"
                 android:textSize="15dp"
                 android:text="实验室具体等级" />
-            <EditText
-                android:id="@+id/detaillevelName_edt"
+            <Spinner
+                android:id="@+id/detaillevelName_spin"
                 app:layout_columnWeight="1"
                 app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp" />
+                android:gravity="center_vertical" />
             <TextView
                 app:layout_columnWeight="1"
                 app:layout_gravity="fill"

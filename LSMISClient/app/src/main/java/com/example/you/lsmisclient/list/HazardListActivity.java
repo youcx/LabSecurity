@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.adapter.HazardAdapter;
@@ -21,6 +23,10 @@ import butterknife.ButterKnife;
 public class HazardListActivity extends AppCompatActivity {
     @BindView(R.id.hazard_list_recyclerview)
     RecyclerView hazardListRecyclerView;
+    @BindView(R.id.hazard_list_toolbar)
+    Toolbar hazardListToolbar;
+    @BindView(R.id.toolbar_textview)
+    TextView toolbarTextView;
     //适配器
     HazardAdapter hazardAdapter;
     //数据
@@ -31,6 +37,16 @@ public class HazardListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hazard_list);
         //绑定控件
         ButterKnife.bind(this);
+        toolbarTextView.setText("危险源分览");
+        setSupportActionBar(hazardListToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        hazardListToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //init
         initHazard();
         //

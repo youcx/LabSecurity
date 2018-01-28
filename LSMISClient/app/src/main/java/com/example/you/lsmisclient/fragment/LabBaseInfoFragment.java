@@ -138,22 +138,22 @@ public class LabBaseInfoFragment extends Fragment {
      */
     private void startSetInfo(LabInfo labInfo)
     {
-        labLevelIdTv.setText(labInfo.getLabLevelId());
-        buildIdTv.setText(labInfo.getBuildId());
-        departmentIdTv.setText(labInfo.getDepartmentId());
-        labAddrTv.setText(labInfo.getLabAddr());
-        labNameTv.setText(labInfo.getLabName());
-        denoterInforTv.setText(labInfo.getDenoterInfor());
-        areaTv.setText(labInfo.getArea());
-        responseNameTv.setText(labInfo.getResponserName());
-        responsePhoneTv.setText(labInfo.getResponsePhone());
-        managerNameTv.setText(labInfo.getManagerName());
-        managerPhoneTv.setText(labInfo.getManagerPhone());
-        labStatusTv.setText(labInfo.getLabStatus());
-        submitPersonNameTv.setText(labInfo.getSubmitPersonName());
-        departmentNameTv.setText(labInfo.getDepartmentName());
-        detailLevelNameTv.setText(labInfo.getDetailLevelName());
-        mainLevelNameTv.setText(labInfo.getMainLevelName());
+//          labLevelIdTv.setText(labInfo.getLabLevelId());
+ //         buildIdTv.setText(labInfo.getBuildId());
+          departmentIdTv.setText(labInfo.getDepartmentId());
+          labAddrTv.setText(labInfo.getLabAddr());
+          labNameTv.setText(labInfo.getLabName());
+          denoterInforTv.setText(labInfo.getDenoterInfor());
+          areaTv.setText(labInfo.getArea());
+          responseNameTv.setText(labInfo.getResponserName());
+            responsePhoneTv.setText(labInfo.getResponsePhone());
+            managerNameTv.setText(labInfo.getManagerName());
+            managerPhoneTv.setText(labInfo.getManagerPhone());
+          labStatusTv.setText(labInfo.getLabStatus());
+         submitPersonNameTv.setText(labInfo.getSubmitPersonName());
+         departmentNameTv.setText(labInfo.getDepartmentName());
+         detailLevelNameTv.setText(labInfo.getDetailLevelName());
+         mainLevelNameTv.setText(labInfo.getMainLevelName());
         labBaseInfoProgressBar.setVisibility(View.GONE);
     }
 

@@ -7,14 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.you.lsmisclient.MainActivity">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/mToolbar"
-        app:titleTextColor="#eeeeee"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary">
-
-    </android.support.v7.widget.Toolbar>
+    <include
+        layout="@layout/widget_layout"
+        android:id="@+id/mToolbar"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/mViewPager"

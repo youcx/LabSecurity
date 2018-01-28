@@ -6,7 +6,8 @@ package com.example.you.lsmisclient.bean;
 
 public class LabInfo {
     int ID;
-    String labLevelId;
+    //实验室具体等级id
+    int labLevelId;
     String labName;
     String buildId;
     //实验室具体等级
@@ -101,11 +102,11 @@ public class LabInfo {
         this.departmentId = departmentId;
     }
 
-    public String getLabLevelId() {
+    public int getLabLevelId() {
         return labLevelId;
     }
 
-    public void setLabLevelId(String labLevelId) {
+    public void setLabLevelId(int labLevelId) {
         this.labLevelId = labLevelId;
     }
 

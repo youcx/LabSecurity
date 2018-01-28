@@ -1,9 +1,13 @@
 package com.example.you.lsmisclient.http;
 
+import com.example.you.lsmisclient.bean.LabDetailLevel;
 import com.example.you.lsmisclient.bean.LabId;
 import com.example.you.lsmisclient.bean.LabInfo;
+import com.example.you.lsmisclient.bean.LabLevel;
 import com.example.you.lsmisclient.bean.Result;
 
+
+import java.util.List;
 
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -40,4 +44,22 @@ public interface HttpApi {
      */
     @POST("AppFiftyToneGraph/videoLink")
     Observable<Result> testHttp(@Body boolean b);
+
+    /**
+     * 获取实验室等级
+     * @return
+     */
+    @GET("labinfor/leveloption")
+    Observable<Result<List<LabLevel>>> getLabLevelList();
+
+    /**
+     * 获取实验室具体等级
+     * @param levelId
+     * @return
+     */
+    @POST("labinfor/detaillevel")
+    Observable<Result<List<LabDetailLevel>>> getLabDetailLevel(@Query("levelId") int levelId);
+
+    @GET("labinfor/department")
+    Observable<Result<String>> getDepartmentList();
 }

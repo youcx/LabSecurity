@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.you.lsmisclient.R;
@@ -25,6 +27,10 @@ public class LabActivity extends AppCompatActivity implements View.OnClickListen
     View browseAsLevel;
     @BindView(R.id.browse_as_hazard)
     View browseAsHazard;
+    @BindView(R.id.lab_Toolbar)
+    Toolbar labToolbar;
+    @BindView(R.id.toolbar_textview)
+    TextView toolbarTextView;
 
 
     @Override
@@ -33,7 +39,18 @@ public class LabActivity extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_lab);
         //绑定
         ButterKnife.bind(this);
-
+       // getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbarTextView.setText("实验室分览");
+        setSupportActionBar(labToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        labToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     @Override
     public void onClick(View v) {
@@ -61,6 +78,7 @@ public class LabActivity extends AppCompatActivity implements View.OnClickListen
 
         }
     }
+
 
 
 }

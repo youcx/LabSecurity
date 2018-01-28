@@ -2,13 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.you.lsmisclient">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -25,25 +25,24 @@
         </activity>
         <activity android:name=".lab.LabActivity" />
         <activity android:name=".check.SecurityCheckActivity" />
-        <activity android:name=".check.SelectCheckMissionActivity"></activity>
+        <activity android:name=".check.SelectCheckMissionActivity" />
         <activity android:name=".list.CollegeListActivity" />
         <activity android:name=".list.LevelListActivity" />
         <activity android:name=".list.HazardListActivity" />
         <!--
 ATTENTION: This was auto-generated to add Google Play services to your project for
     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
-       -->
+        -->
         <meta-data
-                android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version" />
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <activity android:name=".list.LabListActivity" />
-
         <activity android:name=".lab.LabInfoActivity" />
         <activity android:name=".lab.LabInfoChangeActivity" />
-        <activity android:name=".contacts.ContactsActivity"></activity>
-        <activity android:name=".qr.QrScannerActivity"></activity>
-
+        <activity android:name=".contacts.ContactsActivity" />
+        <activity android:name=".qr.QrScannerActivity" />
+        <activity android:name=".check.MissionTypeActivity"></activity>
     </application>
 
 </manifest>

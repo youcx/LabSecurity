@@ -49,6 +49,15 @@ public class LabInfoChangeActivity extends AppCompatActivity {
         //toolbar
         labInfoChangeToolbar.setTitle("实验室信息");
         setSupportActionBar(labInfoChangeToolbar);
+       // toolbarTextView.setText("实验室分览");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        labInfoChangeToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //Fragment
         final ArrayList<Fragment> fgList=new ArrayList<>(2);
         fgList.add(new LabBaseInfoChangeFragment());

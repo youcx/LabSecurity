@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.adapter.LevelAdapter;
@@ -21,6 +23,10 @@ import butterknife.ButterKnife;
 public class LevelListActivity extends AppCompatActivity {
     @BindView(R.id.level_list_recyclerview)
     RecyclerView levelListRecyclerView;
+    @BindView(R.id.level_list_toolbar)
+    Toolbar levelListToolbar;
+    @BindView(R.id.toolbar_textview)
+    TextView toolbarTextView;
     //适配器
     LevelAdapter levelAdapter;
     //数据
@@ -31,6 +37,16 @@ public class LevelListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_level_list);
         //绑定控件
         ButterKnife.bind(this);
+        toolbarTextView.setText("级别分览");
+        setSupportActionBar(levelListToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        levelListToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //init
         initLevel();
         //
