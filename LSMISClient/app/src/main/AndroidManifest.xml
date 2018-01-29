@@ -42,7 +42,8 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
         <activity android:name=".lab.LabInfoChangeActivity" />
         <activity android:name=".contacts.ContactsActivity" />
         <activity android:name=".qr.QrScannerActivity" />
-        <activity android:name=".check.MissionTypeActivity"></activity>
+        <activity android:name=".check.MissionTypeActivity" />
+        <activity android:name=".check.CheckActivity"></activity>
     </application>
 
 </manifest>

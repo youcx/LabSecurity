@@ -34,7 +34,9 @@ public class SecurityCheckActivity extends AppCompatActivity implements View.OnC
                 startActivity(missionSelect);
                 break;
             case R.id.security_check_review:
-                Toast.makeText(this,"还没有写",Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(this,"还没有写",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(this,CheckActivity.class);
+                startActivity(intent);
                 break;
         }
     }

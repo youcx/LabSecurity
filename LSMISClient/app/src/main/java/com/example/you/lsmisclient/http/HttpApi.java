@@ -60,6 +60,10 @@ public interface HttpApi {
     @POST("labinfor/detaillevel")
     Observable<Result<List<LabDetailLevel>>> getLabDetailLevel(@Query("levelId") int levelId);
 
+    /**
+     * 获取学院列表
+     * @return
+     */
     @GET("labinfor/department")
     Observable<Result<String>> getDepartmentList();
 }
