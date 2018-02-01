@@ -8,12 +8,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.you.lsmisclient.check.SecurityCheckActivity">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/security_check_toolbar"
-        app:titleTextColor="#eeeeee"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@mipmap/back1_head"></android.support.v7.widget.Toolbar>
+   <include
+       layout="@layout/widget_layout"
+       android:id="@+id/security_check_toolbar"/>
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"

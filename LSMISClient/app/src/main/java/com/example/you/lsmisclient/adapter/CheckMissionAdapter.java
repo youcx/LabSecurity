@@ -1,6 +1,7 @@
 package com.example.you.lsmisclient.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,18 +74,18 @@ public class CheckMissionAdapter extends RecyclerView.Adapter<CheckMissionAdapte
             }
         });
 
-        holder.checkMissionName.setText(mDatas.get(position).getMissionName());
-        holder.missionDescription.setText(mDatas.get(position).getMissionDescription());
-        holder.missionStartTime.setText(mDatas.get(position).getMissionStartTime());
-        holder.missionEndTime.setText(mDatas.get(position).getMissionEndTime());
-        holder.missionRemainingTime.setText(mDatas.get(position).getMissionRemainingTime());
-        holder.missionAllLabs.setText(mDatas.get(position).getMissionAllLabs());
-        holder.missionCheckedLabs.setText(mDatas.get(position).getMissionCheckedLabs());
-        holder.missionRemainingLabs.setText(mDatas.get(position).getMissionRemainingLabs());
-        holder.alreadlyCheckedCount.setText(mDatas.get(position).getAlreadlyCheckedCount());
-        holder.inconformityCount.setText(mDatas.get(position).getInconformityCount());
-        holder.alreadlyReformCount.setText(mDatas.get(position).getAlreadlyReformCount());
-        holder.inReformCount.setText(mDatas.get(position).getInReformCount());
+        holder.checkMissionName.setText(mDatas.get(position).getTaskTitle());
+        holder.missionDescription.setText(mDatas.get(position).getTaskDesc());
+        holder.missionStartTime.setText(mDatas.get(position).getCheckBeginTime().substring(0,10));
+        holder.missionEndTime.setText(mDatas.get(position).getCheckEndTime().substring(0,10));
+        holder.missionRemainingTime.setText("还剩"+mDatas.get(position).getLeftDay()+"天");
+        holder.missionAllLabs.setText(""+mDatas.get(position).getIncLabCount());
+        holder.missionCheckedLabs.setText(""+mDatas.get(position).getCheckedLabCount());
+        holder.missionRemainingLabs.setText(""+(mDatas.get(position).getIncLabCount()-mDatas.get(position).getCheckedLabCount()));
+        holder.alreadlyCheckedCount.setText(""+mDatas.get(position).getTotalCheckTitleCount());
+        holder.inconformityCount.setText(""+mDatas.get(position).getUnMatchTitleCount());
+        holder.alreadlyReformCount.setText(""+(mDatas.get(position).getUnMatchTitleCount()-mDatas.get(position).getChangingTitleCount()));
+        holder.inReformCount.setText(""+mDatas.get(position).getChangingTitleCount());
 
 
 

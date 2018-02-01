@@ -135,6 +135,7 @@ public class PhotoPickerFragment extends android.support.v4.app.Fragment {
                         if(mPicsPath.contains(picPath)){
                             mPicsPath.remove(picPath);
                             picLay.removeView(deleteTempView);
+                            deleteTempView= null;
                         }else {
                             Log.e(TAG, "onClick: pics arrays dont contains tempview's path");
                             return;
@@ -270,7 +271,7 @@ public class PhotoPickerFragment extends android.support.v4.app.Fragment {
     public void deletePicks(PicItemView view){
         deleteTempView = view;
         deleteConfirmDlg.show();
-        deleteTempView= null;
+
     }
 }
 

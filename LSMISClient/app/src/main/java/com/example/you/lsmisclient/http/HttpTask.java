@@ -1,11 +1,15 @@
 package com.example.you.lsmisclient.http;
 
 import com.example.you.lsmisclient.R;
+import com.example.you.lsmisclient.bean.CheckMission;
+import com.example.you.lsmisclient.bean.Lab;
 import com.example.you.lsmisclient.bean.LabDetailLevel;
 import com.example.you.lsmisclient.bean.LabId;
 import com.example.you.lsmisclient.bean.LabInfo;
 import com.example.you.lsmisclient.bean.LabLevel;
 import com.example.you.lsmisclient.bean.Result;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -81,11 +85,67 @@ public class HttpTask {
      * 获取学院列表
      * @return
      */
-    public Observable<Result<String>> getDepartmentList()
+    public Observable<Result> getDepartmentList()
     {
         return HttpManager
                 .getApi()
                 .getDepartmentList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取危险源大类
+     * @return
+     */
+    public Observable<Result> getMainDanger()
+    {
+        return HttpManager
+                .getApi()
+                .getMainDanger()
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取危险源子类
+     * @param id
+     * @return
+     */
+    public Observable<Result> getDetailDanger(int id,int labid)
+    {
+        return HttpManager
+                .getApi()
+                .getDetailDanger(id,labid)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取检查任务列表
+     * @param flag
+     * @return
+     */
+    public Observable<Result<List<CheckMission>>> getCheckTaskList(int flag)
+    {
+        return HttpManager
+                .getApi()
+                .getCheckTaskList(flag)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 按学院获取实验室列表
+     * @param page
+     * @param id
+     * @return
+     */
+    public Observable<Result<List<Lab>>> getLabListByDepartment(int page, int id)
+    {
+        return HttpManager
+                .getApi()
+                .getLabByDepartment(page,id)
                 .subscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread());
     }

@@ -1,5 +1,7 @@
 package com.example.you.lsmisclient.http;
 
+import com.example.you.lsmisclient.bean.CheckMission;
+import com.example.you.lsmisclient.bean.Lab;
 import com.example.you.lsmisclient.bean.LabDetailLevel;
 import com.example.you.lsmisclient.bean.LabId;
 import com.example.you.lsmisclient.bean.LabInfo;
@@ -7,9 +9,13 @@ import com.example.you.lsmisclient.bean.LabLevel;
 import com.example.you.lsmisclient.bean.Result;
 
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -65,5 +71,38 @@ public interface HttpApi {
      * @return
      */
     @GET("labinfor/department")
-    Observable<Result<String>> getDepartmentList();
+    Observable<Result> getDepartmentList();
+
+    /**
+     * 获取检查任务列表
+     * @param flag
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/front/getCheckTaskList")
+    Observable<Result<List<CheckMission>>> getCheckTaskList(@Field("availableFlag") int flag);
+
+    /**
+     * 获取危险源大类
+     * @return
+     */
+    @GET("dangersubmit/maindanger")
+    Observable<Result>  getMainDanger();
+
+    /**
+     * 危险源显示
+     * @param id
+     * @return
+     */
+    @POST("dangersubmit/dangerinfor")
+    Observable<Result> getDetailDanger(@Query("dangerMainTypeId") int id,@Query("labId") int labid);
+
+    /**
+     * 按学院查看实验室列表
+     * @param page
+     * @param id
+     * @return
+     */
+    @POST("back/labsinfor")
+    Observable<Result<List<Lab>>> getLabByDepartment(@Query("pageNumb") int page, @Query("departmentId") int id );
 }

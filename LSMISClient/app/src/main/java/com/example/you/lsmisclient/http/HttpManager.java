@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpManager {
     //服务端基地址
-    public static final String BASE_URL="http://119.29.201.35:8083/";
+    public static final String BASE_URL="http://119.29.201.35:8080/";
     //public static final String BASE_URL="http://www.izaodao.com/Api/";
     //请求超时时间
     private static final int DEFAULT_TIME_OUT=5;
@@ -83,7 +83,7 @@ public class HttpManager {
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
             okhttp3.Request request = chain.request();
-            request=request.newBuilder().addHeader("content-type","application/json").build();
+           // request=request.newBuilder().addHeader("content-type","application/json").build();
             Logger.d(request.toString() + request.headers().toString());
             Log.i("拦截器",request.toString());
             okhttp3.Response response = chain.proceed(chain.request());

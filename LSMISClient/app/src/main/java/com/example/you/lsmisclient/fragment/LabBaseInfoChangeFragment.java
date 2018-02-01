@@ -101,6 +101,7 @@ public class LabBaseInfoChangeFragment extends Fragment implements AdapterView.O
     //数据
     private List<LabLevel> mainLevelDatas=null;
     private List<LabDetailLevel> detailLevels=null;
+    private String[] departmentList=null;
     //Adapter
     private ArrayAdapter<String> mainLevelAdapter=null;
     private ArrayAdapter<String> detailLevelAdapter=null;
@@ -196,7 +197,6 @@ public class LabBaseInfoChangeFragment extends Fragment implements AdapterView.O
         switch (parent.getId())
         {
             case R.id.main_level_spin:
-
                     labInfo.setMainLevelName(mainLevelDatas.get(position).getLevelName());
                     Log.i("实验室等级",labInfo.getMainLevelName());
                     //startGetLabDetailLevel(mainLevelDatas.get(0).getLabLevel());
@@ -208,17 +208,15 @@ public class LabBaseInfoChangeFragment extends Fragment implements AdapterView.O
                             break;
                         }
                     }
-
-
-
                 //Toast.makeText(getActivity(),labInfo.getMainLevelName(),Toast.LENGTH_SHORT).show();
                 break;
             case R.id.detaillevelName_spin:
                     Log.i("具体等级啊",position+"："+detailLevels.get(position).getLevelId());
                     labInfo.setLabLevelId(detailLevels.get(position).getLevelId());
                     Log.i("具体等级",""+labInfo.getLabLevelId());
-
-
+                break;
+            case R.id.departmentName_spin:
+                labInfo.setDepartmentName(departmentList[position]);
                 break;
         }
     }
@@ -523,7 +521,7 @@ public class LabBaseInfoChangeFragment extends Fragment implements AdapterView.O
     private void startGetDepartmentList()
     {
         mTask.getDepartmentList()
-                .subscribe(new Subscriber<Result<String>>() {
+                .subscribe(new Subscriber<Result>() {
                     @Override
                     public void onCompleted() {
 
@@ -547,14 +545,14 @@ public class LabBaseInfoChangeFragment extends Fragment implements AdapterView.O
                     }
 
                     @Override
-                    public void onNext(Result<String> stringResult) {
+                    public void onNext(Result stringResult) {
                         if(stringResult!=null)
                         {
-                            Log.i("学院列表",stringResult.getData());
+                           // Log.i("学院列表",stringResult.getData().toString());
                             if(stringResult.getStatus()==200)
                             {
-                                Log.i("学院列表",stringResult.getData());
-                               // initDepartmentList(stringResult.getData());
+                               // Log.i("学院列表",stringResult.getData().toString());
+                                initDepartmentList(stringResult.getData().toString());
                             }
                         }
                     }
@@ -608,16 +606,16 @@ public class LabBaseInfoChangeFragment extends Fragment implements AdapterView.O
         try{
             //JSONArray jsonArray=new JSONArray(s);
             Log.i("字符串",s);
-            JSONObject jsonObject=new JSONObject(s);
-            JSONArray dataArray=jsonObject.getJSONArray("data");
-            String[] datas=new String[dataArray.length()];
+           // JSONObject jsonObject=s;
+            JSONArray dataArray=new JSONArray(s);
+            departmentList=new String[dataArray.length()];
             for(int i=0;i<dataArray.length();i++)
             {
                 JSONObject dataObject=(JSONObject) dataArray.get(i);
-                datas[i]=dataObject.getString("departmentName");
-                Log.i("数据",datas[i]);
+                departmentList[i]=dataObject.getString("departmentName");
+                Log.i("数据",departmentList[i]);
             }
-            departmentAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,datas);
+            departmentAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,departmentList);
             myHandler.sendEmptyMessage(UPDATADEPARTMENTNAME);
             departmentNameSpin.setOnItemSelectedListener(this);
         }catch (Exception e)

@@ -9,6 +9,10 @@
     <include
         layout="@layout/widget_layout"
         android:id="@+id/college_list_toolbar"/>
+    <ProgressBar
+        android:id="@+id/mProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/college_list_recyclerview"
         android:layout_width="match_parent"

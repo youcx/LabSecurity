@@ -73,6 +73,7 @@ public class LabActivity extends AppCompatActivity implements View.OnClickListen
                 //Toast.makeText(this,"危险源分览",Toast.LENGTH_SHORT).show();
             case R.id.browse_as_all:
                 Intent intent4=new Intent(this, LabListActivity.class);
+                intent4.putExtra("task","info");
                 startActivity(intent4);
                 break;
 

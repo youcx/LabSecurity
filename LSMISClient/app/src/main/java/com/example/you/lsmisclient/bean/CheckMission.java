@@ -4,135 +4,186 @@ package com.example.you.lsmisclient.bean;
  * Created by You on 2018/1/25.
  */
 
+/**
+ * taskId	int	任务的id
+ * taskTitle	string	任务的标题
+ * taskCode	string	任务编码（忽略这个字段）
+ * taskDesc	string	任务描述
+ * checkBeginTime	string	任务的开始时间
+ * checkEndTime	string	任务的截至时间
+ * pubMemberId	string	发布人员的id
+ * pubTime	string	发布时间
+ * incLabCoubt	int	任务涉及实验室的数量
+ * checkedLabCount	int	已经检查了的实验室的数量
+ * totalCheckTitleCount	int	检查的项的数量
+ * unMatchTitleCount	int	不符合项的数量
+ * changingTitleCount	int	正在整改的项的数量
+ * typeId	int	任务类型
+ */
+
 public class CheckMission {
-    String missionName;
-    String missionDescription;
-    String missionStartTime;
-    String missionEndTime;
-    String missionRemainingTime;
-    String missionAllLabs;
-    String missionCheckedLabs;
-    String missionRemainingLabs;
-    String alreadlyCheckedCount;
-    String inconformityCount;
-    String alreadlyReformCount;
-    String inReformCount;
+    int taskId;
+    String taskTitle;
+    String taskCode;
+    String taskDesc;
+    //任务时间
+    String checkBeginTime;
+    String checkEndTime;
+
+    String pubMemberId;
+    String pubTiem;
+
+    int incLabCount;
+    int checkedLabCount;
+    int totalCheckTitleCount;
+    int unMatchTitleCount;
+    int changingTitleCount;
+    int typeId;
+
+    int leftDay;
+
 
     public CheckMission() {
 
     }
 
-    public String getAlreadlyCheckedCount() {
-        return alreadlyCheckedCount;
+    public int getLeftDay() {
+        return leftDay;
     }
 
-    public void setAlreadlyCheckedCount(String alreadlyCheckedCount) {
-        this.alreadlyCheckedCount = alreadlyCheckedCount;
+    public void setLeftDay(int leftDay) {
+        this.leftDay = leftDay;
     }
 
-    public String getAlreadlyReformCount() {
-        return alreadlyReformCount;
+    public int getChangingTitleCount() {
+        return changingTitleCount;
     }
 
-    public void setAlreadlyReformCount(String alreadlyReformCount) {
-        this.alreadlyReformCount = alreadlyReformCount;
+    public void setChangingTitleCount(int changingTitleCount) {
+        this.changingTitleCount = changingTitleCount;
     }
 
-    public String getInconformityCount() {
-        return inconformityCount;
+    public String getCheckBeginTime() {
+        return checkBeginTime;
     }
 
-    public void setInconformityCount(String inconformityCount) {
-        this.inconformityCount = inconformityCount;
+    public void setCheckBeginTime(String checkBeginTime) {
+        this.checkBeginTime = checkBeginTime;
     }
 
-    public String getInReformCount() {
-        return inReformCount;
+    public int getCheckedLabCount() {
+        return checkedLabCount;
     }
 
-    public void setInReformCount(String inReformCount) {
-        this.inReformCount = inReformCount;
+    public void setCheckedLabCount(int checkedLabCount) {
+        this.checkedLabCount = checkedLabCount;
     }
 
-    public String getMissionAllLabs() {
-        return missionAllLabs;
+    public String getCheckEndTime() {
+        return checkEndTime;
     }
 
-    public void setMissionAllLabs(String missionAllLabs) {
-        this.missionAllLabs = missionAllLabs;
+    public void setCheckEndTime(String checkEndTime) {
+        this.checkEndTime = checkEndTime;
     }
 
-    public String getMissionCheckedLabs() {
-        return missionCheckedLabs;
+    public int getIncLabCount() {
+        return incLabCount;
     }
 
-    public void setMissionCheckedLabs(String missionCheckedLabs) {
-        this.missionCheckedLabs = missionCheckedLabs;
+    public void setIncLabCount(int incLabCoubt) {
+        this.incLabCount = incLabCoubt;
     }
 
-    public String getMissionDescription() {
-        return missionDescription;
+    public String getPubMemberId() {
+        return pubMemberId;
     }
 
-    public void setMissionDescription(String missionDescription) {
-        this.missionDescription = missionDescription;
+    public void setPubMemberId(String pubMemberId) {
+        this.pubMemberId = pubMemberId;
     }
 
-    public String getMissionEndTime() {
-        return missionEndTime;
+    public String getPubTiem() {
+        return pubTiem;
     }
 
-    public void setMissionEndTime(String missionEndTime) {
-        this.missionEndTime = missionEndTime;
+    public void setPubTiem(String pubTiem) {
+        this.pubTiem = pubTiem;
     }
 
-    public String getMissionName() {
-        return missionName;
+    public String getTaskCode() {
+        return taskCode;
     }
 
-    public void setMissionName(String missionName) {
-        this.missionName = missionName;
+    public void setTaskCode(String taskCode) {
+        this.taskCode = taskCode;
     }
 
-    public String getMissionRemainingLabs() {
-        return missionRemainingLabs;
+    public String getTaskDesc() {
+        return taskDesc;
     }
 
-    public void setMissionRemainingLabs(String missionRemainingLabs) {
-        this.missionRemainingLabs = missionRemainingLabs;
+    public void setTaskDesc(String taskDesc) {
+        this.taskDesc = taskDesc;
     }
 
-    public String getMissionRemainingTime() {
-        return missionRemainingTime;
+    public int getTaskId() {
+        return taskId;
     }
 
-    public void setMissionRemainingTime(String missionRemainingTime) {
-        this.missionRemainingTime = missionRemainingTime;
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
     }
 
-    public String getMissionStartTime() {
-        return missionStartTime;
+    public String getTaskTitle() {
+        return taskTitle;
     }
 
-    public void setMissionStartTime(String missionStartTime) {
-        this.missionStartTime = missionStartTime;
+    public void setTaskTitle(String taskTitle) {
+        this.taskTitle = taskTitle;
+    }
+
+    public int getTotalCheckTitleCount() {
+        return totalCheckTitleCount;
+    }
+
+    public void setTotalCheckTitleCount(int totalCheckTitleCount) {
+        this.totalCheckTitleCount = totalCheckTitleCount;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
+
+    public int getUnMatchTitleCount() {
+        return unMatchTitleCount;
+    }
+
+    public void setUnMatchTitleCount(int unMatchTitleCount) {
+        this.unMatchTitleCount = unMatchTitleCount;
     }
 
     @Override
     public String toString() {
         return "{\"CheckMission\":{"
-                + "\"alreadlyCheckedCount\":\"" + alreadlyCheckedCount + "\""
-                + ", \"missionName\":\"" + missionName + "\""
-                + ", \"missionDescription\":\"" + missionDescription + "\""
-                + ", \"missionStartTime\":\"" + missionStartTime + "\""
-                + ", \"missionEndTime\":\"" + missionEndTime + "\""
-                + ", \"missionRemainingTime\":\"" + missionRemainingTime + "\""
-                + ", \"missionAllLabs\":\"" + missionAllLabs + "\""
-                + ", \"missionCheckedLabs\":\"" + missionCheckedLabs + "\""
-                + ", \"missionRemainingLabs\":\"" + missionRemainingLabs + "\""
-                + ", \"inconformityCount\":\"" + inconformityCount + "\""
-                + ", \"alreadlyReformCount\":\"" + alreadlyReformCount + "\""
-                + ", \"inReformCount\":\"" + inReformCount + "\""
+                + "\"changingTitleCount\":\"" + changingTitleCount + "\""
+                + ", \"taskId\":\"" + taskId + "\""
+                + ", \"taskTitle\":\"" + taskTitle + "\""
+                + ", \"taskCode\":\"" + taskCode + "\""
+                + ", \"taskDesc\":\"" + taskDesc + "\""
+                + ", \"checkBeginTime\":\"" + checkBeginTime + "\""
+                + ", \"checkEndTime\":\"" + checkEndTime + "\""
+                + ", \"pubMemberId\":\"" + pubMemberId + "\""
+                + ", \"pubTiem\":\"" + pubTiem + "\""
+                + ", \"incLabCount\":\"" + incLabCount + "\""
+                + ", \"checkedLabCount\":\"" + checkedLabCount + "\""
+                + ", \"totalCheckTitleCount\":\"" + totalCheckTitleCount + "\""
+                + ", \"unMatchTitleCount\":\"" + unMatchTitleCount + "\""
+                + ", \"typeId\":\"" + typeId + "\""
                 + "}}";
     }
 }

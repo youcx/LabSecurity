@@ -55,6 +55,7 @@ public class HazardListActivity extends AppCompatActivity {
             @Override
             public void onHazardItemClick(View view, LabHazard labHazard) {
                 Intent intent=new Intent(getBaseContext(),LabListActivity.class);
+                intent.putExtra("task","info");
                 startActivity(intent);
             }
         });

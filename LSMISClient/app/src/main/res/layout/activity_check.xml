@@ -49,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/check_item_txtv"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingBottom="10dp"
@@ -67,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/check_point_txtv"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingBottom="10dp"
@@ -88,6 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/check_record_edt"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:hint="检查结果相关记录"
@@ -96,6 +99,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.v7.widget.CardView>
+    <fragment
+        android:name="com.example.you.lsmisclient.fragment.photopicker.PhotoPickerFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></fragment>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/previous_item_btn"
+            android:text="上一项"
+            android:layout_weight="1"
+            android:textColor="@color/titleColor"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/next_item_btn"
+            android:text="下一项"
+            android:layout_weight="1"
+            android:textColor="@color/titleColor"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

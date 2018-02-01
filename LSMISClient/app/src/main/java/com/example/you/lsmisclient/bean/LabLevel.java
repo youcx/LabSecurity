@@ -9,7 +9,7 @@ public class LabLevel {
     String labCount;
     int labLevel;
 
-    public LabLevel(String labCount, String levelName) {
+    public LabLevel(String levelName,String labCount ) {
         this.labCount = labCount;
         this.levelName = levelName;
     }

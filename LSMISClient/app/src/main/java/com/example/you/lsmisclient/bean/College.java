@@ -9,11 +9,24 @@ public class College {
     String collegeName;
     String labCount;
     String collegeManager;
+    int departmentId;
 
-    public College(String collegeName,String labCount, String collegeManager ) {
+    public College() {
+    }
+
+    public College(String collegeName, String labCount, String collegeManager , int departmentId) {
         this.labCount = labCount;
         this.collegeManager = collegeManager;
         this.collegeName = collegeName;
+        this.departmentId=departmentId;
+    }
+
+    public int getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
 
     public String getLabCount() {

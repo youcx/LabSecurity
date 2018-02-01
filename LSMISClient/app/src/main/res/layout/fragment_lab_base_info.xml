@@ -39,7 +39,7 @@
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="" />
+                android:text="国家重点实验室士大夫撒" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"
@@ -139,7 +139,7 @@
                 android:layout_gravity="fill"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
-                android:text="" />
+                android:text="省部级国家重点实验室" />
             <View
                 android:layout_columnSpan="2"
                 android:background="#eeeeee"

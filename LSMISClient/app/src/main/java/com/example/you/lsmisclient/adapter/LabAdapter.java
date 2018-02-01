@@ -73,11 +73,11 @@ public class LabAdapter extends RecyclerView.Adapter<LabAdapter.LabViewHolder>{
         });
         //
         holder.labName.setText(mDatas.get(position).getLabName());
-        holder.labCollege.setText(mDatas.get(position).getLabCollege());
-        holder.labLevel.setText(mDatas.get(position).getLabLevel());
+        holder.labCollege.setText(mDatas.get(position).getDepartmentName());
+        holder.labLevel.setText(mDatas.get(position).getMainLevelName());
         holder.labHazard.setText(mDatas.get(position).getLabHazard());
-        holder.labSafePerson.setText(mDatas.get(position).getLabSafePerson());
-        holder.labTeacher.setText(mDatas.get(position).getLabTeacher());
+        holder.labSafePerson.setText(mDatas.get(position).getManagerName());
+        holder.labTeacher.setText(mDatas.get(position).getResponserName());
 
     }
 
