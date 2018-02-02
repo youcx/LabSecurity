@@ -105,4 +105,16 @@ public interface HttpApi {
      */
     @POST("back/labsinfor")
     Observable<Result<List<Lab>>> getLabByDepartment(@Query("pageNumb") int page, @Query("departmentId") int id );
+
+    /**
+     * 按等级查看实验室列表
+     * @param labLevel
+     * @param labLevelId
+     * @param page
+     * @return
+     */
+    @POST("back/labbylevel")
+    Observable<Result<List<Lab>>> getLabByLevel(@Query("labLevel") int labLevel,
+                                                @Query("labLevelId") int labLevelId,
+                                                @Query("pageNumb") int page);
 }

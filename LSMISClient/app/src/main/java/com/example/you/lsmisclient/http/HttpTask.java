@@ -151,6 +151,21 @@ public class HttpTask {
     }
 
     /**
+     * 按等级获取
+     * @param level
+     * @param levelId
+     * @param page
+     * @return
+     */
+    public Observable<Result<List<Lab>>> getLabListByLevel(int level,int levelId,int page)
+    {
+        return HttpManager
+                .getApi()
+                .getLabByLevel(level,levelId,page)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread());
+    }
+    /**
      * http测试
      * @param b
      * @return

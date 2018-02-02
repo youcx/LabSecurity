@@ -19,6 +19,7 @@
         android:layout_alignParentRight="true"
         android:paddingBottom="7dp"
         android:paddingTop="7dp"
+        android:paddingRight="20dp"
         android:text="123"
         android:textSize="15sp"
         android:layout_width="wrap_content"
