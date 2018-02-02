@@ -7,7 +7,7 @@ package com.example.you.lsmisclient.bean;
 public class Result<T> {
     private T data;
     private int status;
-    private String message;
+    private String msg;
 
     public T getData() {
         return data;
@@ -18,11 +18,11 @@ public class Result<T> {
     }
 
     public String getMessage() {
-        return message;
+        return msg;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.msg = message;
     }
 
     public int getStatus() {
@@ -38,7 +38,7 @@ public class Result<T> {
         return "{\"Result\":{"
                 + "\"data\":" + data
                 + ", \"status\":\"" + status + "\""
-                + ", \"message\":\"" + message + "\""
+                + ", \"message\":\"" + msg + "\""
                 + "}}";
     }
 }

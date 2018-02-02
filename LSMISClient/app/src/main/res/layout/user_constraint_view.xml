@@ -28,7 +28,7 @@
                     android:layout_height="match_parent" tools:layout_editor_absoluteY="0dp"
                     tools:layout_editor_absoluteX="0dp">
 
-                <com.example.chendian.photopickersample.user.AvatarView
+                <com.example.you.lsmisclient.contacts.AvatarView
                         android:layout_width="72dp"
                         android:layout_height="72dp"
                         app:srcCompat="@drawable/avatar_blank"

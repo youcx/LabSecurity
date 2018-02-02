@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.fragment.HomeFragment;
@@ -50,6 +51,15 @@ public class LabInfoActivity extends AppCompatActivity {
         //toolbar
         labInfoToolbar.setTitle("实验室信息");
         setSupportActionBar(labInfoToolbar);
+        //toolbarTextView.setText("实验室分览");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        labInfoToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //Fragment
         final ArrayList<Fragment> fgList=new ArrayList<>(2);
         fgList.add(new LabBaseInfoFragment());

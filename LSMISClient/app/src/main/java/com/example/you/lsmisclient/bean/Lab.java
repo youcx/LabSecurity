@@ -1,32 +1,46 @@
 package com.example.you.lsmisclient.bean;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Created by You on 2018/1/22.
  */
 
 public class Lab {
     String labName;
-    String labCollege;
-    String labLevel;
+    String departmentName;
+    String mainLevelName;
     String labHazard;
-    String labTeacher;
-    String labSafePerson;
+    String managerName;
+    String responserName;
 
-    public Lab(String labName,String labCollege, String labLevel,String labHazard,   String labSafePerson, String labTeacher) {
-        this.labCollege = labCollege;
-        this.labHazard = labHazard;
-        this.labLevel = labLevel;
+
+    public Lab() {
+    }
+
+    public Lab(String labName,String departmentName, String detailLevelName,  String managerName, String responseName) {
+        this.departmentName = departmentName;
+        this.mainLevelName = detailLevelName;
         this.labName = labName;
-        this.labSafePerson = labSafePerson;
-        this.labTeacher = labTeacher;
+        this.managerName = managerName;
+        this.responserName = responseName;
     }
 
-    public String getLabCollege() {
-        return labCollege;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setLabCollege(String labCollege) {
-        this.labCollege = labCollege;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getMainLevelName() {
+        return mainLevelName;
+    }
+
+    public void setMainLevelName(String mainLevelName) {
+        this.mainLevelName = mainLevelName;
     }
 
     public String getLabHazard() {
@@ -37,14 +51,6 @@ public class Lab {
         this.labHazard = labHazard;
     }
 
-    public String getLabLevel() {
-        return labLevel;
-    }
-
-    public void setLabLevel(String labLevel) {
-        this.labLevel = labLevel;
-    }
-
     public String getLabName() {
         return labName;
     }
@@ -53,19 +59,19 @@ public class Lab {
         this.labName = labName;
     }
 
-    public String getLabSafePerson() {
-        return labSafePerson;
+    public String getManagerName() {
+        return managerName;
     }
 
-    public void setLabSafePerson(String labSafePerson) {
-        this.labSafePerson = labSafePerson;
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
     }
 
-    public String getLabTeacher() {
-        return labTeacher;
+    public String getResponserName() {
+        return responserName;
     }
 
-    public void setLabTeacher(String labTeacher) {
-        this.labTeacher = labTeacher;
+    public void setResponserName(String responserName) {
+        this.responserName = responserName;
     }
 }

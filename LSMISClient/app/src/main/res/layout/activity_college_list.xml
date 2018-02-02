@@ -6,14 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.you.lsmisclient.list.CollegeListActivity">
-    <TextView
-        android:text="学院列表"
-        android:gravity="center"
-        android:background="@color/colorPrimary"
-        android:textSize="20dp"
-        android:textColor="@color/titleColor"
+    <include
+        layout="@layout/widget_layout"
+        android:id="@+id/college_list_toolbar"/>
+    <ProgressBar
+        android:id="@+id/mProgressBar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
+        android:layout_height="wrap_content" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/college_list_recyclerview"
         android:layout_width="match_parent"
