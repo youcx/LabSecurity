@@ -96,7 +96,21 @@ public class UserInfoBean {
         this.sex = sex;
     }
 
+    public String getCollege() {
+        return college;
+    }
 
+    public void setCollege(String college) {
+        this.college = college;
+    }
+
+    public String getWorkPlace() {
+        return workPlace;
+    }
+
+    public void setWorkPlace(String workPlace) {
+        this.workPlace = workPlace;
+    }
     private String userID;
     private int workPlaceID;
     private int collegeID;
@@ -105,7 +119,13 @@ public class UserInfoBean {
     private Date registeredTime;
     private String accountName;
     private String passwd;
+
+    //0 未知，1男，2女
     private int  sex;
     private String email;
     private String photo;
+
+    //可视信息
+    private String college; //学院
+    private String workPlace; // 职位　<----  workPlaceID
 }

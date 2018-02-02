@@ -13,6 +13,9 @@ import com.example.you.lsmisclient.R;
 
 import java.io.File;
 
+import static android.provider.MediaStore.Video.Thumbnails.MICRO_KIND;
+import static android.provider.MediaStore.Video.Thumbnails.MINI_KIND;
+
 /**
  * Created by chendian on 2018/1/25.
  */
@@ -20,6 +23,7 @@ public class PicItemView extends android.support.v7.widget.AppCompatImageView {
 
     //右上角叉的宽度
     private static final int CANCEL_ICON_WIDHT = 50;
+    private static final int PLAY_ICON_WIDHT = 120;
     private int _WIDTH ;
     private int _HEIGHT;
     private final static String TAG = "PicItemView";
@@ -39,7 +43,7 @@ public class PicItemView extends android.support.v7.widget.AppCompatImageView {
     public PicItemView(Context context, String picFilePath, int width, int height) {
         super(context);
         Log.d(TAG, "PicItemView: ctx");
-        _WIDTH = width; _HEIGHT = height;
+        _WIDTH = width -30 ; _HEIGHT = height -30 ;
 
         setmPicFilepath(picFilePath);
         init();
@@ -69,19 +73,34 @@ public class PicItemView extends android.support.v7.widget.AppCompatImageView {
             setImgInvalid();
             return;
         }else {
-            setImageBitmap(getTumbaImg());
+            Bitmap temp = getTumbaImg();
+            setImageBitmap(temp);
         }
     }
 
+    //判断是图片还是视频
     private Bitmap getTumbaImg(){
-        Bitmap rawPic = BitmapFactory.decodeFile(mPicFilepath);
-        Bitmap thumbPic =  ThumbnailUtils.extractThumbnail(rawPic,_WIDTH,_HEIGHT);
+        Log.d(TAG, "getTumbail: path ---> " + mPicFilepath);
+        Bitmap thumbPic  =null;
         Bitmap cancelMark = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(getResources(), R.drawable.ico_cancel),
-                CANCEL_ICON_WIDHT,CANCEL_ICON_WIDHT);
+                CANCEL_ICON_WIDHT, CANCEL_ICON_WIDHT);
+        String letsee = mPicFilepath.substring(mPicFilepath.lastIndexOf('.')).toLowerCase();
+        if(!mPicFilepath.substring(mPicFilepath.lastIndexOf('.')).toLowerCase().equals(".mp4")) {
+            thumbPic = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(mPicFilepath), _WIDTH, _HEIGHT);
+        }else{
+            Bitmap ico_play =ThumbnailUtils.extractThumbnail( BitmapFactory.decodeResource(getResources(),R.drawable.ico_play),
+                    PLAY_ICON_WIDHT,PLAY_ICON_WIDHT);
+            Bitmap rawbmp= ThumbnailUtils.createVideoThumbnail(mPicFilepath,MINI_KIND);
+            thumbPic = ThumbnailUtils.extractThumbnail(rawbmp,_WIDTH,_HEIGHT);
+            Canvas c = new Canvas (thumbPic);c.drawBitmap(ico_play,(_WIDTH - PLAY_ICON_WIDHT )/2,
+                    (_HEIGHT-PLAY_ICON_WIDHT)/2,null);
+            c.save();
+        }
         Canvas canvas = new Canvas(thumbPic);
         canvas.drawBitmap(cancelMark,_HEIGHT - CANCEL_ICON_WIDHT ,0,null);
-        canvas.save(Canvas.ALL_SAVE_FLAG);
+        canvas.save();
         return thumbPic;
+//        return BitmapFactory.decodeFile(mPicFilepath);
     }
 
     private void setImgInvalid(){
