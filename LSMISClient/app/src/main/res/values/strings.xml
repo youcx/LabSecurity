@@ -3,4 +3,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!--user search activity-->
+    <string name="user_search_hint"> 姓名搜索</string>
+    <!--获取学院API-->
+    <string name="user_department_req">http://119.29.201.35:8083/lablist/departlist?</string>
+    <!-- 获取岗位列表 -->
+    <string name="user_role_req">http://119.29.201.35:8083/addmanager/role?</string>
+    <!-- 获取人员信息，末尾加上参数 -->
+    <string name="user_info_req">http://119.29.201.35:8083/addmanager/memberlist?</string>
 </resources>

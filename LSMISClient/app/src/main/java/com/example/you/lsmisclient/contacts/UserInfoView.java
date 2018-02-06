@@ -1,20 +1,13 @@
 package com.example.you.lsmisclient.contacts;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import butterknife.BindView;
 import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.bean.UserInfoBean;
-import org.w3c.dom.Text;
 
 
 public class UserInfoView extends LinearLayout {
@@ -51,16 +44,16 @@ public class UserInfoView extends LinearLayout {
     //刷新界面信息
     public void updateInfo(){
         if(mUserInfo != null){
-            userNameTextView.setText(mUserInfo.getAccountName());
+            userNameTextView.setText(mUserInfo.getMemberName());
             phoneTextView.setText(mUserInfo.getPhoneNum());
-            collegeTextView.setText(mUserInfo.getCollege());
-            workPlaceView.setText(mUserInfo.getWorkPlace());
+            collegeTextView.setText(mUserInfo.getDepartmentName());
+            workPlaceView.setText(mUserInfo.getStationTitle());
             emailTextView.setText(mUserInfo.getEmail());
             switch (mUserInfo.getSex()) {
                 case 1:
                     imgView.setImageResource(R.drawable.ico_man);
                     break;
-                case 2:
+                case 0:
                     imgView.setImageResource(R.drawable.ico_women);
                     break;
             }

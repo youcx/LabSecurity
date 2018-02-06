@@ -38,7 +38,7 @@
                         app:layout_constraintLeft_toLeftOf="parent"/>
 
                 <TextView
-                        android:textSize="20dp"
+                        android:textSize="16dp"
                         android:gravity="left|center_horizontal"
                         android:text="---"
                         android:layout_width="78dp"
@@ -78,14 +78,14 @@
             android:layout_marginBottom="4dp" android:layout_marginEnd="14dp" android:weightSum="1"
             app:layout_constraintVertical_bias="1.0">
         <TextView
-                android:textSize="18dp"
+                android:textSize="15dp"
                 android:gravity="left|center_vertical"
                 android:text="---"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:id="@+id/collegeText"/>
         <TextView
-                android:textSize="18dp"
+                android:textSize="15dp"
                 android:gravity="left|center_vertical"
                 android:text="---"
                 android:layout_width="match_parent"

@@ -46,6 +46,9 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
         <activity android:name=".check.CheckActivity" />
         <activity android:name=".lab.LabOverViewActivity" />
         <activity android:name=".check.SafetyCheckListActivity" />
+        <activity android:name=".contacts.UserActivity"
+                  android:exported="true"
+        />
     </application>
 
 </manifest>

@@ -16,28 +16,22 @@ public class UserInfoBean {
         this.userID = userID;
     }
 
-    public int getWorkPlaceID() {
-        return workPlaceID;
+
+
+    public int getDepartmentId() {
+        return departmentId;
     }
 
-    public void setWorkPlaceID(int workPlaceID) {
-        this.workPlaceID = workPlaceID;
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public int getCollegeID() {
-        return collegeID;
+    public String getMemberName() {
+        return memberName;
     }
 
-    public void setCollegeID(int collegeID) {
-        this.collegeID = collegeID;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
     }
 
     public String getPhoneNum() {
@@ -96,29 +90,43 @@ public class UserInfoBean {
         this.sex = sex;
     }
 
-    public String getCollege() {
-        return college;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setCollege(String college) {
-        this.college = college;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    public String getWorkPlace() {
-        return workPlace;
+    public String getStationTitle() {
+        return stationTitle;
     }
 
-    public void setWorkPlace(String workPlace) {
-        this.workPlace = workPlace;
+    public void setStationTitle(String stationTitle) {
+        this.stationTitle = stationTitle;
     }
-    private String userID;
-    private int workPlaceID;
-    private int collegeID;
-    private String userName;
+
+    public int getRoleID() {
+        return roleID;
+    }
+
+    public void setRoleID(int roleID) {
+        this.roleID = roleID;
+    }
+
+
+
+
+    private int roleID = -1;
+    private int departmentId;
+    private String memberName;
     private String phoneNum;
+
+    /* 多余字段 */
     private Date registeredTime;
     private String accountName;
     private String passwd;
+    private String userID;
 
     //0 未知，1男，2女
     private int  sex;
@@ -126,6 +134,6 @@ public class UserInfoBean {
     private String photo;
 
     //可视信息
-    private String college; //学院
-    private String workPlace; // 职位　<----  workPlaceID
+    private String departmentName; //学院
+    private String stationTitle; // 职位　<----  workPlaceID
 }
