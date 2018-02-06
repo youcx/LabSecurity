@@ -121,7 +121,10 @@ public class LevelListActivity extends AppCompatActivity {
             @Override
             public void onLevelItemClickListener(View view, LabLevel labLevel) {
                 Intent intent=new Intent(getBaseContext(),LabListActivity.class);
-                intent.putExtra("task","info");
+                Bundle bd=new Bundle();
+                bd.putInt("labLevel",labLevel.getLabLevel());
+                bd.putString("task","fromLevel");
+                intent.putExtras(bd);
                 startActivity(intent);
             }
         });
@@ -137,15 +140,15 @@ public class LevelListActivity extends AppCompatActivity {
 
     }
 
-    private void initLevel()
-    {
-        datas=new ArrayList<LabLevel>();
-        datas.add(new LabLevel("国家级","3"));
-        datas.add(new LabLevel("省级","5"));
-        datas.add(new LabLevel("校级","22"));
-        datas.add(new LabLevel("院级","25"));
-        datas.add(new LabLevel("其他","3"));
-    }
+//    private void initLevel()
+//    {
+//        datas=new ArrayList<LabLevel>();
+//        datas.add(new LabLevel("国家级","3"));
+//        datas.add(new LabLevel("省级","5"));
+//        datas.add(new LabLevel("校级","22"));
+//        datas.add(new LabLevel("院级","25"));
+//        datas.add(new LabLevel("其他","3"));
+//    }
 
     /**
      * 显示Toast消息

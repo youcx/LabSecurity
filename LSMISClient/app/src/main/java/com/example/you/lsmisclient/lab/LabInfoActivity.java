@@ -41,6 +41,8 @@ public class LabInfoActivity extends AppCompatActivity {
     TabLayout labInfoTabLayout;
     @BindView(R.id.lab_info_viewpager)
     ViewPager labInfoViewPager;
+    //实验室id
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class LabInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lab_info);
         //bind
         ButterKnife.bind(this);
+        Intent intent=getIntent();
+        id=intent.getIntExtra("labId",4);
         //toolbar
         labInfoToolbar.setTitle("实验室信息");
         setSupportActionBar(labInfoToolbar);
@@ -60,10 +64,18 @@ public class LabInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        LabBaseInfoFragment labBaseInforFragment=new LabBaseInfoFragment();
+        LabSecurityInfoFragment labSecurityInfoFragment=new LabSecurityInfoFragment();
+        //Activity向Fragment传值
+        Bundle bundle=new Bundle();
+        bundle.putInt("labId",id);
+        labBaseInforFragment.setArguments(bundle);
+        labSecurityInfoFragment.setArguments(bundle);
         //Fragment
         final ArrayList<Fragment> fgList=new ArrayList<>(2);
-        fgList.add(new LabBaseInfoFragment());
-        fgList.add(new LabSecurityInfoFragment());
+        fgList.add(labBaseInforFragment);
+        fgList.add(labSecurityInfoFragment);
         //Fragment适配器
         FragmentPagerAdapter mFragmentPagerAdapter=new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override

@@ -14,6 +14,7 @@ public class Lab {
     String labHazard;
     String managerName;
     String responserName;
+    int iD;
 
 
     public Lab() {
@@ -25,6 +26,14 @@ public class Lab {
         this.labName = labName;
         this.managerName = managerName;
         this.responserName = responseName;
+    }
+
+    public int getID() {
+        return iD;
+    }
+
+    public void setID(int ID) {
+        this.iD = ID;
     }
 
     public String getDepartmentName() {

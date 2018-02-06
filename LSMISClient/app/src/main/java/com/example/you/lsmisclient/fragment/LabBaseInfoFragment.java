@@ -81,16 +81,17 @@ public class LabBaseInfoFragment extends Fragment {
         ButterKnife.bind(this,view);
         mTask=new HttpTask();
         labBaseInfoProgressBar.setVisibility(View.VISIBLE);
-        startGetLabInfo();
+        Bundle bundle=LabBaseInfoFragment.this.getArguments();
+        startGetLabInfo(bundle.getInt("labId",4));
         return view;
     }
 
     /**
      * 获取实验室信息
      */
-    private void startGetLabInfo()
+    private void startGetLabInfo(int id)
     {
-        mTask.getLabInfo(4)
+        mTask.getLabInfo(id)
                 .subscribe(new Subscriber<Result<LabInfo>>() {
                     @Override
                     public void onCompleted() {

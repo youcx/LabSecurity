@@ -238,56 +238,7 @@ public class LabBaseInfoChangeFragment extends Fragment implements AdapterView.O
             }
     }
 
-    /**
-     * http测试
-     * @param b
-     */
-    private void testhttp(boolean b)
-    {
 
-        mTask.testHttp(b)
-                .subscribe(new Subscriber<Result>() {
-                    @Override
-                    public void onStart() {
-                        super.onStart();
-                    }
-
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();if ( e instanceof HttpException){
-                            HttpException httpException= (HttpException) e;
-                            int code=httpException.code();
-                            String msg=httpException.getMessage();
-                            if (code==504){
-                                msg="网络不给力";
-                            }else if(code==404){
-                                msg="请求内容不存在！";
-                            }
-                            showToast(msg);
-                        }else {
-
-                        }
-                    }
-
-                    @Override
-                    public void onNext(Result result) {
-                        if(result!=null)
-                        {
-//                            if(result.getStatus()==1)
-//                            {
-//                                showToast(result.getMsg());
-//                            }
-//                            showToast(result.getMsg());
-                            Log.i("tag",result.getData().toString());
-                        }
-                    }
-                });
-    }
 
     /**
      * 开始改变实验室信息

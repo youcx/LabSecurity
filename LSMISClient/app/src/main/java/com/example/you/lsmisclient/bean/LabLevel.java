@@ -6,16 +6,17 @@ package com.example.you.lsmisclient.bean;
 
 public class LabLevel {
     String levelName;
-    String labCount;
+    String labNumb;
+    //实验室大等级ID
     int labLevel;
 
-    public LabLevel(String levelName,String labCount ) {
-        this.labCount = labCount;
+    public LabLevel(String levelName,String labNumb) {
+        this.labNumb = labNumb;
         this.levelName = levelName;
     }
 
-    public LabLevel(String labCount, int labLevel, String levelName) {
-        this.labCount = labCount;
+    public LabLevel(String labNumb, int labLevel, String levelName) {
+        this.labNumb = labNumb;
         this.labLevel = labLevel;
         this.levelName = levelName;
     }
@@ -32,12 +33,12 @@ public class LabLevel {
         this.labLevel = labLevel;
     }
 
-    public String getLabCount() {
-        return labCount;
+    public String getLabNumb() {
+        return labNumb;
     }
 
-    public void setLabCount(String labCount) {
-        this.labCount = labCount;
+    public void setLabNumb(String labNumb) {
+        this.labNumb = labNumb;
     }
 
     public String getLevelName() {

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.example.you.lsmisclient.database.MyDatabaseHelper;
 import com.example.you.lsmisclient.fragment.AboutFragment;
 import com.example.you.lsmisclient.fragment.HomeFragment;
 import com.example.you.lsmisclient.fragment.ManageFragment;
@@ -25,6 +26,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.you.lsmisclient.qr.QrScannerActivity;
+
+import org.litepal.tablemanager.Connector;
 
 public class MainActivity extends AppCompatActivity {
     //绑定控件
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //创建数据库
+        Connector.getDatabase();
         //控件绑定
         ButterKnife.bind(this);
 

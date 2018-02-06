@@ -8,6 +8,9 @@ import com.example.you.lsmisclient.bean.LabId;
 import com.example.you.lsmisclient.bean.LabInfo;
 import com.example.you.lsmisclient.bean.LabLevel;
 import com.example.you.lsmisclient.bean.Result;
+import com.example.you.lsmisclient.check.bean.CheckItem;
+import com.example.you.lsmisclient.check.bean.FirstCheckList;
+import com.example.you.lsmisclient.check.bean.SecondCheckList;
 
 import org.json.JSONObject;
 
@@ -78,7 +81,7 @@ public class HttpTask {
                 .getApi()
                 .getLabDetailLevel(levelId)
                 .subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
@@ -104,7 +107,7 @@ public class HttpTask {
                 .getApi()
                 .getMainDanger()
                 .subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
@@ -118,7 +121,7 @@ public class HttpTask {
                 .getApi()
                 .getDetailDanger(id,labid)
                 .subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
@@ -132,7 +135,7 @@ public class HttpTask {
                 .getApi()
                 .getCheckTaskList(flag)
                 .subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
@@ -147,11 +150,11 @@ public class HttpTask {
                 .getApi()
                 .getLabByDepartment(page,id)
                 .subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
-     * 按等级获取
+     * 按等级获取实验室列表
      * @param level
      * @param levelId
      * @param page
@@ -163,18 +166,109 @@ public class HttpTask {
                 .getApi()
                 .getLabByLevel(level,levelId,page)
                 .subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread());
     }
+
     /**
-     * http测试
-     * @param b
+     * 按危险源获取实验室列表
+     * @param id
+     * @param page
      * @return
      */
-    public Observable<Result> testHttp(boolean b)
+    public Observable<Result<List<Lab>>> getLabListByHazard(int id,int page)
     {
         return HttpManager
                 .getApi()
-                .testHttp(b)
+                .getLabByHazard(id,page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 按任务选择实验室列表
+     * @param id
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    public Observable<Result<List<Lab>>> getLabListByTask(int id,int pageSize,int pageNum)
+    {
+        return HttpManager
+                .getApi()
+                .getLabByTask(id,pageSize,pageNum)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取检查表第一大类
+     * @return
+     */
+    public Observable<Result<List<FirstCheckList>>> getFirstCheckList()
+    {
+        return HttpManager
+                .getApi()
+                .getFirstCheckGroupList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 根据第一大类获取检查表子类
+     * @param serialNum
+     * @return
+     */
+    public Observable<Result<List<SecondCheckList>>> getSecondCheckList(String serialNum)
+    {
+        return HttpManager
+                .getApi()
+                .getSecondCheckGroupList(serialNum)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取检查项
+     * @param serialNum
+     * @param labId
+     * @return
+     */
+    public Observable<Result<List<CheckItem>>> getCheckItemList(String serialNum,int labId)
+    {
+        return HttpManager
+                .getApi()
+                .getCheckItemList(serialNum,labId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 开始检查
+     * @param taskId
+     * @param typeId
+     * @return
+     */
+    public Observable<String> startCheck(int taskId,int typeId,int labId)
+    {
+        return HttpManager
+                .getApi()
+                .startCheck(taskId,typeId,labId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 上传不适用项
+     * @param recordId
+     * @param labId
+     * @param titleId
+     * @return
+     */
+    public Observable<Result> uploadUnUseTitle(int recordId,int labId,int titleId)
+    {
+        return HttpManager
+                .getApi()
+                .uploadUnUseTitle(recordId,labId,titleId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

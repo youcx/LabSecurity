@@ -1,24 +1,31 @@
 package com.example.you.lsmisclient.bean;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.List;
+
 /**
  * Created by You on 2018/1/21.
  */
 
 public class College {
-    //学院名、实验室总数、学院责任人
-    String collegeName;
-    String labCount;
-    String collegeManager;
+    //学院名、id、实验室总数、学院责任人
+    String departmentName;
     int departmentId;
+    String labNumb;
+    String member;
+
 
     public College() {
     }
 
-    public College(String collegeName, String labCount, String collegeManager , int departmentId) {
-        this.labCount = labCount;
-        this.collegeManager = collegeManager;
-        this.collegeName = collegeName;
-        this.departmentId=departmentId;
+    public College(int departmentId, String departmentName, String member,String labNumb) {
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.labNumb = labNumb;
+        this.member=member;
+
     }
 
     public int getDepartmentId() {
@@ -29,27 +36,27 @@ public class College {
         this.departmentId = departmentId;
     }
 
-    public String getLabCount() {
-        return labCount;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setLabCount(String labCount) {
-        this.labCount = labCount;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    public String getCollegeManager() {
-        return collegeManager;
+    public String getLabNumb() {
+        return labNumb;
     }
 
-    public void setCollegeManager(String collegeManager) {
-        this.collegeManager = collegeManager;
+    public void setLabNumb(String labNumb) {
+        this.labNumb = labNumb;
     }
 
-    public String getCollegeName() {
-        return collegeName;
+    public String getMember() {
+        return member;
     }
 
-    public void setCollegeName(String collegeName) {
-        this.collegeName = collegeName;
+    public void setMember(String member) {
+        this.member = member;
     }
 }

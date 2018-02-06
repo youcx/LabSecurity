@@ -17,6 +17,8 @@ import com.example.you.lsmisclient.adapter.CollegeAdapter;
 import com.example.you.lsmisclient.bean.College;
 import com.example.you.lsmisclient.bean.Result;
 import com.example.you.lsmisclient.http.HttpTask;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -124,16 +126,31 @@ public class CollegeListActivity extends AppCompatActivity {
             {
                 JSONObject jsonObject=(JSONObject) jsonArray.get(i);
                 Log.i("学院名",jsonObject.getString("departmentName"));
-                mDatas.add(new College(jsonObject.getString("departmentName"),"","",jsonObject.getInt("departmentId")));
-            }
+                if("".equals(jsonObject.optString("memberList")) || jsonObject.optString("memberList")==null)
+                {
+                    mDatas.add(new College(
+                            jsonObject.getInt("departmentId"),
+                            jsonObject.getString("departmentName"),
+                            "",
+                            jsonObject.getString("labNumb")));
+                }else{
+                    JSONArray jsonArray1=new JSONArray(jsonObject.getString("memberList"));
+                    JSONObject jsonObject1=(JSONObject) jsonArray1.get(0);
+                    mDatas.add(new College(
+                            jsonObject.getInt("departmentId"),
+                            jsonObject.getString("departmentName"),
+                            jsonObject1.getString("memberName"),
+                            jsonObject.getString("labNumb")));
+                }
 
+            }
             collegeAdapter = new CollegeAdapter(mDatas);
             collegeAdapter.setCollegeItemClickListener(new CollegeAdapter.CollegeItemClickListener() {
                         @Override
                         public void onCollegeItemClick(View view, College college) {
                             Intent intent=new Intent(getBaseContext(),LabListActivity.class);
                             Bundle bd=new Bundle();
-                            Log.i("点击项",""+college.getCollegeName());
+                            Log.i("点击项",""+college.getDepartmentName());
                             bd.putInt("departmentId",college.getDepartmentId());
                             bd.putString("task","fromDepartment");
                             intent.putExtras(bd);

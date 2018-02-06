@@ -78,7 +78,10 @@ public class CheckMissionAdapter extends RecyclerView.Adapter<CheckMissionAdapte
         holder.missionDescription.setText(mDatas.get(position).getTaskDesc());
         holder.missionStartTime.setText(mDatas.get(position).getCheckBeginTime().substring(0,10));
         holder.missionEndTime.setText(mDatas.get(position).getCheckEndTime().substring(0,10));
-        holder.missionRemainingTime.setText("还剩"+mDatas.get(position).getLeftDay()+"天");
+        if(mDatas.get(position).getLeftDay()>-1)
+            holder.missionRemainingTime.setText("还剩"+mDatas.get(position).getLeftDay()+"天");
+        else
+            holder.missionRemainingTime.setText("已过期");
         holder.missionAllLabs.setText(""+mDatas.get(position).getIncLabCount());
         holder.missionCheckedLabs.setText(""+mDatas.get(position).getCheckedLabCount());
         holder.missionRemainingLabs.setText(""+(mDatas.get(position).getIncLabCount()-mDatas.get(position).getCheckedLabCount()));

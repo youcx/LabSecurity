@@ -7,6 +7,9 @@ import com.example.you.lsmisclient.bean.LabId;
 import com.example.you.lsmisclient.bean.LabInfo;
 import com.example.you.lsmisclient.bean.LabLevel;
 import com.example.you.lsmisclient.bean.Result;
+import com.example.you.lsmisclient.check.bean.CheckItem;
+import com.example.you.lsmisclient.check.bean.FirstCheckList;
+import com.example.you.lsmisclient.check.bean.SecondCheckList;
 
 
 import org.json.JSONObject;
@@ -55,7 +58,7 @@ public interface HttpApi {
      * 获取实验室等级
      * @return
      */
-    @GET("labinfor/leveloption")
+    @GET("lablist/levellist")
     Observable<Result<List<LabLevel>>> getLabLevelList();
 
     /**
@@ -70,27 +73,20 @@ public interface HttpApi {
      * 获取学院列表
      * @return
      */
-    @GET("labinfor/department")
+    @GET("lablist/departlist")
     Observable<Result> getDepartmentList();
 
-    /**
-     * 获取检查任务列表
-     * @param flag
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("labsafe/checkResult/front/getCheckTaskList")
-    Observable<Result<List<CheckMission>>> getCheckTaskList(@Field("availableFlag") int flag);
+
 
     /**
-     * 获取危险源大类
+     * 获取危险源大类列表
      * @return
      */
-    @GET("dangersubmit/maindanger")
+    @GET("lablist/dangerlist")
     Observable<Result>  getMainDanger();
 
     /**
-     * 危险源显示
+     * 获取危险源子类列表
      * @param id
      * @return
      */
@@ -117,4 +113,84 @@ public interface HttpApi {
     Observable<Result<List<Lab>>> getLabByLevel(@Query("labLevel") int labLevel,
                                                 @Query("labLevelId") int labLevelId,
                                                 @Query("pageNumb") int page);
+
+    /**
+     * 按危险源查看实验室列表
+     * @param id
+     * @param page
+     * @return
+     */
+    @POST("back/labbydanger")
+    Observable<Result<List<Lab>>> getLabByHazard(@Query("dangerMainTypeId") int id,@Query("pageNumb") int page);
+
+    /**
+     * 获取检查任务列表
+     * @param flag
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/front/getCheckTaskList")
+    Observable<Result<List<CheckMission>>> getCheckTaskList(@Field("availableFlag") int flag);
+
+    /**
+     * 按任务查看实验室列表
+     * @param id
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkTask/front/getTaskIncLabList")
+    Observable<Result<List<Lab>>> getLabByTask(@Field("taskId") int id,@Field("pageSize") int pageSize,@Field("pageNum") int pageNum);
+
+    /**
+     * 获取检查表第一大类
+     * @return
+     */
+    @POST("labsafe/checkResult/front/getFirstCheckGroupList")
+    Observable<Result<List<FirstCheckList>>> getFirstCheckGroupList();
+
+    /**
+     * 获取检查表第二大类
+     * @param id
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/front/getSecondCheckGroupList")
+    Observable<Result<List<SecondCheckList>>> getSecondCheckGroupList(@Field("groupSerialNumber") String id);
+
+    /**
+     * 获取检查项
+     * @param id
+     * @param labId
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/front/getLabCheckTitleList")
+    Observable<Result<List<CheckItem>>> getCheckItemList(@Field("groupSerialNumber") String id,@Field("labId") int labId);
+
+    /**
+     * 开始检查
+     * @param taskId
+     * @param typeId
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/back/startNewCheck")
+    Observable<String> startCheck(@Field("taskId") int taskId,@Field("typeId") int typeId,@Field("labId") int labId);
+
+    /**
+     * 上传不适用项
+     * @param recordId
+     * @param labId
+     * @param titleId
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/back/uploadLabUnUseTitle")
+    Observable<Result> uploadUnUseTitle(@Field("recordId") int recordId,@Field("labId") int labId,@Field("titleId") int titleId);
+
+
+
+
 }

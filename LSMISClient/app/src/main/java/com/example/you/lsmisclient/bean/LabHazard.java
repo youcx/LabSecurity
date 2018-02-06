@@ -7,10 +7,20 @@ package com.example.you.lsmisclient.bean;
 public class LabHazard {
     String hazardName;
     String labCount;
+    int dangerMainTypeId;
 
-    public LabHazard(String hazardName, String labCount) {
+    public LabHazard(String hazardName, String labCount,int dangerMainTypeId) {
         this.hazardName = hazardName;
         this.labCount = labCount;
+        this.dangerMainTypeId=dangerMainTypeId;
+    }
+
+    public int getDangerMainTypeId() {
+        return dangerMainTypeId;
+    }
+
+    public void setDangerMainTypeId(int dangerMainTypeId) {
+        this.dangerMainTypeId = dangerMainTypeId;
     }
 
     public String getHazardName() {

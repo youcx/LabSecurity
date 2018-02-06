@@ -36,6 +36,8 @@ public class LabSecurityInfoFragment extends Fragment {
     //数据
     String[] item1=null;
     String[][][] item2=null;
+
+    int labId;
     //adapter
     HazardListAdapter hazardListAdapter;
     //http
@@ -55,6 +57,8 @@ public class LabSecurityInfoFragment extends Fragment {
         ButterKnife.bind(this,view);
         mTask=new HttpTask();
         mProgressBar.setVisibility(View.VISIBLE);
+        Bundle bundle=LabSecurityInfoFragment.this.getArguments();
+        labId=bundle.getInt("labId",4);
         //进行数据请求
        startGetInfo();
         item1=new String[6];
@@ -135,7 +139,7 @@ public class LabSecurityInfoFragment extends Fragment {
                 item1[i]=jsonObject.getString("dangerMainTypeName");
                 //Log.i("数据",item1[i]);
                 Log.i("一项",""+jsonObject.getInt("dangerMainTypeId"));
-                startGetDetailDanger(i,jsonObject.getInt("dangerMainTypeId"),4);
+                startGetDetailDanger(i,jsonObject.getInt("dangerMainTypeId"),labId);
             }
 //            for(int i=0;i<5;i++)
 //            {
@@ -168,7 +172,7 @@ public class LabSecurityInfoFragment extends Fragment {
      * @param id
      * @param labid
      */
-    private void startGetDetailDanger(final int i,int id,int labid)
+    private void startGetDetailDanger(final int i, int id, final int labid)
     {
         mTask.getDetailDanger(id,labid)
                 .subscribe(new Subscriber<Result>() {
@@ -198,7 +202,7 @@ public class LabSecurityInfoFragment extends Fragment {
                     public void onNext(Result result) {
                         if(result!=null){
                             if(result.getStatus()==200){
-                               // Log.i("item1！！！",""+i);
+                                Log.i("item1！！！",""+labid);
                                 inidDetailDangerDatas(i,result.getData().toString());
                             }
                         }

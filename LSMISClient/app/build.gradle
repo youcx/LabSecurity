@@ -34,6 +34,8 @@ dependencies {
     //http库与zxing二维码库
     //compile 'com.squareup.okhttp3:okhttp:3.8.1'
     //    niftydialog
+    //treeview
+    //LitePal数据库
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.github.sd6352051.niftydialogeffects:niftydialogeffects:1.0.0@aar'
     compile 'com.android.support:appcompat-v7:25.2.0'
@@ -51,8 +53,8 @@ dependencies {
     compile 'me.dm7.barcodescanner:zxing:1.9'
     compile 'com.google.android.gms:play-services-appindexing:9.8.0'
     compile 'com.android.support:gridlayout-v7:25.3.1'
+    compile 'me.texy.treeview:treeview_lib:1.0.3'
+    compile 'org.litepal.android:core:1.6.1'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
-    //treeview
-    compile 'me.texy.treeview:treeview_lib:1.0.3'
 }

@@ -5,7 +5,7 @@ package com.example.you.lsmisclient.bean;
  */
 
 public class LabInfo {
-    int ID;
+    int iD;
     //实验室具体等级id
     int labLevelId;
     String labName;
@@ -55,11 +55,11 @@ public class LabInfo {
     }
 
     public int getID() {
-        return ID;
+        return iD;
     }
 
     public void setID(int ID) {
-        this.ID = ID;
+        this.iD = ID;
     }
 
     public String getLabAddr() {
@@ -170,7 +170,7 @@ public class LabInfo {
     public String toString() {
         return "{\"LabInfo\":{"
                 + "\"area\":\"" + area + "\""
-                + ", \"ID\":\"" + ID + "\""
+                + ", \"ID\":\"" + iD + "\""
                 + ", \"labLevelId\":\"" + labLevelId + "\""
                 + ", \"labName\":\"" + labName + "\""
                 + ", \"buildId\":\"" + buildId + "\""

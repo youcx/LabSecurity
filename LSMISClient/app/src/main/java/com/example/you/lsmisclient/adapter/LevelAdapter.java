@@ -86,7 +86,7 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelViewHol
         });
         //数据设置
         holder.levelName.setText(mDatas.get(position).getLevelName());
-        holder.labCount.setText(mDatas.get(position).getLabCount());
+        holder.labCount.setText(mDatas.get(position).getLabNumb());
         holder.levelIcon.setImageResource(R.mipmap.rocket_72px);
     }
 

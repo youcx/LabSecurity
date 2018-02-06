@@ -12,13 +12,18 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:rowCount="15">
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
-                    android:layout_columnWeight="1"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="fill"
                     android:paddingLeft="40dp"
                     android:gravity="center_vertical"
@@ -29,236 +34,435 @@
 
                 <EditText
                     android:id="@+id/lab_levelid_edt"
-                    android:layout_columnWeight="1"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="fill"
                     android:gravity="center_vertical"
                     android:textSize="16sp" />
-
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="学院名称" />
-            <Spinner
-                android:id="@+id/departmentName_spin"
+            </LinearLayout>
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="实验室等级" />
-            <Spinner
-                android:id="@+id/main_level_spin"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></Spinner>
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="实验室具体等级" />
-            <Spinner
-                android:id="@+id/detaillevelName_spin"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical" />
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="楼层id" />
-            <EditText
-                android:id="@+id/build_id_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp" />
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="院系ID" />
-            <EditText
-                android:id="@+id/departmentId_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp" />
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="实验室名称" />
-            <EditText
-                android:id="@+id/lab_name_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp" />
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="标识牌信息" />
-            <EditText
-                android:id="@+id/denoter_infor_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp" />
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="实验室面积" />
-            <EditText
-                android:id="@+id/lab_area_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp" />
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="实验室地址" />
-            <EditText
-                android:id="@+id/location_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp" />
-
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="实验室负责人姓名" />
-            <EditText
-                android:id="@+id/response_name_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp"/>
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="实验室负责人电话" />
-            <EditText
-                android:id="@+id/response_phone_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp" />
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="安全管理员姓名" />
-            <EditText
-                android:id="@+id/manager_name_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp" />
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="安全管理员电话" />
-            <EditText
-                android:id="@+id/manager_phone_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp" />
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="实验室状态" />
-            <EditText
-                android:id="@+id/lab_status_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp"/>
-            <TextView
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:paddingLeft="40dp"
-                android:gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="15dp"
-                android:text="提交人姓名" />
-            <EditText
-                android:id="@+id/submit_person_name_edt"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                android:gravity="center_vertical"
-                android:textSize="15dp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="学院名称" />
+                <Spinner
+                    android:id="@+id/departmentName_spin"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="实验室等级" />
+                <Spinner
+                    android:id="@+id/main_level_spin"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></Spinner>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="实验室具体等级" />
+                <Spinner
+                    android:id="@+id/detaillevelName_spin"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="楼层id" />
+                <EditText
+                    android:id="@+id/build_id_edt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="院系ID" />
+                <EditText
+                    android:id="@+id/departmentId_edt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="实验室名称" />
+                <EditText
+                    android:id="@+id/lab_name_edt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="标识牌信息" />
+                <EditText
+                    android:id="@+id/denoter_infor_edt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="实验室面积" />
+                <EditText
+                    android:id="@+id/lab_area_edt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="实验室地址" />
+                <EditText
+                    android:id="@+id/location_edt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="实验室负责人姓名" />
+                <EditText
+                    android:id="@+id/response_name_edt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="实验室负责人电话" />
+                <EditText
+                    android:id="@+id/response_phone_edt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="安全管理员姓名" />
+                <EditText
+                    android:id="@+id/manager_name_edt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="安全管理员电话" />
+                <EditText
+                    android:id="@+id/manager_phone_edt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="实验室状态" />
+                <EditText
+                    android:id="@+id/lab_status_edt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:paddingLeft="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="15dp"
+                    android:text="提交人姓名" />
+                <EditText
+                    android:id="@+id/submit_person_name_edt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_gravity="fill"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#eeeeee"
+                android:layout_height="1dp"/>
             <Button
                 android:id="@+id/change_labinfo_btn"
-                app:layout_columnSpan="2" />
-        </TableLayout>
+                android:layout_weight="1"
+                android:text="提交修改"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </ScrollView>
 
 </FrameLayout>

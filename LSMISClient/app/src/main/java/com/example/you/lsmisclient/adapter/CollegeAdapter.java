@@ -87,9 +87,9 @@ public class CollegeAdapter extends RecyclerView.Adapter<CollegeAdapter.CollegeV
         });
 
         //数据设置
-        holder.collegeName.setText(mDatas.get(position).getCollegeName());
-        holder.labCount.setText(mDatas.get(position).getLabCount());
-        holder.collegeManager.setText(mDatas.get(position).getCollegeManager());
+        holder.collegeName.setText(mDatas.get(position).getDepartmentName());
+        holder.labCount.setText(mDatas.get(position).getLabNumb());
+        holder.collegeManager.setText(mDatas.get(position).getMember());
         holder.collegeIcon.setImageResource(R.mipmap.bookshelf_72px);
     }
 

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.you.lsmisclient.R;
+import com.example.you.lsmisclient.rectification.RectificationActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +48,7 @@ public class SecurityCheckActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.security_check_review:
                 //Toast.makeText(this,"还没有写",Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(this,SafetyCheckListActivity
+                Intent intent=new Intent(this,RectificationActivity
                         .class);
                 startActivity(intent);
                 break;

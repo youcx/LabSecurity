@@ -1,9 +1,12 @@
 package com.example.you.lsmisclient.lab;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ExpandedMenuView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -17,10 +20,13 @@ import com.example.you.lsmisclient.check.CheckActivity;
 import com.example.you.lsmisclient.check.SafetyCheckListActivity;
 import com.example.you.lsmisclient.http.HttpTask;
 
+import org.json.JSONObject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
+import rx.exceptions.Exceptions;
 
 public class LabOverViewActivity extends AppCompatActivity implements View.OnClickListener{
     @BindView(R.id.lab_overview_toolbar)
@@ -44,6 +50,8 @@ public class LabOverViewActivity extends AppCompatActivity implements View.OnCli
 
     //获取数据
     private HttpTask mTask;
+    //
+    int labid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,8 @@ public class LabOverViewActivity extends AppCompatActivity implements View.OnCli
         //绑定控件
         ButterKnife.bind(this);
         mTask=new HttpTask();
+        Intent intent=getIntent();
+        labid=intent.getIntExtra("labId",4);
         //toolbar
         toolbarTextView.setText("实验室概览");
         setSupportActionBar(labOverViewToolbar);
@@ -73,11 +83,11 @@ public class LabOverViewActivity extends AppCompatActivity implements View.OnCli
     }
 
     /**
-     * 过去实验室信息
+     * 获取实验室信息
      */
     private void startGetLabInfo()
     {
-        mTask.getLabInfo(4)
+        mTask.getLabInfo(labid)
                 .subscribe(new Subscriber<Result<LabInfo>>() {
                     @Override
                     public void onCompleted() {
@@ -128,6 +138,10 @@ public class LabOverViewActivity extends AppCompatActivity implements View.OnCli
         labManagerName.setText(labInfo.getManagerName());
         labManagerPhone.setText(labInfo.getManagerPhone());
         labOverViewProgressbar.setVisibility(View.GONE);
+        SharedPreferences.Editor editor=getSharedPreferences("checkdata",MODE_PRIVATE).edit();
+        Log.i("labID",""+labInfo.getID());
+        editor.putInt("labId",labInfo.getID());
+        editor.apply();
     }
 
     @Override
@@ -135,12 +149,51 @@ public class LabOverViewActivity extends AppCompatActivity implements View.OnCli
         switch (v.getId())
         {
             case R.id.start_check_btn:
+                SharedPreferences sp=getSharedPreferences("checkdata",MODE_PRIVATE);
+                int taskId=sp.getInt("taskId",0);
+                int typeId=sp.getInt("typeId",0);
+                int labId=sp.getInt("labId",0);
+                Log.i("labId",taskId+":"+typeId+":"+labId);
+                startCheck(taskId,typeId,labId);
                 Intent intoCheckAc=new Intent(this,SafetyCheckListActivity.class);
                 startActivity(intoCheckAc);
                 break;
             case R.id.reform_btn:
                 break;
         }
+    }
+
+    private void startCheck(int taskId,int typeId,int labId)
+    {
+        mTask.startCheck(taskId,typeId,labId)
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        if(s!=null)
+                        {
+                            try {
+                                JSONObject jsonObject = new JSONObject(s);
+                                SharedPreferences.Editor editor=getSharedPreferences("checkdata",MODE_PRIVATE).edit();
+                                editor.putInt("recordId",jsonObject.getInt("recordId"));
+                                editor.apply();
+                            } catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }
+                });
     }
 
     /**

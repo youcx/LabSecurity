@@ -1,6 +1,7 @@
 package com.example.you.lsmisclient.check;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -127,9 +128,15 @@ public class SelectCheckMissionActivity extends AppCompatActivity implements Vie
         missionAdapter.setCheckMissionItemListener(new CheckMissionAdapter.CheckMissionItemClickListener() {
             @Override
             public void onCheckMissionItemClickListener(View view, CheckMission checkMission) {
-                String s="check";
+                SharedPreferences.Editor editor=getSharedPreferences("checkdata",MODE_PRIVATE).edit();
+                editor.putInt("taskId",checkMission.getTaskId());
+                editor.putInt("typeId",checkMission.getTypeId());
+                editor.apply();
                 Intent intent=new Intent(getBaseContext(), LabListActivity.class);
-                intent.putExtra("task",s);
+                Bundle bd=new Bundle();
+                bd.putString("task","check");
+                bd.putInt("taskId",checkMission.getTaskId());
+                intent.putExtras(bd);
                 startActivity(intent);
             }
         });

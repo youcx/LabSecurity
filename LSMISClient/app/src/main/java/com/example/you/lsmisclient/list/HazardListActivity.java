@@ -13,12 +13,18 @@ import android.widget.TextView;
 import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.adapter.HazardAdapter;
 import com.example.you.lsmisclient.bean.LabHazard;
+import com.example.you.lsmisclient.bean.Result;
+import com.example.you.lsmisclient.http.HttpTask;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Subscriber;
 
 public class HazardListActivity extends AppCompatActivity {
     @BindView(R.id.hazard_list_recyclerview)
@@ -31,12 +37,15 @@ public class HazardListActivity extends AppCompatActivity {
     HazardAdapter hazardAdapter;
     //数据
     List<LabHazard> datas;
+    //http
+    HttpTask mTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hazard_list);
         //绑定控件
         ButterKnife.bind(this);
+        mTask=new HttpTask();
         toolbarTextView.setText("危险源分览");
         setSupportActionBar(hazardListToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -48,30 +57,72 @@ public class HazardListActivity extends AppCompatActivity {
             }
         });
         //init
-        initHazard();
-        //
-        hazardAdapter=new HazardAdapter(datas);
-        hazardAdapter.setHazardItemClickListener(new HazardAdapter.HazardItemClickListener() {
-            @Override
-            public void onHazardItemClick(View view, LabHazard labHazard) {
-                Intent intent=new Intent(getBaseContext(),LabListActivity.class);
-                intent.putExtra("task","info");
-                startActivity(intent);
-            }
-        });
-        //RecyclerView
-        hazardListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        hazardListRecyclerView.setAdapter(hazardAdapter);
+        startGetHazardList();
+
     }
-    private void initHazard()
+
+    private void startGetHazardList()
     {
-        datas=new ArrayList<LabHazard>();
-        datas.add(new LabHazard("易燃易爆物","2"));
-        datas.add(new LabHazard("放射性物质","23"));
-        datas.add(new LabHazard("生物类物品","1"));
-        datas.add(new LabHazard("特种设备","3"));
-        datas.add(new LabHazard("压缩气体","5"));
-        datas.add(new LabHazard("有毒物","6"));
-        datas.add(new LabHazard("腐蚀品","5"));
+        mTask.getMainDanger()
+                .subscribe(new Subscriber<Result>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        if(result!=null)
+                        {
+                            if(result.getStatus()==200)
+                            {
+                                initHazard(result.getData().toString());
+                            }
+                        }
+                    }
+                });
+    }
+    private void initHazard(String s)
+    {
+        try{
+            JSONArray jsonArray=new JSONArray(s);
+            datas=new ArrayList<>();
+            for(int i=0;i<jsonArray.length();i++)
+            {
+                JSONObject jsonObject=(JSONObject) jsonArray.get(i);
+                datas.add(new LabHazard(jsonObject.getString("dangerMainTypeName"),
+                        jsonObject.getString("labNumb"),
+                        jsonObject.getInt("dangerMainTypeId")));
+            }
+            //
+            hazardAdapter=new HazardAdapter(datas);
+            hazardAdapter.setHazardItemClickListener(new HazardAdapter.HazardItemClickListener() {
+                @Override
+                public void onHazardItemClick(View view, LabHazard labHazard) {
+                    Intent intent=new Intent(getBaseContext(),LabListActivity.class);
+                    Bundle bd=new Bundle();
+                    bd.putInt("dangerMainTypeId",labHazard.getDangerMainTypeId());
+                    bd.putString("task","fromHazard");
+                    intent.putExtras(bd);
+                    startActivity(intent);
+                }
+            });
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    //RecyclerView
+                    hazardListRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+                    hazardListRecyclerView.setAdapter(hazardAdapter);
+                }
+            });
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

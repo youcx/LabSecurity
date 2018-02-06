@@ -16,8 +16,13 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.you.lsmisclient.R;
+import com.example.you.lsmisclient.bean.Result;
 import com.example.you.lsmisclient.check.CheckActivity;
+import com.example.you.lsmisclient.check.CheckItemListActivity;
 import com.example.you.lsmisclient.check.adapter.CheckListAdapter;
+import com.example.you.lsmisclient.check.bean.FirstCheckList;
+import com.example.you.lsmisclient.check.bean.SecondCheckList;
+import com.example.you.lsmisclient.http.HttpTask;
 
 import java.util.List;
 
@@ -25,6 +30,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.texy.treeview.TreeNode;
 import me.texy.treeview.TreeView;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.Subscriber;
 
 
 /**
@@ -38,8 +45,11 @@ public class CheckListFragment extends Fragment {
     //数据
     String[] item1=null;
     String[][] item2=null;
+    String[][] groupSerialNumb;
     //adapter
     private CheckListAdapter checkListAdapter;
+    //http
+    HttpTask mTask;
 
     public CheckListFragment() {
         // Required empty public constructor
@@ -54,19 +64,133 @@ public class CheckListFragment extends Fragment {
         //bind
         ButterKnife.bind(this,view);
         //初始化数据
-        initDatas();
+        mTask=new HttpTask();
+        startGetInfo();
+       // initDatas();
+
+
+        return view;
+    }
+
+    private void startGetInfo()
+    {
+        mTask.getFirstCheckList()
+                .subscribe(new Subscriber<Result<List<FirstCheckList>>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();if ( e instanceof HttpException){
+                            HttpException httpException= (HttpException) e;
+                            int code=httpException.code();
+                            String msg=httpException.getMessage();
+                            if (code==504){
+                                msg="网络不给力";
+                            }else if(code==404){
+                                msg="请求内容不存在！";
+                            }
+                            showToast(msg);
+                        }else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onNext(Result<List<FirstCheckList>> listResult) {
+                        if(listResult!=null)
+                        {
+                            if(listResult.getStatus()==200)
+                            {
+                                initFirstCheckList(listResult.getData());
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void initFirstCheckList(List<FirstCheckList> data)
+    {
+        item1=new String[data.size()];
+        item2=new String[data.size()][10];
+        groupSerialNumb=new String[data.size()][10];
+        for(int i=0;i<data.size();i++)
+        {
+            item1[i]=data.get(i).getGroupSerialNumber()+"."+data.get(i).getGroupLevelName();
+            startGetSecondList(i,data.get(i).getGroupSerialNumber());
+        }
         checkListAdapter=new CheckListAdapter(item1,item2,getActivity());
-        checkListExpandTV.setAdapter(checkListAdapter);
-        checkListExpandTV.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+        getActivity().runOnUiThread(new Runnable() {
             @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-              //  Toast.makeText(getActivity(),"点击了"+item2[groupPosition][childPosition],Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getActivity(), CheckActivity.class);
-                startActivity(intent);
-                return false;
+            public void run() {
+                checkListExpandTV.setAdapter(checkListAdapter);
+                checkListExpandTV.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                    @Override
+                    public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                        //  Toast.makeText(getActivity(),"点击了"+item2[groupPosition][childPosition],Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(getActivity(), CheckItemListActivity.class);
+                        intent.putExtra("serialNum",groupSerialNumb[groupPosition][childPosition]);
+                        startActivity(intent);
+                        return false;
+                    }
+                });
             }
         });
-        return view;
+    }
+
+    private void startGetSecondList(final int i,String serialNum)
+    {
+        mTask.getSecondCheckList(serialNum)
+                .subscribe(new Subscriber<Result<List<SecondCheckList>>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();if ( e instanceof HttpException){
+                            HttpException httpException= (HttpException) e;
+                            int code=httpException.code();
+                            String msg=httpException.getMessage();
+                            if (code==504){
+                                msg="网络不给力";
+                            }else if(code==404){
+                                msg="请求内容不存在！";
+                            }
+                            showToast(msg);
+                        }else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onNext(Result<List<SecondCheckList>> listResult) {
+                        if(listResult!=null)
+                        {
+                            if(listResult.getStatus()==200)
+                            {
+                                initSecondCheckList(i,listResult.getData());
+                            }
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 初始化二级检查表
+     * @param i
+     * @param data
+     */
+    private void initSecondCheckList(int i,List<SecondCheckList> data )
+    {
+        for(int j=0;j<data.size();j++)
+        {
+            item2[i][j]=data.get(j).getGroupSerialNumber()+" "+data.get(j).getGroupLevelName();
+            groupSerialNumb[i][j]=data.get(j).getGroupSerialNumber();
+        }
     }
 
     private void initDatas()
@@ -84,5 +208,10 @@ public class CheckListFragment extends Fragment {
     }
 
 
-
+    /**
+     * 显示Toast消息
+     */
+    private void showToast(String str) {
+        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+    }
 }
