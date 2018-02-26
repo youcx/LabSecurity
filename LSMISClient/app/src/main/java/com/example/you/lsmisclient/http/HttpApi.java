@@ -14,6 +14,7 @@ import com.example.you.lsmisclient.check.bean.SecondCheckList;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.List;
 
 import retrofit2.http.Body;
@@ -190,7 +191,28 @@ public interface HttpApi {
     @POST("labsafe/checkResult/back/uploadLabUnUseTitle")
     Observable<Result> uploadUnUseTitle(@Field("recordId") int recordId,@Field("labId") int labId,@Field("titleId") int titleId);
 
-
+    /**
+     *上传不符合项
+     * @param titleId              检查项id
+     * @param recordId              检查记录id
+     * @param descrip               问题描述
+     * @param changeAdvice          整改意见
+     * @param targetLevel           建议整改主体，1为学校,2为学院,3为实验室,4为责任人
+     * @param time                  建议整改完成时间,yyyy-MM-dd HH:mm:ss格式
+     * @param pic                   上传的图片，多张，name都为pic
+     * @param video                 上传的视频，只能有一个
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/back/uploadNewCheckResult")
+    Observable<Result> uploadNewCheckResult(@Field("titleId")int titleId,
+                                            @Field("recordId") int recordId,
+                                            @Field("questionDesc") String descrip,
+                                            @Field("changeAdvice") String changeAdvice,
+                                            @Field("adviceTargetOrgLevel") int targetLevel,
+                                            @Field("adviceChangeTimeStr") String time,
+                                            @Field("pic")File  pic,
+                                            @Field("video") File video);
 
 
 }

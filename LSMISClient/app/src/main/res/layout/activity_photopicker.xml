@@ -13,8 +13,8 @@
             android:id="@+id/addPictureBtn"
             android:scaleType="centerCrop"
             android:src="@drawable/add_image"
-            android:layout_width="110dp"
-            android:layout_height="110dp"/>
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
 
 </LinearLayout>
 </HorizontalScrollView>

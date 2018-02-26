@@ -94,6 +94,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
+                android:id="@+id/lab_info_btn"
+                android:text="查看详情"
+                android:layout_margin="10dp"
+                android:textColor="#eeeeee"
+                android:background="#99ccff"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
                 android:id="@+id/reform_btn"
                 android:text="整改复查"
                 android:layout_margin="10dp"

@@ -45,11 +45,11 @@ public class SafetyCheckListActivity extends AppCompatActivity {
             }
         });
         //fragment
-        final ArrayList<Fragment> fgList=new ArrayList<>(4);
+        final ArrayList<Fragment> fgList=new ArrayList<>(1);
         fgList.add(new CheckListFragment());
-        fgList.add(new CheckListFragment());
-        fgList.add(new CheckListFragment());
-        fgList.add(new CheckListFragment());
+//        fgList.add(new CheckListFragment());
+//        fgList.add(new CheckListFragment());
+//        fgList.add(new CheckListFragment());
         //fragment适配器
         FragmentPagerAdapter fragmentPagerAdapter=new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -66,9 +66,9 @@ public class SafetyCheckListActivity extends AppCompatActivity {
         checkListViewPager.setAdapter(fragmentPagerAdapter);
         checkListTablayout.setupWithViewPager(checkListViewPager);
         checkListTablayout.getTabAt(0).setText("层级");
-        checkListTablayout.getTabAt(1).setText("流式");
-        checkListTablayout.getTabAt(2).setText("未检");
-        checkListTablayout.getTabAt(3).setText("不符");
+//        checkListTablayout.getTabAt(1).setText("流式");
+//        checkListTablayout.getTabAt(2).setText("未检");
+//        checkListTablayout.getTabAt(3).setText("不符");
 
 
 

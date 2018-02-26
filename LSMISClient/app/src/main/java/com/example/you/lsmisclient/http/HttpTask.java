@@ -14,6 +14,7 @@ import com.example.you.lsmisclient.check.bean.SecondCheckList;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.List;
 
 import rx.Observable;
@@ -269,6 +270,28 @@ public class HttpTask {
         return HttpManager
                 .getApi()
                 .uploadUnUseTitle(recordId,labId,titleId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 上传不符合项
+     * @param titleId
+     * @param recordId
+     * @param descrip
+     * @param changeAdvice
+     * @param tagLevel
+     * @param changeTime
+     * @param pic
+     * @param video
+     * @return
+     */
+    public Observable<Result> uploadNewCheckResult(int titleId, int recordId, String descrip, String changeAdvice,
+                                                   int tagLevel, String changeTime, File pic,File video)
+    {
+        return HttpManager
+                .getApi()
+                .uploadNewCheckResult(titleId,recordId,descrip,changeAdvice,tagLevel,changeTime,pic,video)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

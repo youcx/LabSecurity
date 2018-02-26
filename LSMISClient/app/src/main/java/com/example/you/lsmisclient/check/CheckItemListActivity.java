@@ -132,7 +132,7 @@ public class CheckItemListActivity extends AppCompatActivity {
         for(int i=0;i<data.size();i++)
         {
             CheckItem checkItem=data.get(i);
-            List<CheckItem> checks=DataSupport.where("titleSerialNumber = ?",data.get(i).getTitleSerialNumber()).find(CheckItem.class);
+            List<CheckItem> checks=DataSupport.where("titleId = ?",""+data.get(i).getTitleId()).find(CheckItem.class);
             if(checks==null||checks.size()==0)
                 checkItem.save();
             checkTitle[i]=data.get(i).getTitleSerialNumber()+" "+data.get(i).getCheckTitle().substring(0,10)+"......";
@@ -148,6 +148,8 @@ public class CheckItemListActivity extends AppCompatActivity {
         }
         editor.putInt("startTitleId",startTitleId);
         editor.putInt("endTitleId",endTitleId);
+        Log.i("startId",""+startTitleId);
+        Log.i("endId",""+endTitleId);
         editor.apply();
        final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_list_item_checked,checkTitle);
         runOnUiThread(new Runnable() {

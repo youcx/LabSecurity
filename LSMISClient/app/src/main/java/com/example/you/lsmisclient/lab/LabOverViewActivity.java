@@ -33,10 +33,13 @@ public class LabOverViewActivity extends AppCompatActivity implements View.OnCli
     Toolbar labOverViewToolbar;
     @BindView(R.id.toolbar_textview)
     TextView toolbarTextView;
+    //btn
     @BindView(R.id.start_check_btn)
     Button startCheckBtn;
     @BindView(R.id.reform_btn)
     Button reformBtn;
+    @BindView(R.id.lab_info_btn)
+    Button labInfoBtn;
     //信息显示控件
     @BindView(R.id.lab_name_tv)
     TextView labNameTv;
@@ -77,6 +80,7 @@ public class LabOverViewActivity extends AppCompatActivity implements View.OnCli
         //btn
         startCheckBtn.setOnClickListener(this);
         reformBtn.setOnClickListener(this);
+        labInfoBtn.setOnClickListener(this);
         //获取信息
         labOverViewProgressbar.setVisibility(View.VISIBLE);
         startGetLabInfo();
@@ -159,6 +163,11 @@ public class LabOverViewActivity extends AppCompatActivity implements View.OnCli
                 startActivity(intoCheckAc);
                 break;
             case R.id.reform_btn:
+                break;
+            case R.id.lab_info_btn:
+                Intent intent=new Intent(this,LabInfoActivity.class);
+                intent.putExtra("labId",labid);
+                startActivity(intent);
                 break;
         }
     }

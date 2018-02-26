@@ -1,15 +1,21 @@
 package com.example.you.lsmisclient.check;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +27,8 @@ import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
 import org.litepal.crud.DataSupport;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,8 +54,15 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
     TextView checkItemTxtView;
     @BindView(R.id.check_point_txtv)
     TextView checkPointTxtView;
+
     @BindView(R.id.check_record_edt)
     EditText checkRecordEdt;
+    @BindView(R.id.check_suggestion_edt)
+    EditText suggestionEdt;
+
+    //整改主体下拉框
+    @BindView(R.id.reform_target)
+    Spinner reformTargetSpinner;
 
     //检查项序号
     String serialNum;
@@ -66,6 +81,10 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
     final int CONFORM=200;                  //符合
     final int INCONFORMITY=300;             //不符合
     final int INAPPLICABLE=400;             //不适用
+
+    //整改主体Adapter
+    private ArrayAdapter<String> reformTargetAdapter=null;
+
 
     //http
     HttpTask mTask;
@@ -106,6 +125,8 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
         //设置UI
         checkItemTxtView.setText(checkItem.get(0).getCheckTitle());
         checkPointTxtView.setText(checkItem.get(0).getCheckImportant());
+        //初始化整改主体
+        initTarget();
         //单选框
         checkRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -165,6 +186,13 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void initTarget()
+    {
+        String[] reformTargetList={"学校","学院","实验室","负责人"};
+        reformTargetAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,reformTargetList);
+        reformTargetSpinner.setAdapter(reformTargetAdapter);
+    }
+
     /**
      * 进入上一项
      */
@@ -221,7 +249,10 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case INCONFORMITY:
+                //填写记录
+               // CheckRecordDialog();
                 //上传不符合结果
+                uploadCheckResult();
                 if(titleId==endTitleId)
                 {
                     //是最后一项
@@ -286,6 +317,39 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
+    private void uploadCheckResult()
+    {
+        SimpleDateFormat myDate=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String mtime=myDate.format(new Date());
+        Log.i("时间",mtime);
+        mTask.uploadNewCheckResult(titleId,recordId,checkRecordEdt.getText().toString(),"a",1,mtime,null,null)
+                .subscribe(new Subscriber<Result>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        if(result!=null)
+                        {
+
+                            if(result.getStatus()==200)
+                            {
+                                showToast("提交检查记录成功");
+                            }else{
+                                showToast(result.getMessage());
+                            }
+                        }
+                    }
+                });
+    }
+
     /**
      * 更新检查项
      */
@@ -298,6 +362,71 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
         checkPointTxtView.setText(checkItem.get(0).getCheckImportant());
     }
 
+    protected void CheckRecordDialog() {
+
+        LayoutInflater factory = LayoutInflater.from(this);
+        final View textEntryView = factory.inflate(R.layout.change_passwd, null);
+        final EditText oldpwdet = (EditText) textEntryView.findViewById(R.id.oldpwd_edit);
+        final EditText newpwdet = (EditText)textEntryView.findViewById(R.id.newpwd_edit);
+        final EditText newpwdconfmet=(EditText) textEntryView.findViewById(R.id.newpwd_confirm);
+        AlertDialog.Builder ad1 = new AlertDialog.Builder(this);
+        ad1.setTitle("提交整改意见");
+        ad1.setIcon(android.R.drawable.ic_dialog_info);
+        ad1.setView(textEntryView);
+        ad1.setPositiveButton("是", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int i) {
+
+            }
+        });
+        ad1.setNegativeButton("否", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int i) {
+
+            }
+        });
+        //ad1.show();// 显示对话框
+        final AlertDialog dialog=ad1.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        //拦截按键
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                boolean canChange=true;
+                String oldpwd=oldpwdet.getText().toString();
+                String newpwd=newpwdet.getText().toString();
+                String newpwd_confirm=newpwdconfmet.getText().toString();
+                if(TextUtils.isEmpty(oldpwd))
+                {
+                    oldpwdet.setError("原始密码不能为空");
+                    canChange=false;
+                    oldpwdet.requestFocus();
+                }else if(TextUtils.isEmpty(newpwd))
+                {
+                    newpwdet.setError("新密码不能为空");
+                    canChange=false;
+                    newpwdet.requestFocus();
+                }else if(newpwd.length()<6)
+                {
+                    newpwdet.setError("密码太短");
+                    canChange=false;
+                    newpwdet.requestFocus();
+                }else if(!newpwd.equals(newpwd_confirm))
+                {
+                    newpwdconfmet.setError("密码不一致");
+                    canChange=false;
+                    newpwdconfmet.requestFocus();
+                }
+                if(canChange)
+                {
+//                    String phonenum=(String)SharePreferenceUtil.getParam(getActivity(),Constants.PHONE,"");//获取电话号码
+//                    String sessionid=(String)SharePreferenceUtil.getParam(getActivity(),Constants.SESSIONID,"");
+//                    updatePwd(phonenum,sessionid,oldpwd,newpwd);
+                    dialog.dismiss();
+                }
+            }
+        });
+
+    }
     private void showToast(String str)
     {
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();

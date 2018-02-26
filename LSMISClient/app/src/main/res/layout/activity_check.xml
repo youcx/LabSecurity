@@ -9,6 +9,7 @@
     <include
         layout="@layout/widget_layout"
         android:id="@+id/check_toolbar"/>
+
     <RadioGroup
         android:id="@+id/check_radio_group"
         android:padding="10dp"
@@ -37,73 +38,172 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </RadioGroup>
-    <View
-        android:background="#eeeeee"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-    <TextView
-        android:text="检查项目"
-        android:textSize="18sp"
-        android:textColor="@color/cardview_dark_background"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/check_item_txtv"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="10dp"
-        android:text="有校级实验室安全工作领导机构，由校领导作为负责人，相关职能部门参与，设办公室"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <View
-        android:background="#eeeeee"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-    <TextView
-        android:text="检查要点"
-        android:textSize="18sp"
-        android:textColor="@color/cardview_dark_background"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/check_point_txtv"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="10dp"
-        android:text="有带文号的机构设计文件，明确包含实验室技术安全关林恩荣"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <View
-        android:background="#eeeeee"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-    <TextView
-        android:padding="10dp"
-        android:text="检查记录"
-        android:textSize="18sp"
-        android:textColor="@color/cardview_dark_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/check_record_edt"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:hint="检查结果相关记录"
-            android:textSize="15sp"
-            android:maxLines="5"
+        android:layout_height="362dp"
+        android:gravity="bottom"
+        android:orientation="vertical">
+        <ScrollView
+            android:id="@+id/body"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </android.support.v7.widget.CardView>
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <View
+                    android:background="#eeeeee"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <TextView
+                    android:text="检查项目"
+                    android:textSize="15sp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/check_item_txtv"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="5dp"
+                    android:text="有校级实验室安全工作领导机构，由校领导作为负责人，相关职能部门参与，设办公室"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:background="#eeeeee"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <TextView
+                    android:text="检查要点"
+                    android:textSize="15sp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/check_point_txtv"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="5dp"
+                    android:text="有带文号的机构设计文件，明确包含实验室技术安全关林恩荣"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:background="#eeeeee"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <TextView
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="检查记录(问题描述)"
+                    android:textSize="15sp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/check_record_edt"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:hint="检查结果相关记录"
+                        android:textSize="13sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.v7.widget.CardView>
+                <TextView
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="整改意见"
+                    android:textSize="15sp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/check_suggestion_edt"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:hint="对检查结果的整改建议"
+                        android:textSize="13sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.v7.widget.CardView>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="5dp"
+                        android:text="整改主体"
+                        android:textSize="15sp"
+                        android:textColor="@color/cardview_dark_background"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <Spinner
+                        android:id="@+id/reform_target"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></Spinner>
+                </LinearLayout>
+                <View
+                    android:background="#eeeeee"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="5dp"
+                        android:text="整改时间"
+                        android:textSize="15sp"
+                        android:textColor="@color/cardview_dark_background"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:background="#eeeeee"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+            </LinearLayout>
+        </ScrollView>
+
+
+
+    </LinearLayout>
+    <View
+        android:background="#eeeeee"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
     <fragment
         android:name="com.example.you.lsmisclient.fragment.photopicker.PhotoPickerFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></fragment>
     <LinearLayout
+        android:gravity="bottom"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -133,6 +233,7 @@
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
+
 
 
 </LinearLayout>
