@@ -249,7 +249,7 @@ public class HttpTask {
      * @param typeId
      * @return
      */
-    public Observable<String> startCheck(int taskId,int typeId,int labId)
+    public Observable<Result> startCheck(int taskId,int typeId,int labId)
     {
         return HttpManager
                 .getApi()

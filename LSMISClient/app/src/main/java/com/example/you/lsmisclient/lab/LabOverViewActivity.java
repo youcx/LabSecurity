@@ -19,6 +19,7 @@ import com.example.you.lsmisclient.bean.Result;
 import com.example.you.lsmisclient.check.CheckActivity;
 import com.example.you.lsmisclient.check.SafetyCheckListActivity;
 import com.example.you.lsmisclient.http.HttpTask;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
 import org.json.JSONObject;
 
@@ -159,8 +160,6 @@ public class LabOverViewActivity extends AppCompatActivity implements View.OnCli
                 int labId=sp.getInt("labId",0);
                 Log.i("labId",taskId+":"+typeId+":"+labId);
                 startCheck(taskId,typeId,labId);
-                Intent intoCheckAc=new Intent(this,SafetyCheckListActivity.class);
-                startActivity(intoCheckAc);
                 break;
             case R.id.reform_btn:
                 break;
@@ -175,7 +174,7 @@ public class LabOverViewActivity extends AppCompatActivity implements View.OnCli
     private void startCheck(int taskId,int typeId,int labId)
     {
         mTask.startCheck(taskId,typeId,labId)
-                .subscribe(new Subscriber<String>() {
+                .subscribe(new Subscriber<Result>() {
                     @Override
                     public void onCompleted() {
 
@@ -183,28 +182,73 @@ public class LabOverViewActivity extends AppCompatActivity implements View.OnCli
 
                     @Override
                     public void onError(Throwable e) {
+                        e.printStackTrace();if ( e instanceof HttpException){
+                            HttpException httpException= (HttpException) e;
+                            int code=httpException.code();
+                            String msg=httpException.getMessage();
+                            if (code==504){
+                                msg="网络不给力";
+                            }else if(code==404){
+                                msg="请求内容不存在！";
+                            }
+                            showToast(msg);
+                        }else {
 
+                        }
                     }
 
                     @Override
-                    public void onNext(String s) {
-                        if(s!=null)
+                    public void onNext(Result result) {
+                        if(result!=null)
                         {
-                            try {
-                                JSONObject jsonObject = new JSONObject(s);
-                                SharedPreferences.Editor editor=getSharedPreferences("checkdata",MODE_PRIVATE).edit();
-                                editor.putInt("recordId",jsonObject.getInt("recordId"));
-                                editor.apply();
-                            } catch (Exception e)
+                            if(result.getStatus()==200)
                             {
-                                e.printStackTrace();
+                                SharedPreferences.Editor editor=getSharedPreferences("checkdata",MODE_PRIVATE).edit();
+                                Log.i("recordId",""+result.getRecordId());
+                                editor.putInt("recordId",result.getRecordId());
+                                editor.apply();
+                                Intent intoCheckAc=new Intent(getBaseContext(),SafetyCheckListActivity.class);
+                                startActivity(intoCheckAc);
+                            }else if(result.getStatus()==203)
+                            {
+                                show203Dialog();
                             }
+
 
                         }
                     }
                 });
     }
 
+    /**
+     *本实验室已存在检查记录
+     */
+    private void show203Dialog()
+    {
+        final NiftyDialogBuilder dialogBuilder=NiftyDialogBuilder.getInstance(this);
+        dialogBuilder
+                .withTitle("提示")
+                .withMessage("当前任务下本实验室已经存在检查记录了,是否再次检查？")
+                .withDialogColor("#99cccc")
+                .withDuration(200)
+                .withButton1Text("取消")
+                .withButton2Text("确定")
+                .isCancelableOnTouchOutside(true)
+                .setButton1Click(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogBuilder.dismiss();
+                    }
+                })
+                .setButton2Click(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogBuilder.dismiss();
+                        Intent intoCheckAc=new Intent(getBaseContext(),SafetyCheckListActivity.class);
+                        startActivity(intoCheckAc);
+                    }
+                }).show();
+    }
     /**
      * 显示Toast消息
      */

@@ -8,6 +8,7 @@ public class Result<T> {
     private T data;
     private int status;
     private String msg;
+    private int recordId;
 
     public T getData() {
         return data;
@@ -23,6 +24,14 @@ public class Result<T> {
 
     public void setMessage(String message) {
         this.msg = message;
+    }
+
+    public int getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(int recordId) {
+        this.recordId = recordId;
     }
 
     public int getStatus() {

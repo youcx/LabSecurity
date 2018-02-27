@@ -178,7 +178,7 @@ public interface HttpApi {
      */
     @FormUrlEncoded
     @POST("labsafe/checkResult/back/startNewCheck")
-    Observable<String> startCheck(@Field("taskId") int taskId,@Field("typeId") int typeId,@Field("labId") int labId);
+    Observable<Result> startCheck(@Field("taskId") int taskId,@Field("typeId") int typeId,@Field("labId") int labId);
 
     /**
      * 上传不适用项

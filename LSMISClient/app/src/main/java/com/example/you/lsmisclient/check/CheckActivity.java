@@ -1,6 +1,8 @@
 package com.example.you.lsmisclient.check;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -27,7 +30,11 @@ import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
 import org.litepal.crud.DataSupport;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +56,8 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
     Button nextItemBtn;
     @BindView(R.id.submit)
     Button submit;
+    @BindView(R.id.DateBtn)
+    Button dateBtn;
 
     @BindView(R.id.check_item_txtv)
     TextView checkItemTxtView;
@@ -76,6 +85,8 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
     int labId;
     //该类总检查项
     int checkCount;
+    //提交日期
+    int year,month,day;
     //符合结果
     int checkResult;                        //符合结果
     final int CONFORM=200;                  //符合
@@ -83,6 +94,7 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
     final int INAPPLICABLE=400;             //不适用
 
     //整改主体Adapter
+    private int ReformBody;
     private ArrayAdapter<String> reformTargetAdapter=null;
 
 
@@ -122,6 +134,7 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
         previoutItemBtn.setOnClickListener(this);
         nextItemBtn.setOnClickListener(this);
         submit.setOnClickListener(this);
+        dateBtn.setOnClickListener(this);
         //设置UI
         checkItemTxtView.setText(checkItem.get(0).getCheckTitle());
         checkPointTxtView.setText(checkItem.get(0).getCheckImportant());
@@ -145,6 +158,12 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
+
+        //整改时间
+        final Calendar ca = Calendar.getInstance();
+        year = ca.get(Calendar.YEAR);
+        month = ca.get(Calendar.MONTH);
+        day = ca.get(Calendar.DAY_OF_MONTH);
 
     }
 
@@ -183,9 +202,39 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
                             }
                         }).show();
                 break;
+            case R.id.DateBtn:
+                new DatePickerDialog(this,mdateListener,year,month,day).show();
+                break;
         }
     }
 
+
+
+
+    /**
+     * 设置日期 利用StringBuffer追加
+     */
+    public void display() {
+        dateBtn.setText(new StringBuffer().append(year).append("-").append(month + 1).append("-").append(day).append(" ")
+        .append("12:00:00"));
+    }
+
+    /**
+     * 日期选择器对话框监听
+     */
+    private DatePickerDialog.OnDateSetListener mdateListener=new DatePickerDialog.OnDateSetListener(){
+        @Override
+        public void onDateSet(DatePicker view, int yyear, int mmonth, int dayOfMonth) {
+            year=yyear;
+            month=mmonth;
+            day=dayOfMonth;
+            display();
+        }
+    };
+
+    /**
+     * 初始化整改主体
+     */
     private void initTarget()
     {
         String[] reformTargetList={"学校","学院","实验室","负责人"};
@@ -317,12 +366,18 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
+    /**
+     * 上传不符合项
+     */
     private void uploadCheckResult()
     {
-        SimpleDateFormat myDate=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String mtime=myDate.format(new Date());
-        Log.i("时间",mtime);
-        mTask.uploadNewCheckResult(titleId,recordId,checkRecordEdt.getText().toString(),"a",1,mtime,null,null)
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ParsePosition pos = new ParsePosition(0);
+        Date strtodate = formatter.parse(dateBtn.getText().toString(), pos);
+        String mtime=formatter.format(strtodate);
+        Log.i("时间",""+recordId);
+        mTask.uploadNewCheckResult(titleId,recordId,checkRecordEdt.getText().toString(),suggestionEdt.getText().toString(),
+                1,mtime,null,null)
                 .subscribe(new Subscriber<Result>() {
                     @Override
                     public void onCompleted() {
