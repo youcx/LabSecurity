@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 public class CheckMissionAdapter extends RecyclerView.Adapter<CheckMissionAdapter.CheckMissionViewHolder>{
 
     //数据
-    List<CheckMission> mDatas;
+    private List<CheckMission> mDatas;
     //点击监听
     private CheckMissionItemClickListener checkMissionItemClickListener;
 
@@ -51,7 +51,10 @@ public class CheckMissionAdapter extends RecyclerView.Adapter<CheckMissionAdapte
         this.mDatas = mDatas;
         //刷新item内容
         notifyDataSetChanged();
+    }
 
+    public List<CheckMission> getmDatas() {
+        return mDatas;
     }
 
     @Override

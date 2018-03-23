@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <View
+        android:id="@+id/view1"
+        android:background="#eeeeee"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <TextView
+        android:id="@+id/reform_title"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/view1"
+        android:textColor="@color/blackWord"
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/view2"
+        android:background="#eeeeee"
+        android:layout_below="@+id/reform_title"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <TextView
+        android:id="@+id/reform_item"
+        android:layout_below="@+id/view2"
+        android:maxLines="1"
+        android:paddingLeft="8dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/redWarn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/reform_item_detail"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/reform_item"
+        android:layout_alignBottom="@+id/reform_item"
+        android:src="@drawable/ic_chevron_right_black_24dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/view5"
+        android:background="#eeeeee"
+        android:layout_below="@+id/reform_item"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/reform_neirong"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/check_result"
+        android:drawableLeft="@drawable/ic_create_black_12dp"
+        android:text="检查结果"
+        android:layout_below="@+id/reform_neirong"
+        android:paddingLeft="8dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/pic"
+        android:drawableLeft="@drawable/ic_camera_alt_black_12dp"
+        android:layout_alignTop="@+id/check_result"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:text="相关照片"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/document"
+        android:drawableLeft="@drawable/ic_folder_open_black_24dp"
+        android:layout_alignTop="@+id/check_result"
+        android:layout_alignParentRight="true"
+        android:text="相关文档"
+        android:paddingRight="8dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/check_person"
+        android:paddingTop="10dp"
+        android:paddingLeft="8dp"
+        android:layout_below="@+id/check_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/check_time"
+        android:paddingLeft="8dp"
+        android:layout_below="@+id/check_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/reform_time"
+        android:paddingBottom="10dp"
+        android:paddingLeft="8dp"
+        android:layout_below="@+id/check_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/view3"
+        android:background="#eeeeee"
+        android:layout_below="@+id/reform_time"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <TextView
+        android:id="@+id/reform_result"
+        android:layout_below="@+id/view3"
+        android:drawableLeft="@drawable/ic_create_black_12dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="8dp"
+        android:text="整改结果"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/reform_pic"
+        android:drawableLeft="@drawable/ic_camera_alt_black_12dp"
+        android:layout_alignTop="@+id/reform_result"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:text="整改照片"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"  />
+    <TextView
+        android:id="@+id/reform_document"
+        android:drawableLeft="@drawable/ic_folder_open_black_24dp"
+        android:layout_alignTop="@+id/reform_result"
+        android:layout_alignParentRight="true"
+        android:paddingRight="8dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:text="整改文档"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/reform_btn"
+        android:text="申请复查"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_below="@+id/reform_result"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/view4"
+        android:background="#eeeeee"
+        android:layout_below="@+id/reform_btn"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+
+
+
+
+</RelativeLayout>

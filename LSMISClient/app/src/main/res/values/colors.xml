@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#5CACEE</color>
     <color name="colorAccent">#5CACEE</color>
     <color name="titleColor">#eeeeee</color>
+    <color name="redWarn">#ff0033</color>
+    <color name="blackWord">#000000</color>
+    <color name="viewColor">#eeeeee</color>
 </resources>

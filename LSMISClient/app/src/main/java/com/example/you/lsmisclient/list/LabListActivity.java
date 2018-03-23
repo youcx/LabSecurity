@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.adapter.LabAdapter;
@@ -42,7 +43,7 @@ public class LabListActivity extends AppCompatActivity {
     //适配器
     LabAdapter labAdapter;
     //数据
-    List<Lab> datas;
+   //List<Lab> datas;
     //指令
     String order=null;
     int departmentId;
@@ -51,6 +52,7 @@ public class LabListActivity extends AppCompatActivity {
     int taskId;
     //http
     HttpTask mTask;
+    LabAdapter.LabItemClickListener itemClickListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +63,7 @@ public class LabListActivity extends AppCompatActivity {
         //绑定控件
         ButterKnife.bind(this);
         //init
-        mTask=new HttpTask();
+        init();
         if(order.equals("fromDepartment"))
         {
             //按学院获取实验室列表
@@ -115,10 +117,46 @@ public class LabListActivity extends AppCompatActivity {
         {
             case R.id.toolbar_scan:
                 Intent intent=new Intent(this, QrScannerActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,22);
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode)
+        {
+            case 22:
+                Toast.makeText(this,data.getStringExtra("qrValue"),Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void init()
+    {
+        mTask=new HttpTask();
+        labAdapter=new LabAdapter();
+        itemClickListener=new LabAdapter.LabItemClickListener() {
+            @Override
+            public void onLabItemClickListener(View view, Lab lab) {
+                if(order.equals("check"))
+                {
+
+                }else if(order.equals("fromDepartment")||order.equals("fromLevel")||order.equals("fromHazard")){
+                    Intent intent=new Intent(getBaseContext(), LabInfoActivity.class);
+                    intent.putExtra("labId",lab.getID());
+                    startActivity(intent);
+                }
+            }
+        };
+        //设置布局
+        labListRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+        //设置适配器
+        labListRecyclerView.setAdapter(labAdapter);
+        labAdapter.setLabItemClickListener(itemClickListener);
     }
 
     /**
@@ -159,67 +197,14 @@ public class LabListActivity extends AppCompatActivity {
                             if(listResult.getStatus()==200)
                             {
                                 Log.i("初始化",listResult.getData().toString());
-                                initLabByDepart(listResult.getData());
+                                labAdapter.setmDatas(listResult.getData());
+                                //initLabByDepart(listResult.getData());
                             }
                         }
                     }
                 });
     }
 
-    /**
-     * 按学院初始化实验室列表
-     * @param s
-     */
-    private void initLabByDepart(List<Lab> s)
-    {
-        try{
-//            JSONArray jsonArray=new JSONArray(s);
-//            datas=new ArrayList<>();
-//            for(int i=0;i<jsonArray.length();i++)
-//            {
-//                JSONObject jsonObject=(JSONObject) jsonArray.get(i);
-//                datas.add(new Lab(jsonObject.getString("labName"),
-//                        jsonObject.getString("departmentName"),
-//                        jsonObject.getString("mainLevelName"),
-//                        jsonObject.getString("managerName"),
-//                        jsonObject.getString("responserName")));
-//            }
-            datas=s;
-            //适配器初始化
-            for(int i=0;i<datas.size();i++)
-            {
-                datas.get(i).toString();
-            }
-            labAdapter=new LabAdapter(datas);
-            labAdapter.setLabItemClickListener(new LabAdapter.LabItemClickListener() {
-                @Override
-                public void onLabItemClickListener(View view, Lab lab) {
-                    if(order.equals("check"))
-                    {
-                        Intent intent=new Intent(getBaseContext(), LabOverViewActivity.class);
-                        startActivity(intent);
-                    }else if(order.equals("fromDepartment")||order.equals("fromLevel")||order.equals("fromHazard")){
-                        Intent intent=new Intent(getBaseContext(), LabInfoActivity.class);
-                        intent.putExtra("labId",lab.getID());
-                        startActivity(intent);
-                    }
-                }
-            });
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    //设置布局
-                    labListRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-                    //设置适配器
-                    labListRecyclerView.setAdapter(labAdapter);
-                }
-            });
-
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * 按级别获取实验室列表
@@ -246,46 +231,14 @@ public class LabListActivity extends AppCompatActivity {
                         {
                             if(listResult.getStatus()==200)
                             {
-                                initLabBylevel(listResult.getData());
+                                labAdapter.setmDatas(listResult.getData());
                             }
                         }
                     }
                 });
     }
 
-    /**
-     * 按级别初始化实验室列表
-     * @param data
-     */
-    private void initLabBylevel(List<Lab> data)
-    {
-        datas=data;
-        //适配器初始化
-        labAdapter=new LabAdapter(datas);
-        labAdapter.setLabItemClickListener(new LabAdapter.LabItemClickListener() {
-            @Override
-            public void onLabItemClickListener(View view, Lab lab) {
-                if(order.equals("check"))
-                {
-                    Intent intent=new Intent(getBaseContext(), LabOverViewActivity.class);
-                    startActivity(intent);
-                }else if(order.equals("fromDepartment")||order.equals("fromLevel")||order.equals("fromHazard")){
-                    Intent intent=new Intent(getBaseContext(), LabInfoActivity.class);
-                    intent.putExtra("labId",lab.getID());
-                    startActivity(intent);
-                }
-            }
-        });
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //设置布局
-                labListRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-                //设置适配器
-                labListRecyclerView.setAdapter(labAdapter);
-            }
-        });
-    }
+
 
     /**
      * 按危险源获取实验室列表
@@ -312,45 +265,11 @@ public class LabListActivity extends AppCompatActivity {
                         {
                             if(listResult.getStatus()==200)
                             {
-                                initLabByHazard(listResult.getData());
+                                labAdapter.setmDatas(listResult.getData());
                             }
                         }
                     }
                 });
-    }
-
-    /**
-     * 按危险源初始化实验室列表
-     * @param data
-     */
-    private void initLabByHazard(List<Lab> data)
-    {
-        datas=data;
-        //适配器初始化
-        labAdapter=new LabAdapter(datas);
-        labAdapter.setLabItemClickListener(new LabAdapter.LabItemClickListener() {
-            @Override
-            public void onLabItemClickListener(View view, Lab lab) {
-                if(order.equals("check"))
-                {
-                    Intent intent=new Intent(getBaseContext(), LabOverViewActivity.class);
-                    startActivity(intent);
-                }else if(order.equals("fromDepartment")||order.equals("fromLevel")||order.equals("fromHazard")){
-                    Intent intent=new Intent(getBaseContext(), LabInfoActivity.class);
-                    intent.putExtra("labId",lab.getID());
-                    startActivity(intent);
-                }
-            }
-        });
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //设置布局
-                labListRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-                //设置适配器
-                labListRecyclerView.setAdapter(labAdapter);
-            }
-        });
     }
 
     /**
@@ -379,48 +298,14 @@ public class LabListActivity extends AppCompatActivity {
                         {
                             if(listResult.getStatus()==200)
                             {
-                                initLabByTask(listResult.getData());
+                               labAdapter.setmDatas(listResult.getData());
                             }
                         }
                     }
                 });
     }
 
-    /**
-     * 按任务初始化实验室列表
-     * @param data
-     */
-    private void initLabByTask(List<Lab> data)
-    {
-        datas=data;
-        //适配器初始化
-        labAdapter=new LabAdapter(datas);
-        labAdapter.setLabItemClickListener(new LabAdapter.LabItemClickListener() {
-            @Override
-            public void onLabItemClickListener(View view, Lab lab) {
-                if(order.equals("check"))
-                {
-                    Intent intent=new Intent(getBaseContext(), LabOverViewActivity.class);
-                    Log.i("LABID",""+lab.getID());
-                    intent.putExtra("labId",lab.getID());
-                    startActivity(intent);
-                }else if(order.equals("fromDepartment")||order.equals("fromLevel")||order.equals("fromHazard")){
-                    Intent intent=new Intent(getBaseContext(), LabInfoActivity.class);
-                    intent.putExtra("labId",lab.getID());
-                    startActivity(intent);
-                }
-            }
-        });
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //设置布局
-                labListRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-                //设置适配器
-                labListRecyclerView.setAdapter(labAdapter);
-            }
-        });
-    }
+
 
     /**
      * 初始化数据

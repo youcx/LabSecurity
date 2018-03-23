@@ -39,7 +39,6 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
             android:value="@integer/google_play_services_version" />
         -->
 
-
         <activity android:name=".list.LabListActivity" />
         <activity android:name=".lab.LabInfoActivity" />
         <activity android:name=".lab.LabInfoChangeActivity" />
@@ -50,9 +49,13 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
         <activity android:name=".lab.LabOverViewActivity" />
         <activity android:name=".check.SafetyCheckListActivity" />
         <activity android:name=".check.CheckItemListActivity" />
-        <activity android:name=".rectification.RectificationActivity"></activity>
-        <activity android:name=".contacts.UserActivity"
-                  android:exported="true" />
+        <activity android:name=".rectification.RectificationActivity" />
+        <activity
+            android:name=".contacts.UserActivity"
+            android:exported="true" />
+        <activity android:name=".rectification.ReformDetailActivity" />
+        <activity android:name=".rectification.FillInReformActivity" />
+        <activity android:name=".check.CheckListActivity"></activity>
     </application>
 
 </manifest>

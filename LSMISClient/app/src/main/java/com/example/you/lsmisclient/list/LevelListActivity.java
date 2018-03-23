@@ -1,6 +1,8 @@
 package com.example.you.lsmisclient.list;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,8 +35,9 @@ public class LevelListActivity extends AppCompatActivity {
     Toolbar levelListToolbar;
     @BindView(R.id.toolbar_textview)
     TextView toolbarTextView;
-    @BindView(R.id.mProgressBar)
-    ProgressBar mProgressBar;
+    //下拉刷新
+    @BindView(R.id.levelListSwipeRefresh)
+    SwipeRefreshLayout levelListSwipeRefresh;
     //适配器
     LevelAdapter levelAdapter;
     //数据
@@ -58,10 +61,25 @@ public class LevelListActivity extends AppCompatActivity {
                 finish();
             }
         });
-        //init
+        //init\
+        levelListSwipeRefresh.post(new Runnable() {
+            @Override
+            public void run() {
+                levelListSwipeRefresh.setRefreshing(true);
+                startGetLevelList();
+            }
+        });
+        levelListSwipeRefresh.setColorSchemeColors(Color.parseColor("#5CACEE"));
+        levelListSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                startGetLevelList();
+
+            }
+        });
         //initLevel();
-        mProgressBar.setVisibility(View.VISIBLE);
-        startGetLevelList();
+        //mProgressBar.setVisibility(View.VISIBLE);
+        //startGetLevelList();
         //
 
     }
@@ -97,6 +115,7 @@ public class LevelListActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(Result<List<LabLevel>> listResult) {
+                        levelListSwipeRefresh.setRefreshing(false);
                         if(listResult!=null)
                         {
                             if(listResult.getStatus()==200)
@@ -134,7 +153,6 @@ public class LevelListActivity extends AppCompatActivity {
             public void run() {
                 levelListRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
                 levelListRecyclerView.setAdapter(levelAdapter);
-                mProgressBar.setVisibility(View.GONE);
             }
         });
 

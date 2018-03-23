@@ -28,7 +28,7 @@ public class QrScannerActivity extends AppCompatActivity implements ZXingScanner
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView mScannerView;
     private static final String TAG = "QrScannerActivity";
-    public final static String CODE_RESULT = "value";
+    public final static String CODE_RESULT = "qrValue";
 
 
     /**
@@ -39,8 +39,8 @@ public class QrScannerActivity extends AppCompatActivity implements ZXingScanner
     public void handleResult(Result rawResult) {
         final String result = rawResult.getText();
         final BarcodeFormat format = rawResult.getBarcodeFormat();
-        Log.d("QRCodeScanner", rawResult.getText());
-        Log.d("QRCodeScanner",format.toString());
+        Log.i("QRCodeScanner", rawResult.getText());
+        Log.i("QRCodeScanner",format.toString());
         if(format == BarcodeFormat.QR_CODE){
             Intent intent = new Intent();
             intent.putExtra(CODE_RESULT,result);

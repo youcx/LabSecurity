@@ -15,9 +15,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.you.lsmisclient.R;
+import com.example.you.lsmisclient.bean.Result;
+import com.example.you.lsmisclient.http.HttpTask;
+
+import java.io.File;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import rx.Subscriber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +70,48 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.about:
                 showToast("关于");
+                File file=new File("/storage/emulated/0/1.jpg");
+                RequestBody imageBody=RequestBody.create(MediaType.parse("multipart/form-data"),file);
+                MultipartBody.Builder builder=new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM);  //表单类型
+                builder
+                        .addFormDataPart("titleId",""+15)
+                        .addFormDataPart("recordId",""+53)
+                        .addFormDataPart("questionDesc","youwenti")
+                        .addFormDataPart("changeAdvice","wenti")
+                        .addFormDataPart("adviceTargetOrgLevel",""+1)
+                        .addFormDataPart("adviceChangeTimeStr","2018-03-10 12:00:00")
+                        .addFormDataPart("pic",file.getName(),imageBody);
+                List<MultipartBody.Part> parts=builder.build().parts();
+////        mTask.uploadNewCheckResult(titleId,recordId,checkRecordEdt.getText().toString(),suggestionEdt.getText().toString(),
+////                1,mtime,null,null)
+//                HttpTask mTask=new HttpTask();
+//                mTask.uploadNewCheckResult(parts)
+//                        .subscribe(new Subscriber<Result>() {
+//                            @Override
+//                            public void onCompleted() {
+//
+//                            }
+//
+//                            @Override
+//                            public void onError(Throwable e) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onNext(Result result) {
+//                                if(result!=null)
+//                                {
+//
+//                                    if(result.getStatus()==200)
+//                                    {
+//                                        showToast("提交检查记录成功");
+//                                    }else{
+//                                        showToast(result.getMessage());
+//                                    }
+//                                }
+//                            }
+//                        });
                 break;
             case R.id.settings:
                 showToast("设置");

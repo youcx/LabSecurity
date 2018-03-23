@@ -29,6 +29,7 @@ import com.example.you.lsmisclient.bean.LabInfo;
 import com.example.you.lsmisclient.bean.LabLevel;
 import com.example.you.lsmisclient.bean.Result;
 import com.example.you.lsmisclient.http.HttpTask;
+import com.example.you.lsmisclient.lab.bean.LabInforResult;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -159,18 +160,18 @@ public class LabBaseInfoChangeFragment extends Fragment implements AdapterView.O
             public void onClick(View v) {
                 labBaseInfoProgressBar.setVisibility(View.VISIBLE);
                 //labInfo.setLabLevelId(labLevelIdEdi.getText());
-                labInfo.setBuildId(buildIdEdt.getText().toString());
+               // labInfo.setBuildId(buildIdEdt.getText().toString());
                 labInfo.setDepartmentId(departmentIdEdt.getText().toString());
                 labInfo.setLabName(labNameEdt.getText().toString());
-                labInfo.setDenoterInfor(denoterInforEdt.getText().toString());
-                labInfo.setArea(labAreaEdt.getText().toString());
+               // labInfo.setDenoterInfor(denoterInforEdt.getText().toString());
+                //labInfo.setArea(labAreaEdt.getText().toString());
                 labInfo.setResponserName(responseNameEdt.getText().toString());
                 labInfo.setResponsePhone(responsePhoneEdt.getText().toString());
                 labInfo.setManagerName(managerNameEdt.getText().toString());
                 labInfo.setManagerPhone(managerPhoneEdt.getText().toString());
                 labInfo.setLabStatus(labStatusEdt.getText().toString());
-                labInfo.setSubmitPersonName(submitPersonNameEdt.getText().toString());
-                labInfo.setLabAddr(locationEdt.getText().toString());
+               // labInfo.setSubmitPersonName(submitPersonNameEdt.getText().toString());
+                //labInfo.setLabAddr(locationEdt.getText().toString());
                 //labInfo.setDepartmentName(departmentNameEdt.getText().toString());
                // labInfo.setDetailLevelName(detailLevelNameEdt.getText().toString());
                // labInfo.setMainLevelName(mainLevelNameEdt.getText().toString());
@@ -298,7 +299,7 @@ public class LabBaseInfoChangeFragment extends Fragment implements AdapterView.O
     private void startGetLabInfo()
     {
         mTask.getLabInfo(4)
-                .subscribe(new Subscriber<Result<LabInfo>>() {
+                .subscribe(new Subscriber<LabInforResult>() {
                     @Override
                     public void onCompleted() {
 
@@ -322,14 +323,14 @@ public class LabBaseInfoChangeFragment extends Fragment implements AdapterView.O
                     }
 
                     @Override
-                    public void onNext(Result<LabInfo> result) {
+                    public void onNext(LabInforResult result) {
                         if(result!=null)
                         {
 
                             if(result.getStatus()==200)
                             {
                                 showToast("返回实验室信息成功");
-                                startSetInfo(result.getData());
+                                startSetInfo(result.getLabinfor());
                             }else{
 
                             }
@@ -346,18 +347,18 @@ public class LabBaseInfoChangeFragment extends Fragment implements AdapterView.O
     private void startSetInfo(LabInfo labInfo)
     {
         //labLevelIdEdi.setText(labInfo.getLabLevelId());
-        buildIdEdt.setText(labInfo.getBuildId());
+        buildIdEdt.setText("");
         departmentIdEdt.setText(labInfo.getDepartmentId());
-        locationEdt.setText(labInfo.getLabAddr());
+        locationEdt.setText("");
         labNameEdt.setText(labInfo.getLabName());
-        denoterInforEdt.setText(labInfo.getDenoterInfor());
-        labAreaEdt.setText(labInfo.getArea());
+        denoterInforEdt.setText("");
+        labAreaEdt.setText("");
         responseNameEdt.setText(labInfo.getResponserName());
         responsePhoneEdt.setText(labInfo.getResponsePhone());
         managerNameEdt.setText(labInfo.getManagerName());
         managerPhoneEdt.setText(labInfo.getManagerPhone());
         labStatusEdt.setText(labInfo.getLabStatus());
-        submitPersonNameEdt.setText(labInfo.getSubmitPersonName());
+        submitPersonNameEdt.setText("");
         //departmentNameEdt.setText(labInfo.getDepartmentName());
        // detailLevelNameEdt.setText(labInfo.getDetailLevelName());
        // mainLevelNameEdt.setText(labInfo.getMainLevelName());

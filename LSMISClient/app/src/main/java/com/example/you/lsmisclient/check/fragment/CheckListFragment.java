@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,9 @@ public class CheckListFragment extends Fragment {
     //bind
     @BindView(R.id.check_list_expandLV)
     ExpandableListView checkListExpandTV;
+    //下拉控件
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     //数据
     String[] item1=null;
@@ -65,13 +69,31 @@ public class CheckListFragment extends Fragment {
         ButterKnife.bind(this,view);
         //初始化数据
         mTask=new HttpTask();
-        startGetInfo();
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+                startGetInfo();
+            }
+        });
+        //startGetInfo();
        // initDatas();
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                startGetInfo();
 
+            }
+        });
 
         return view;
     }
 
+
+    /**
+     * 获取检查表
+     */
     private void startGetInfo()
     {
         mTask.getFirstCheckList()
@@ -100,6 +122,7 @@ public class CheckListFragment extends Fragment {
 
                     @Override
                     public void onNext(Result<List<FirstCheckList>> listResult) {
+                        swipeRefreshLayout.setRefreshing(false);
                         if(listResult!=null)
                         {
                             if(listResult.getStatus()==200)
@@ -122,9 +145,6 @@ public class CheckListFragment extends Fragment {
             startGetSecondList(i,data.get(i).getGroupSerialNumber());
         }
         checkListAdapter=new CheckListAdapter(item1,item2,getActivity());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
                 checkListExpandTV.setAdapter(checkListAdapter);
                 checkListExpandTV.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                     @Override
@@ -136,8 +156,7 @@ public class CheckListFragment extends Fragment {
                         return false;
                     }
                 });
-            }
-        });
+
     }
 
     private void startGetSecondList(final int i,String serialNum)

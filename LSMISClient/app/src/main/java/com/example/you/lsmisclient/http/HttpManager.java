@@ -2,7 +2,9 @@ package com.example.you.lsmisclient.http;
 
 import android.text.TextUtils;
 import android.util.Log;
+//import android.util.Log;
 
+import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
@@ -10,8 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HttpManager {
     //服务端基地址
     public static final String BASE_URL="http://47.104.85.89/";
-    //public static final String BASE_U0RL="http://www.izaodao.com/Api/";
+    //public static final String BASE_URL="http://119.29.201.35:8083/";
     //请求超时时间
     private static final int DEFAULT_TIME_OUT=5;
     //retrofit
@@ -34,7 +34,6 @@ public class HttpManager {
     {
 //        HttpLoggingInterceptor httpLoggingInterceptor=new HttpLoggingInterceptor(new HttpLogger());
 //        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
         //创建OkHttpClient
         OkHttpClient.Builder builder=new OkHttpClient.Builder();
         builder.connectTimeout(DEFAULT_TIME_OUT, TimeUnit.SECONDS);//链接超时时间
@@ -84,8 +83,11 @@ public class HttpManager {
         public okhttp3.Response intercept(Chain chain) throws IOException {
             okhttp3.Request request = chain.request();
            // request=request.newBuilder().addHeader("content-type","application/json").build();
-            Logger.d(request.toString() + request.headers().toString());
+                Logger.d(request.toString() + request.headers().toString());
+
             Log.i("拦截器",request.toString());
+            Log.i("请求头",request.headers().toString());
+            Log.i("请求体",request.body().toString());
             okhttp3.Response response = chain.proceed(chain.request());
             okhttp3.MediaType mediaType = response.body().contentType();
             String content = response.body().string();

@@ -2,14 +2,17 @@ package com.example.you.lsmisclient.bean;
 
 /**
  * Created by You on 2018/1/22.
+ * 实验室信息
  */
 
 public class LabInfo {
     int iD;
+    //校区
+    private int campusId;
+    private String campusName;
     //实验室具体等级id
     int labLevelId;
     String labName;
-    String buildId;
     //实验室具体等级
     String detailLevelName;
     //实验室等级《国家级等》
@@ -17,15 +20,15 @@ public class LabInfo {
     //所属学院id和名称
     String departmentId;
     String departmentName;
-    String labAddr;
-    String denoterInfor;
-    String area;
+    //负责人
     String responserName;
     String responsePhone;
+    //管理员
     String managerName;
     String managerPhone;
     String labStatus;
-    String submitPersonName;
+    //实验室图片地址
+    private String labPictureUrl;
 
     public LabInfo() {
     }
@@ -62,37 +65,6 @@ public class LabInfo {
         this.iD = ID;
     }
 
-    public String getLabAddr() {
-        return labAddr;
-    }
-
-    public void setLabAddr(String labAddr) {
-        this.labAddr = labAddr;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public String getBuildId() {
-        return buildId;
-    }
-
-    public void setBuildId(String buildId) {
-        this.buildId = buildId;
-    }
-
-    public String getDenoterInfor() {
-        return denoterInfor;
-    }
-
-    public void setDenoterInfor(String denoterInfor) {
-        this.denoterInfor = denoterInfor;
-    }
 
     public String getDepartmentId() {
         return departmentId;
@@ -158,34 +130,35 @@ public class LabInfo {
         this.responsePhone = responsePhone;
     }
 
-    public String getSubmitPersonName() {
-        return submitPersonName;
+    public int getCampusId() {
+        return campusId;
     }
 
-    public void setSubmitPersonName(String submitPersonName) {
-        this.submitPersonName = submitPersonName;
+    public void setCampusId(int campusId) {
+        this.campusId = campusId;
     }
 
-    @Override
-    public String toString() {
-        return "{\"LabInfo\":{"
-                + "\"area\":\"" + area + "\""
-                + ", \"ID\":\"" + iD + "\""
-                + ", \"labLevelId\":\"" + labLevelId + "\""
-                + ", \"labName\":\"" + labName + "\""
-                + ", \"buildId\":\"" + buildId + "\""
-                + ", \"detailLevelName\":\"" + detailLevelName + "\""
-                + ", \"mainLevelName\":\"" + mainLevelName + "\""
-                + ", \"departmentId\":\"" + departmentId + "\""
-                + ", \"departmentName\":\"" + departmentName + "\""
-                + ", \"labAddr\":\"" + labAddr + "\""
-                + ", \"denoterInfor\":\"" + denoterInfor + "\""
-                + ", \"responserName\":\"" + responserName + "\""
-                + ", \"responsePhone\":\"" + responsePhone + "\""
-                + ", \"managerName\":\"" + managerName + "\""
-                + ", \"managerPhone\":\"" + managerPhone + "\""
-                + ", \"labStatus\":\"" + labStatus + "\""
-                + ", \"submitPersonName\":\"" + submitPersonName + "\""
-                + "}}";
+    public String getCampusName() {
+        return campusName;
+    }
+
+    public void setCampusName(String campusName) {
+        this.campusName = campusName;
+    }
+
+    public int getiD() {
+        return iD;
+    }
+
+    public void setiD(int iD) {
+        this.iD = iD;
+    }
+
+    public String getLabPictureUrl() {
+        return labPictureUrl;
+    }
+
+    public void setLabPictureUrl(String labPictureUrl) {
+        this.labPictureUrl = labPictureUrl;
     }
 }

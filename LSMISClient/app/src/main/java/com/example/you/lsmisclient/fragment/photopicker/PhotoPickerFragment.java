@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * Created by chendian on 2018/1/24.
  */
-public class PhotoPickerFragment extends android.support.v4.app.Fragment {
+public class PhotoPickerFragment extends Fragment {
     private final static int MAX_PHOTO_VIEW = 3;
     private final String APP_PATH = "/labSafety/";
 

@@ -1,6 +1,8 @@
 package com.example.you.lsmisclient.list;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,8 +40,8 @@ public class CollegeListActivity extends AppCompatActivity {
     Toolbar collegeListToolbar;
     @BindView(R.id.toolbar_textview)
     TextView toolbarTextView;
-    @BindView(R.id.mProgressBar)
-    ProgressBar mProgressBar;
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefreshLayout;
     //适配器
     CollegeAdapter collegeAdapter;
     //数据
@@ -66,8 +68,20 @@ public class CollegeListActivity extends AppCompatActivity {
         });
 
         //getList
-        mProgressBar.setVisibility(View.VISIBLE);
-        startGetDepartmentList();
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+                startGetDepartmentList();
+            }
+        });
+        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#5CACEE"));
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                startGetDepartmentList();
+            }
+        });
         //init
 
     }
@@ -103,6 +117,7 @@ public class CollegeListActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(Result result) {
+                        swipeRefreshLayout.setRefreshing(false);
                         if(result!=null)
                         {
                             if(result.getStatus()==200)
@@ -164,7 +179,6 @@ public class CollegeListActivity extends AppCompatActivity {
                     collegeListRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
                     //设置适配器
                     collegeListRecyclerView.setAdapter(collegeAdapter);
-                    mProgressBar.setVisibility(View.GONE);
                 }
             });
 

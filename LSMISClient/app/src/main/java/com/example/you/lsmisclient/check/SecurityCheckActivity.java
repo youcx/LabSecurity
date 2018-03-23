@@ -20,6 +20,9 @@ public class SecurityCheckActivity extends AppCompatActivity implements View.OnC
     @BindView(R.id.toolbar_textview)
     TextView toolbarTextView;
 
+    //data
+    private final int GET_ALL_LIST = 222;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,9 @@ public class SecurityCheckActivity extends AppCompatActivity implements View.OnC
         {
             case R.id.security_check_start:
                 Intent missionSelect=new Intent(this,SelectCheckMissionActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putInt("fromWhere",GET_ALL_LIST);
+                missionSelect.putExtras(bundle);
                 startActivity(missionSelect);
                 break;
             case R.id.security_check_review:

@@ -18,6 +18,7 @@ import com.example.you.lsmisclient.bean.LabId;
 import com.example.you.lsmisclient.bean.LabInfo;
 import com.example.you.lsmisclient.bean.Result;
 import com.example.you.lsmisclient.http.HttpTask;
+import com.example.you.lsmisclient.lab.bean.LabInforResult;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -92,7 +93,7 @@ public class LabBaseInfoFragment extends Fragment {
     private void startGetLabInfo(int id)
     {
         mTask.getLabInfo(id)
-                .subscribe(new Subscriber<Result<LabInfo>>() {
+                .subscribe(new Subscriber<LabInforResult>() {
                     @Override
                     public void onCompleted() {
 
@@ -116,16 +117,16 @@ public class LabBaseInfoFragment extends Fragment {
                     }
 
                     @Override
-                    public void onNext(Result<LabInfo> result) {
+                    public void onNext(LabInforResult result) {
                         if(result!=null)
                         {
 
                             if(result.getStatus()==200)
                             {
                                 showToast("获取实验室信息成功");
-                                startSetInfo(result.getData());
+                                startSetInfo(result.getLabinfor());
                             }else{
-                                showToast(result.getMessage());
+                                showToast(""+result.getStatus());
                             }
                         }
 
@@ -142,16 +143,16 @@ public class LabBaseInfoFragment extends Fragment {
 //          labLevelIdTv.setText(labInfo.getLabLevelId());
  //         buildIdTv.setText(labInfo.getBuildId());
           departmentIdTv.setText(labInfo.getDepartmentId());
-          labAddrTv.setText(labInfo.getLabAddr());
+          labAddrTv.setText("");
           labNameTv.setText(labInfo.getLabName());
-          denoterInforTv.setText(labInfo.getDenoterInfor());
-          areaTv.setText(labInfo.getArea());
+          denoterInforTv.setText("");
+          areaTv.setText("");
           responseNameTv.setText(labInfo.getResponserName());
             responsePhoneTv.setText(labInfo.getResponsePhone());
             managerNameTv.setText(labInfo.getManagerName());
             managerPhoneTv.setText(labInfo.getManagerPhone());
           labStatusTv.setText(labInfo.getLabStatus());
-         submitPersonNameTv.setText(labInfo.getSubmitPersonName());
+         submitPersonNameTv.setText("");
          departmentNameTv.setText(labInfo.getDepartmentName());
          detailLevelNameTv.setText(labInfo.getDetailLevelName());
          mainLevelNameTv.setText(labInfo.getMainLevelName());

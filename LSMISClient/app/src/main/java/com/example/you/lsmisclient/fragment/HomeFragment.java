@@ -21,6 +21,8 @@ import com.example.you.lsmisclient.check.SelectCheckMissionActivity;
 import com.example.you.lsmisclient.contacts.ContactsActivity;
 import com.example.you.lsmisclient.contacts.UserActivity;
 import com.example.you.lsmisclient.lab.LabActivity;
+import com.example.you.lsmisclient.lab.LabOverViewActivity;
+import com.example.you.lsmisclient.rectification.ReformDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +70,10 @@ public class HomeFragment extends Fragment {
                 }else if(myCard.getCard_name().equals("责任人"))
                 {
                     Intent intent =new Intent(getActivity(), UserActivity.class);
+                    startActivity(intent);
+                }else if(myCard.getCard_name().equals("安全总览"))
+                {
+                    Intent intent =new Intent(getActivity(), LabOverViewActivity.class);
                     startActivity(intent);
                 }
             }

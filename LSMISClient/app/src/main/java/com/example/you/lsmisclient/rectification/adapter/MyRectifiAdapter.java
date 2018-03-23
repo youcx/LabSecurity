@@ -47,6 +47,7 @@ public class MyRectifiAdapter extends  RecyclerView.Adapter<MyRectifiAdapter.MyR
 
     public void setmDatas(List<MyRectification> mDatas) {
         this.mDatas = mDatas;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -67,9 +68,9 @@ public class MyRectifiAdapter extends  RecyclerView.Adapter<MyRectifiAdapter.MyR
                 }
             }
         });
-        holder.descripionTv.setText(mDatas.get(position).getDescrip());
-        holder.remainTimeTv.setText(mDatas.get(position).getRemainTime());
-        holder.checkTimeTv.setText(mDatas.get(position).getCheckTime());
+        holder.descripionTv.setText(mDatas.get(position).getQuestionDesc());
+        //holder.remainTimeTv.setText(mDatas.get(position).getRemainTime());
+        holder.checkTimeTv.setText(mDatas.get(position).getAdviceChangeTime());
     }
 
     @Override

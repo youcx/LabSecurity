@@ -3,6 +3,8 @@ package com.example.you.lsmisclient.bean;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.List;
+
 /**
  * Created by You on 2018/1/22.
  */
@@ -14,6 +16,7 @@ public class Lab {
     String labHazard;
     String managerName;
     String responserName;
+    List<MainTypeList> mainTypeList;
     int iD;
 
 
@@ -26,6 +29,14 @@ public class Lab {
         this.labName = labName;
         this.managerName = managerName;
         this.responserName = responseName;
+    }
+
+    public List<MainTypeList> getMainTypeList() {
+        return mainTypeList;
+    }
+
+    public void setMainTypeList(List<MainTypeList> mainTypeList) {
+        this.mainTypeList = mainTypeList;
     }
 
     public int getID() {
@@ -83,4 +94,6 @@ public class Lab {
     public void setResponserName(String responserName) {
         this.responserName = responserName;
     }
+
+
 }

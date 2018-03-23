@@ -51,6 +51,10 @@ public class LabAdapter extends RecyclerView.Adapter<LabAdapter.LabViewHolder>{
         notifyDataSetChanged();
     }
 
+    public List<Lab> getmDatas() {
+        return mDatas;
+    }
+
     @Override
     public LabViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //item界面布局
@@ -75,9 +79,13 @@ public class LabAdapter extends RecyclerView.Adapter<LabAdapter.LabViewHolder>{
         holder.labName.setText(mDatas.get(position).getLabName());
         holder.labCollege.setText(mDatas.get(position).getDepartmentName());
         holder.labLevel.setText(mDatas.get(position).getMainLevelName());
-        holder.labHazard.setText(mDatas.get(position).getLabHazard());
-        holder.labSafePerson.setText(mDatas.get(position).getManagerName());
-        holder.labTeacher.setText(mDatas.get(position).getResponserName());
+        if(mDatas.get(position).getMainTypeList()!=null)
+        {
+            holder.labHazard.setText(mDatas.get(position).getMainTypeList().get(0).getDangerMainTypeName());
+        }
+        //
+        holder.labSafePerson.setText("实验室管理员："+mDatas.get(position).getManagerName());
+        holder.labTeacher.setText("实验室负责人："+mDatas.get(position).getResponserName());
 
     }
 

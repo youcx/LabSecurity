@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/myReform"
             android:layout_weight="1"
             android:text="我的整改"
             android:textColor="@color/colorPrimary"
@@ -22,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/inReform"
             android:layout_weight="1"
             android:text="正在整改"
             android:textColor="@color/colorPrimary"
@@ -29,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/review"
             android:layout_weight="1"
             android:text="等待复查"
             android:textColor="@color/colorPrimary"
@@ -36,8 +39,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/mRecyclerView"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </LinearLayout>

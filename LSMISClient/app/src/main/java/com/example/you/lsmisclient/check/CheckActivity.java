@@ -3,6 +3,7 @@ package com.example.you.lsmisclient.check;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,21 +26,27 @@ import android.widget.Toast;
 import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.bean.Result;
 import com.example.you.lsmisclient.check.bean.CheckItem;
+import com.example.you.lsmisclient.fragment.photopicker.PhotoPickerFragment;
 import com.example.you.lsmisclient.http.HttpTask;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
 import org.litepal.crud.DataSupport;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import rx.Subscriber;
 
 public class CheckActivity extends AppCompatActivity implements View.OnClickListener{
@@ -50,10 +57,6 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.check_radio_group)
     RadioGroup checkRadioGroup;
     //btn
-    @BindView(R.id.previous_item_btn)
-    Button previoutItemBtn;
-    @BindView(R.id.next_item_btn)
-    Button nextItemBtn;
     @BindView(R.id.submit)
     Button submit;
     @BindView(R.id.DateBtn)
@@ -77,9 +80,11 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
     String serialNum;
     List<CheckItem> checkItem;
     //检查项id
-    int titleId;
-    int startTitleId;
-    int endTitleId;
+    private int titleId;
+    private String checkTitle;
+    private String checkPoint;
+//    int startTitleId;
+//    int endTitleId;
     //任务记录id
     int recordId;
     int labId;
@@ -100,27 +105,33 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
 
     //http
     HttpTask mTask;
+    PhotoPickerFragment photoFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
-        Intent intent=getIntent();
-        titleId=intent.getIntExtra("titleId",0);
-        checkItem= DataSupport.where("titleId = ?",""+titleId).find(CheckItem.class);
+        /**获取检查项数据*/
+        Bundle bundle=getIntent().getExtras();
+        titleId=bundle.getInt("titleId",0);
+        checkTitle=bundle.getString("checkTitle");
+        checkPoint = bundle.getString("checkPoint");
+        serialNum = bundle.getString("serialNum");
+//        checkItem= DataSupport.where("titleId = ?",""+titleId).find(CheckItem.class);
         //bind
         ButterKnife.bind(this);
         mTask=new HttpTask();
+       photoFragment= (PhotoPickerFragment) getSupportFragmentManager().findFragmentById(R.id.photo_fragment);
         //init
         SharedPreferences sp=getSharedPreferences("checkdata",MODE_PRIVATE);
-        startTitleId=sp.getInt("startTitleId",0);
-        endTitleId=sp.getInt("endTitleId",0);
+//        startTitleId=sp.getInt("startTitleId",0);
+//        endTitleId=sp.getInt("endTitleId",0);
         recordId=sp.getInt("recordId",0);
         labId=sp.getInt("labId",0);
-        checkCount=sp.getInt("checkCount",0);
-        Log.i("endTitleID!!!!!",""+endTitleId);
+//        checkCount=sp.getInt("checkCount",0);
+//        Log.i("endTitleID!!!!!",""+endTitleId);
         //ToolBar
-        toolbarTextView.setText(checkItem.get(0).getTitleSerialNumber());
+        toolbarTextView.setText(serialNum);
         setSupportActionBar(checkToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -131,13 +142,11 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
             }
         });
         //btn
-        previoutItemBtn.setOnClickListener(this);
-        nextItemBtn.setOnClickListener(this);
         submit.setOnClickListener(this);
         dateBtn.setOnClickListener(this);
         //设置UI
-        checkItemTxtView.setText(checkItem.get(0).getCheckTitle());
-        checkPointTxtView.setText(checkItem.get(0).getCheckImportant());
+        checkItemTxtView.setText(checkTitle);
+        checkPointTxtView.setText(checkPoint);
         //初始化整改主体
         initTarget();
         //单选框
@@ -171,17 +180,12 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.next_item_btn:
-                gotoNextItem();
-                break;
-            case R.id.previous_item_btn:
-                gotoLastItem();
-                break;
             case R.id.submit:
+
                 final NiftyDialogBuilder dialogBuilder=NiftyDialogBuilder.getInstance(this);
                 dialogBuilder
                         .withTitle("提示")
-                        .withMessage("确定提交结果并开始下一项检查任务吗？")
+                        .withMessage("确定提交结果吗？")
                         .withDialogColor("#99cccc")
                         .withDuration(200)
                         .withButton1Text("取消")
@@ -197,12 +201,34 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onClick(View v) {
                                 dialogBuilder.dismiss();
-                                checkNextItem();
+                                //填写记录
+                                if(checkRecordEdt.getText().toString().equals(""))
+                                {
+                                    checkRecordEdt.setError("请填写检查记录");
+                                }else if(suggestionEdt.getText().toString().equals(""))
+                                {
+                                    suggestionEdt.setError("请填写整改意见");
+                                }else if(dateBtn.getText().toString().equals(""))
+                                {
+                                    dateBtn.performClick();
+                                    //dateBtn.setError("请选择整改时间");
+                                }else
+                                {
+                                    //上传不符合结果
+                                    uploadCheckResult();
+                                }
+//                                checkNextItem();
 
                             }
                         }).show();
                 break;
             case R.id.DateBtn:
+                ArrayList<String> picPath=new ArrayList<>();
+                picPath=photoFragment.getPickedPicsPath();
+                for(String path:picPath)
+                {
+                    Log.i("PICPATH",path);
+                }
                 new DatePickerDialog(this,mdateListener,year,month,day).show();
                 break;
         }
@@ -242,96 +268,100 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
         reformTargetSpinner.setAdapter(reformTargetAdapter);
     }
 
-    /**
-     * 进入上一项
-     */
-    private void gotoLastItem()
-    {
-        if(titleId==startTitleId)
-        {
-            //是开始项
-            showToast("已经是最初项");
-        }else
-        {
-            //进入上一项
-            titleId--;
-            updataItem();
-        }
-    }
-
-    /**
-     * 进入下一项
-     */
-    private void gotoNextItem()
-    {
-        if(titleId==endTitleId)
-        {
-            //是最后一项
-            showToast("已经是最后一项");
-        }else
-        {
-            //不是最后一项，进入下一项
-            titleId++;
-            updataItem();
-        }
-    }
+//    /**
+//     * 进入上一项
+//     */
+//    private void gotoLastItem()
+//    {
+//        if(titleId==startTitleId)
+//        {
+//            //是开始项
+//            showToast("已经是最初项");
+//        }else
+//        {
+//            //进入上一项
+//            titleId--;
+//            updataItem();
+//        }
+//    }
+//
+//    /**
+//     * 进入下一项
+//     */
+//    private void gotoNextItem()
+//    {
+//        if(titleId==endTitleId)
+//        {
+//            //是最后一项
+//            showToast("已经是最后一项");
+//        }else
+//        {
+//            //不是最后一项，进入下一项
+//            titleId++;
+//            updataItem();
+//        }
+//    }
     /**
      * 检查下一项
      */
-    private void checkNextItem()
-    {
-        switch (checkResult)
-        {
-            case CONFORM:
-                //符合
-                //提交结果,先提交结果，再根据id是否进入下一项
-                showToast("提交检查记录成功");
-                if(titleId==endTitleId)
-                {
-                    //是最后一项
-                    showToast("该类已经检查完毕");
-                }else
-                {
-                    //不是最后一项，进入下一项
-                    titleId++;
-                    updataItem();
-                }
-                break;
-            case INCONFORMITY:
-                //填写记录
-               // CheckRecordDialog();
-                //上传不符合结果
-                uploadCheckResult();
-                if(titleId==endTitleId)
-                {
-                    //是最后一项
-                    showToast("该类已经检查完毕");
-                }else
-                {
-                    //不是最后一项，进入下一项
-                    titleId++;
-                    updataItem();
-                }
-                break;
-            case INAPPLICABLE:
-                //上传不适用结果
-                uploadUnUseTitle(recordId,labId,titleId);
-                if(titleId==endTitleId)
-                {
-                    //是最后一项
-                    showToast("该类已经检查完毕");
-                }else
-                {
-                    //不是最后一项，进入下一项
-                    titleId++;
-                    updataItem();
-                }
-                break;
-            default:
-                showToast("请勾选检查情况");
-                break;
-        }
-    }
+//    private void checkNextItem()
+//    {
+//        switch (checkResult)
+//        {
+//            case CONFORM:
+//                //符合
+//                //提交结果,先提交结果，再根据id是否进入下一项
+//                showToast("提交检查记录成功");
+//                if(titleId==endTitleId)
+//                {
+//                    //是最后一项
+//                    showToast("该类已经检查完毕");
+//                }else
+//                {
+//                    //不是最后一项，进入下一项
+//                    titleId++;
+//                    updataItem();
+//                }
+//                break;
+//            case INCONFORMITY:
+//                //填写记录
+//               // CheckRecordDialog();
+//                if(checkRecordEdt.getText().toString().equals(""))
+//                {
+//                    checkRecordEdt.setError("请填写检查记录");
+//                }else if(suggestionEdt.getText().toString().equals(""))
+//                {
+//                    suggestionEdt.setError("请填写整改意见");
+//                }else if(dateBtn.getText().toString().equals(""))
+//                {
+//                    dateBtn.performClick();
+//                    //dateBtn.setError("请选择整改时间");
+//                }else
+//                {
+//                    //上传不符合结果
+//                    uploadCheckResult();
+//                }
+//
+//                break;
+//            case INAPPLICABLE:
+//                //上传不适用结果
+//                uploadUnUseTitle(recordId,labId,titleId);
+//                if(titleId==endTitleId)
+//                {
+//                    //是最后一项
+//                    showToast("该类已经检查完毕");
+//                }else
+//                {
+//                    //不是最后一项，进入下一项
+//                    titleId++;
+//                    updataItem();
+//                }
+//                break;
+//            default:
+//                showToast("请勾选检查情况");
+//                break;
+//        }
+//    }
 
     /**
      * 上传不适用项
@@ -375,9 +405,26 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
         ParsePosition pos = new ParsePosition(0);
         Date strtodate = formatter.parse(dateBtn.getText().toString(), pos);
         String mtime=formatter.format(strtodate);
-        Log.i("时间",""+recordId);
-        mTask.uploadNewCheckResult(titleId,recordId,checkRecordEdt.getText().toString(),suggestionEdt.getText().toString(),
-                1,mtime,null,null)
+        Log.i("RecordId",""+recordId);
+        MultipartBody.Builder builder=new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)  //表单类型
+                .addFormDataPart("titleId",""+titleId)
+                .addFormDataPart("recordId",""+recordId)
+                .addFormDataPart("questionDesc",checkRecordEdt.getText().toString())
+                .addFormDataPart("changeAdvice",suggestionEdt.getText().toString())
+                .addFormDataPart("adviceTargetOrgLevel",""+1)
+                .addFormDataPart("adviceChangeTimeStr",mtime);
+        ArrayList<String> picPath=photoFragment.getPickedPicsPath();
+        for(String path:picPath)
+        {
+            File file=new File(path);
+            RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),file);
+            builder.addFormDataPart("pic",file.getName(),requestBody);
+        }
+        List<MultipartBody.Part> parts=builder.build().parts();
+//        mTask.uploadNewCheckResult(titleId,recordId,checkRecordEdt.getText().toString(),suggestionEdt.getText().toString(),
+//                1,mtime,null,null)
+        mTask.uploadNewCheckResult(parts)
                 .subscribe(new Subscriber<Result>() {
                     @Override
                     public void onCompleted() {
@@ -397,6 +444,16 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
                             if(result.getStatus()==200)
                             {
                                 showToast("提交检查记录成功");
+//                                if(titleId==endTitleId)
+//                                {
+//                                    //是最后一项
+//                                    showToast("该类已经检查完毕");
+//                                }else
+//                                {
+//                                    //不是最后一项，进入下一项
+//                                    titleId++;
+//                                    updataItem();
+//                                }
                             }else{
                                 showToast(result.getMessage());
                             }
@@ -415,6 +472,8 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
         //设置UI
         checkItemTxtView.setText(checkItem.get(0).getCheckTitle());
         checkPointTxtView.setText(checkItem.get(0).getCheckImportant());
+        checkRecordEdt.setText("");
+        suggestionEdt.setText("");
     }
 
     protected void CheckRecordDialog() {

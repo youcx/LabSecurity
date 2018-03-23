@@ -11,12 +11,19 @@ import com.example.you.lsmisclient.bean.Result;
 import com.example.you.lsmisclient.check.bean.CheckItem;
 import com.example.you.lsmisclient.check.bean.FirstCheckList;
 import com.example.you.lsmisclient.check.bean.SecondCheckList;
+import com.example.you.lsmisclient.lab.bean.LabInforResult;
+import com.example.you.lsmisclient.rectification.bean.MyRectification;
+import com.example.you.lsmisclient.rectification.bean.MyReformResult;
+import com.example.you.lsmisclient.rectification.bean.ReformDetail;
 
 import org.json.JSONObject;
 
 import java.io.File;
+import java.sql.Ref;
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import retrofit2.http.Multipart;
 import rx.Observable;
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
@@ -49,7 +56,7 @@ public class HttpTask {
      * @param labId
      * @return
      */
-    public Observable<Result<LabInfo>> getLabInfo(int labId)
+    public Observable<LabInforResult> getLabInfo(int labId)
     {
         return HttpManager
                 .getApi()
@@ -135,6 +142,23 @@ public class HttpTask {
         return HttpManager
                 .getApi()
                 .getCheckTaskList(flag)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取当前实验室检查任务列表
+     * @param flag
+     * @param labId
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    public Observable<Result<List<CheckMission>>> getLabCheckTaskList(int flag,int labId,int pageSize,int pageNum)
+    {
+        return HttpManager
+                .getApi()
+                .getLabCheckTaskList(flag,labId,pageSize,pageNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -259,6 +283,21 @@ public class HttpTask {
     }
 
     /**
+     * 开始日常检查
+     * @param typeId
+     * @param labId
+     * @return
+     */
+   public Observable<Result> startDailyCheck(int typeId,int labId)
+   {
+       return HttpManager
+               .getApi()
+               .startDailyCheck(typeId,labId)
+               .subscribeOn(Schedulers.io())
+               .observeOn(AndroidSchedulers.mainThread());
+   }
+
+    /**
      * 上传不适用项
      * @param recordId
      * @param labId
@@ -274,24 +313,104 @@ public class HttpTask {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+
+
     /**
      * 上传不符合项
-     * @param titleId
-     * @param recordId
-     * @param descrip
-     * @param changeAdvice
-     * @param tagLevel
-     * @param changeTime
-     * @param pic
-     * @param video
+     * @param partList
      * @return
      */
-    public Observable<Result> uploadNewCheckResult(int titleId, int recordId, String descrip, String changeAdvice,
-                                                   int tagLevel, String changeTime, File pic,File video)
+    public Observable<Result> uploadNewCheckResult(List<MultipartBody.Part> partList){
+        return HttpManager
+                .getApi()
+                .uploadNewCheckResult(partList)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 提交检查记录
+     * @param recordId
+     * @return
+     */
+    public Observable<Result> submitCheckRecord(int recordId)
     {
         return HttpManager
                 .getApi()
-                .uploadNewCheckResult(titleId,recordId,descrip,changeAdvice,tagLevel,changeTime,pic,video)
+                .submitCheckRecord(recordId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 查看我的整改
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    public Observable<MyReformResult<List<MyRectification>>> getMyReformList(int pageSize,int pageNum)
+    {
+        return HttpManager
+                .getApi()
+                .getMyReformList(pageSize,pageNum)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取正在整改的项
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    public Observable<MyReformResult<List<MyRectification>>> getInReformList(int pageSize,int pageNum)
+    {
+        return HttpManager
+                .getApi()
+                .getInReformList(pageSize,pageNum)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取正在整改项详情
+     * @param changeId
+     * @return
+     */
+    public Observable<Result<ReformDetail>> getChangingDetail(int changeId)
+    {
+        return HttpManager
+                .getApi()
+                .getChangingDetail(changeId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取等待复查列表
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    public Observable<MyReformResult<List<MyRectification>>> getReviewList(int pageSize,int pageNum)
+    {
+        return HttpManager
+                .getApi()
+                .getReviewList(pageSize,pageNum)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 复检通过
+     * @param recordId
+     * @return
+     */
+    public Observable<Result> reCheckPass(int recordId)
+    {
+        return HttpManager
+                .getApi()
+                .reCheckPass(recordId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

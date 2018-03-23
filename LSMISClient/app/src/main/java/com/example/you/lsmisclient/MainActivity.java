@@ -9,12 +9,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.example.you.lsmisclient.check.bean.CheckItem;
 import com.example.you.lsmisclient.database.MyDatabaseHelper;
 import com.example.you.lsmisclient.fragment.AboutFragment;
 import com.example.you.lsmisclient.fragment.HomeFragment;
@@ -22,11 +24,13 @@ import com.example.you.lsmisclient.fragment.ManageFragment;
 import com.example.you.lsmisclient.fragment.MineFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.you.lsmisclient.qr.QrScannerActivity;
 
+import org.litepal.crud.DataSupport;
 import org.litepal.tablemanager.Connector;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     Toolbar mToolbar;
     //标题栏
     private String[] titles=new String[]{"LSMIS","管理","我的"};
+    //data
+    private final int REQUEST_CODE=11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //创建数据库
         Connector.getDatabase();
+        //DataSupport.where("name like ? and duration < ?", "song%", "200").order("duration").find(CheckItem.class);
         //控件绑定
         ButterKnife.bind(this);
 
@@ -116,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
                         mViewPager.setCurrentItem(1);
                         mToolbar.setVisibility(View.VISIBLE);
                         mToolbar.setTitle(titles[1]);
+
+
                         break;
 //                    case R.id.bottom_about:
 //                        mViewPager.setCurrentItem(2);
@@ -150,12 +159,23 @@ public class MainActivity extends AppCompatActivity {
         {
             case R.id.toolbar_scan:
                 Intent intent=new Intent(this, QrScannerActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,REQUEST_CODE);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode)
+        {
+            case REQUEST_CODE:
+                showToast(data.getStringExtra("qrValue"));
+                break;
+            default:
+                break;
+        }
+    }
 
     public void showToast(String str)
     {

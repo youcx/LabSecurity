@@ -152,9 +152,7 @@ public class CheckItemListActivity extends AppCompatActivity {
         Log.i("endId",""+endTitleId);
         editor.apply();
        final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_list_item_checked,checkTitle);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
+
                 itemListView.setAdapter(arrayAdapter);
                 itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -164,8 +162,6 @@ public class CheckItemListActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-            }
-        });
 
     }
 }

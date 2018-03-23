@@ -10,6 +10,10 @@ import com.example.you.lsmisclient.bean.Result;
 import com.example.you.lsmisclient.check.bean.CheckItem;
 import com.example.you.lsmisclient.check.bean.FirstCheckList;
 import com.example.you.lsmisclient.check.bean.SecondCheckList;
+import com.example.you.lsmisclient.lab.bean.LabInforResult;
+import com.example.you.lsmisclient.rectification.bean.MyRectification;
+import com.example.you.lsmisclient.rectification.bean.MyReformResult;
+import com.example.you.lsmisclient.rectification.bean.ReformDetail;
 
 
 import org.json.JSONObject;
@@ -17,11 +21,14 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -36,8 +43,8 @@ public interface HttpApi {
      * @param labid
      * @return
      */
-    @POST("labinfor/labinfor")
-    Observable<Result<LabInfo>> getLabInfo(@Query("ID") int labid);
+    @POST("back/detailinfor")
+    Observable<LabInforResult> getLabInfo(@Query("ID") int labid);
 
     /**
      * 修改实验室信息
@@ -134,6 +141,21 @@ public interface HttpApi {
     Observable<Result<List<CheckMission>>> getCheckTaskList(@Field("availableFlag") int flag);
 
     /**
+     * 获取当前实验室的任务列表
+     * @param flag    1表示当前可用的，0表示查询所有的
+     * @param labId
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/front/getLabCheckTaskList")
+    Observable<Result<List<CheckMission>>>getLabCheckTaskList(@Field("availableFlag")int flag,
+                                                              @Field("labId") int labId,
+                                                              @Field("pageSize") int pageSize,
+                                                              @Field("pageNum") int pageNum);
+
+    /**
      * 按任务查看实验室列表
      * @param id
      * @param pageSize
@@ -181,6 +203,16 @@ public interface HttpApi {
     Observable<Result> startCheck(@Field("taskId") int taskId,@Field("typeId") int typeId,@Field("labId") int labId);
 
     /**
+     * 开始日常检查，无需传入taskId
+     * @param typeId
+     * @param labId
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/back/startNewCheck")
+    Observable<Result> startDailyCheck(@Field("typeId") int typeId,@Field("labId") int labId);
+
+    /**
      * 上传不适用项
      * @param recordId
      * @param labId
@@ -191,28 +223,85 @@ public interface HttpApi {
     @POST("labsafe/checkResult/back/uploadLabUnUseTitle")
     Observable<Result> uploadUnUseTitle(@Field("recordId") int recordId,@Field("labId") int labId,@Field("titleId") int titleId);
 
+
     /**
-     *上传不符合项
-     * @param titleId              检查项id
-     * @param recordId              检查记录id
-     * @param descrip               问题描述
-     * @param changeAdvice          整改意见
-     * @param targetLevel           建议整改主体，1为学校,2为学院,3为实验室,4为责任人
-     * @param time                  建议整改完成时间,yyyy-MM-dd HH:mm:ss格式
-     * @param pic                   上传的图片，多张，name都为pic
-     * @param video                 上传的视频，只能有一个
+     * 上传不符合项
+     * @param partList
+     * @return
+     */
+    @Multipart
+    @POST("labsafe/checkResult/back/uploadNewCheckResult")
+    Observable<Result> uploadNewCheckResult(@Part List<MultipartBody.Part> partList);
+
+    /**
+     * 提交检查记录
+     * @param recordId
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/back/uploadNewCheckResult")
-    Observable<Result> uploadNewCheckResult(@Field("titleId")int titleId,
-                                            @Field("recordId") int recordId,
-                                            @Field("questionDesc") String descrip,
-                                            @Field("changeAdvice") String changeAdvice,
-                                            @Field("adviceTargetOrgLevel") int targetLevel,
-                                            @Field("adviceChangeTimeStr") String time,
-                                            @Field("pic")File  pic,
-                                            @Field("video") File video);
+    @POST("labsafe/checkResult/back/submitCheckRecord")
+    Observable<Result> submitCheckRecord(@Field("recordId") int recordId);
+
+    /**
+     * 查看我的整改
+     * @param pageSize 要查询的行数
+     * @param pageNum   页码
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafety/labCheckResult/front/getLabChangeList")
+    Observable<MyReformResult<List<MyRectification>>> getMyReformList(@Field("pageSize")int pageSize,
+                                                                      @Field("pageNum") int pageNum);
+
+    /**
+     * 获取正在整改
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/front/getChangingCheckResultList")
+    Observable<MyReformResult<List<MyRectification>>> getInReformList(@Field("pageSize")int pageSize,
+                                                                       @Field("pageNum") int pageNum);
+
+    /**
+     * 获取正在整改项详情
+     * @param changeId
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/front/getChangingDetail")
+    Observable<Result<ReformDetail>> getChangingDetail(@Field("changeId") int changeId);
+
+    /**
+     * 获取等待复查列表
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/front/getWaitCheckResultList")
+    Observable<MyReformResult<List<MyRectification>>> getReviewList(@Field("pageSize")int pageSize,
+                                                                    @Field("pageNum") int pageNum);
+
+    /**
+     * 复查通过
+     * @param recordId
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("labsafe/checkResult/back/reCheckPass")
+    Observable<Result> reCheckPass(@Field("recordId") int recordId);
+
+    /**
+     * 复检不通过，上传驳回原因
+     * @param partList
+     * @return
+     */
+    @Multipart
+    @POST("labsafe/checkResult/back/reCheckRefuse")
+    Observable<Result> reCheckRefuse(@Part List<MultipartBody.Part> partList);
+
 
 
 }

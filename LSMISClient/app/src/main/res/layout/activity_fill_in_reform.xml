@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_fill_in_reform"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.you.lsmisclient.rectification.FillInReformActivity">
+    <include
+        layout="@layout/widget_layout"
+        android:id="@+id/toolbar"/>
+    <TextView
+        android:text="检查项目"
+        android:textSize="15sp"
+        android:textColor="@color/cardview_dark_background"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/check_item_txtv"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="5dp"
+        android:text="有校级实验室安全工作领导机构，由校领导作为负责人，相关职能部门参与，设办公室"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:background="#eeeeee"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <TextView
+        android:text="检查要点"
+        android:textSize="15sp"
+        android:textColor="@color/cardview_dark_background"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/check_point_txtv"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="5dp"
+        android:text="有带文号的机构设计文件，明确包含实验室技术安全关林恩荣"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:background="#eeeeee"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <TextView
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:text="整改措施"
+        android:textSize="15sp"
+        android:textColor="@color/cardview_dark_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/reform_measure_edt"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:hint="填写整改措施"
+            android:textSize="13sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.CardView>
+    <TextView
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:text="整改结果"
+        android:textSize="15sp"
+        android:textColor="@color/cardview_dark_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/reform_result_edt"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:hint="填写整改结果"
+            android:textSize="13sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.CardView>
+    <View
+        android:background="#eeeeee"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <fragment
+        android:name="com.example.you.lsmisclient.fragment.photopicker.PhotoPickerFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></fragment>
+    <Button
+        android:id="@+id/submit"
+        android:layout_gravity="right"
+        android:text="提交"
+        android:textColor="@color/titleColor"
+        android:background="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

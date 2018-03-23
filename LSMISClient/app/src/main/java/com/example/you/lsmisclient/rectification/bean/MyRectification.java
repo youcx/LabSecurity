@@ -5,37 +5,47 @@ package com.example.you.lsmisclient.rectification.bean;
  */
 
 public class MyRectification {
-    private     String descrip;
-    private     String remainTime;
-    private     String checkTime;
+    private     String questionDesc;
+    private     String labName;
+    private     int changeId;
+    private     String adviceChangeTime;
 
-    public MyRectification(String descrip, String remainTime,String checkTime) {
-        this.checkTime = checkTime;
-        this.descrip = descrip;
-        this.remainTime = remainTime;
+    public MyRectification(String adviceChangeTime, int changeId, String labName, String questionDesc) {
+        this.adviceChangeTime = adviceChangeTime;
+        this.changeId = changeId;
+        this.labName = labName;
+        this.questionDesc = questionDesc;
     }
 
-    public String getCheckTime() {
-        return checkTime;
+    public String getAdviceChangeTime() {
+        return adviceChangeTime;
     }
 
-    public void setCheckTime(String checkTime) {
-        this.checkTime = checkTime;
+    public void setAdviceChangeTime(String adviceChangeTime) {
+        this.adviceChangeTime = adviceChangeTime;
     }
 
-    public String getDescrip() {
-        return descrip;
+    public int getChangeId() {
+        return changeId;
     }
 
-    public void setDescrip(String descrip) {
-        this.descrip = descrip;
+    public void setChangeId(int changeId) {
+        this.changeId = changeId;
     }
 
-    public String getRemainTime() {
-        return remainTime;
+    public String getLabName() {
+        return labName;
     }
 
-    public void setRemainTime(String remainTime) {
-        this.remainTime = remainTime;
+    public void setLabName(String labName) {
+        this.labName = labName;
+    }
+
+    public String getQuestionDesc() {
+        return questionDesc;
+    }
+
+    public void setQuestionDesc(String questionDesc) {
+        this.questionDesc = questionDesc;
     }
 }

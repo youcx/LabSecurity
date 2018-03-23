@@ -60,4 +60,15 @@ public class CheckItem extends DataSupport{
     public void setUseFlag(int useFlag) {
         this.useFlag = useFlag;
     }
+
+    @Override
+    public String toString() {
+        return "{\"CheckItem\":{"
+                + "\"checkImportant\":\"" + checkImportant + "\""
+                + ", \"checkTitle\":\"" + checkTitle + "\""
+                + ", \"titleId\":\"" + titleId + "\""
+                + ", \"titleSerialNumber\":\"" + titleSerialNumber + "\""
+                + ", \"useFlag\":\"" + useFlag + "\""
+                + "}}";
+    }
 }

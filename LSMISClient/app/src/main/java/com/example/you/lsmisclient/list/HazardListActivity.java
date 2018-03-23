@@ -1,6 +1,8 @@
 package com.example.you.lsmisclient.list;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +35,9 @@ public class HazardListActivity extends AppCompatActivity {
     Toolbar hazardListToolbar;
     @BindView(R.id.toolbar_textview)
     TextView toolbarTextView;
+    //下拉刷新
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefreshLayout;
     //适配器
     HazardAdapter hazardAdapter;
     //数据
@@ -57,7 +62,22 @@ public class HazardListActivity extends AppCompatActivity {
             }
         });
         //init
-        startGetHazardList();
+        //先来一个刷新任务
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+                startGetHazardList();
+            }
+        });
+        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#5CACEE"));
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                startGetHazardList();
+            }
+        });
+
 
     }
 
@@ -77,6 +97,7 @@ public class HazardListActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(Result result) {
+                        swipeRefreshLayout.setRefreshing(false);
                         if(result!=null)
                         {
                             if(result.getStatus()==200)
