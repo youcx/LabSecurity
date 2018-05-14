@@ -3,7 +3,6 @@ package com.example.you.lsmisclient.http;
 import com.example.you.lsmisclient.bean.CheckMission;
 import com.example.you.lsmisclient.bean.Lab;
 import com.example.you.lsmisclient.bean.LabDetailLevel;
-import com.example.you.lsmisclient.bean.LabId;
 import com.example.you.lsmisclient.bean.LabInfo;
 import com.example.you.lsmisclient.bean.LabLevel;
 import com.example.you.lsmisclient.bean.Result;
@@ -11,14 +10,13 @@ import com.example.you.lsmisclient.check.bean.CheckItem;
 import com.example.you.lsmisclient.check.bean.FirstCheckList;
 import com.example.you.lsmisclient.check.bean.SecondCheckList;
 import com.example.you.lsmisclient.lab.bean.LabInforResult;
+import com.example.you.lsmisclient.rectification.bean.InReformResult;
 import com.example.you.lsmisclient.rectification.bean.MyRectification;
 import com.example.you.lsmisclient.rectification.bean.MyReformResult;
-import com.example.you.lsmisclient.rectification.bean.ReformDetail;
+import com.example.you.lsmisclient.rectification.bean.CheckRecordDetail;
+import com.example.you.lsmisclient.rectification.bean.ReviewResult;
 
 
-import org.json.JSONObject;
-
-import java.io.File;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -43,7 +41,7 @@ public interface HttpApi {
      * @param labid
      * @return
      */
-    @POST("back/detailinfor")
+    @POST("/back/detailinfor")
     Observable<LabInforResult> getLabInfo(@Query("ID") int labid);
 
     /**
@@ -51,7 +49,7 @@ public interface HttpApi {
      * @param labInfo
      * @return
      */
-    @POST("labinfor/submitinfor")
+    @POST("/labinfor/submitinfor")
     Observable<Result> changeLabInfo(@Query("ID") int labid,@Body LabInfo labInfo);
 
     /**
@@ -59,14 +57,14 @@ public interface HttpApi {
      * @param b
      * @return
      */
-    @POST("AppFiftyToneGraph/videoLink")
+    @POST("/AppFiftyToneGraph/videoLink")
     Observable<Result> testHttp(@Body boolean b);
 
     /**
      * 获取实验室等级
      * @return
      */
-    @GET("lablist/levellist")
+    @GET("/lablist/levellist")
     Observable<Result<List<LabLevel>>> getLabLevelList();
 
     /**
@@ -74,14 +72,14 @@ public interface HttpApi {
      * @param levelId
      * @return
      */
-    @POST("labinfor/detaillevel")
+    @POST("/labinfor/detaillevel")
     Observable<Result<List<LabDetailLevel>>> getLabDetailLevel(@Query("levelId") int levelId);
 
     /**
      * 获取学院列表
      * @return
      */
-    @GET("lablist/departlist")
+    @GET("/lablist/departlist")
     Observable<Result> getDepartmentList();
 
 
@@ -90,7 +88,7 @@ public interface HttpApi {
      * 获取危险源大类列表
      * @return
      */
-    @GET("lablist/dangerlist")
+    @GET("/lablist/dangerlist")
     Observable<Result>  getMainDanger();
 
     /**
@@ -98,7 +96,7 @@ public interface HttpApi {
      * @param id
      * @return
      */
-    @POST("dangersubmit/dangerinfor")
+    @POST("/dangersubmit/dangerinfor")
     Observable<Result> getDetailDanger(@Query("dangerMainTypeId") int id,@Query("labId") int labid);
 
     /**
@@ -107,7 +105,7 @@ public interface HttpApi {
      * @param id
      * @return
      */
-    @POST("back/labsinfor")
+    @POST("/back/labsinfor")
     Observable<Result<List<Lab>>> getLabByDepartment(@Query("pageNumb") int page, @Query("departmentId") int id );
 
     /**
@@ -117,7 +115,7 @@ public interface HttpApi {
      * @param page
      * @return
      */
-    @POST("back/labbylevel")
+    @POST("/back/labbylevel")
     Observable<Result<List<Lab>>> getLabByLevel(@Query("labLevel") int labLevel,
                                                 @Query("labLevelId") int labLevelId,
                                                 @Query("pageNumb") int page);
@@ -128,7 +126,7 @@ public interface HttpApi {
      * @param page
      * @return
      */
-    @POST("back/labbydanger")
+    @POST("/back/labbydanger")
     Observable<Result<List<Lab>>> getLabByHazard(@Query("dangerMainTypeId") int id,@Query("pageNumb") int page);
 
     /**
@@ -137,7 +135,7 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/front/getCheckTaskList")
+    @POST("/labsafe/checkResult/front/getCheckTaskList")
     Observable<Result<List<CheckMission>>> getCheckTaskList(@Field("availableFlag") int flag);
 
     /**
@@ -149,7 +147,7 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/front/getLabCheckTaskList")
+    @POST("/labsafe/checkResult/front/getLabCheckTaskList")
     Observable<Result<List<CheckMission>>>getLabCheckTaskList(@Field("availableFlag")int flag,
                                                               @Field("labId") int labId,
                                                               @Field("pageSize") int pageSize,
@@ -163,14 +161,14 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkTask/front/getTaskIncLabList")
+    @POST("/labsafe/checkTask/front/getTaskIncLabList")
     Observable<Result<List<Lab>>> getLabByTask(@Field("taskId") int id,@Field("pageSize") int pageSize,@Field("pageNum") int pageNum);
 
     /**
      * 获取检查表第一大类
      * @return
      */
-    @POST("labsafe/checkResult/front/getFirstCheckGroupList")
+    @POST("/labsafe/checkResult/front/getFirstCheckGroupList")
     Observable<Result<List<FirstCheckList>>> getFirstCheckGroupList();
 
     /**
@@ -179,7 +177,7 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/front/getSecondCheckGroupList")
+    @POST("/labsafe/checkResult/front/getSecondCheckGroupList")
     Observable<Result<List<SecondCheckList>>> getSecondCheckGroupList(@Field("groupSerialNumber") String id);
 
     /**
@@ -189,7 +187,7 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/front/getLabCheckTitleList")
+    @POST("/labsafe/checkResult/front/getLabCheckTitleList")
     Observable<Result<List<CheckItem>>> getCheckItemList(@Field("groupSerialNumber") String id,@Field("labId") int labId);
 
     /**
@@ -199,7 +197,7 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/back/startNewCheck")
+    @POST("/labsafe/checkResult/back/startNewCheck")
     Observable<Result> startCheck(@Field("taskId") int taskId,@Field("typeId") int typeId,@Field("labId") int labId);
 
     /**
@@ -209,7 +207,7 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/back/startNewCheck")
+    @POST("/labsafe/checkResult/back/startNewCheck")
     Observable<Result> startDailyCheck(@Field("typeId") int typeId,@Field("labId") int labId);
 
     /**
@@ -220,7 +218,7 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/back/uploadLabUnUseTitle")
+    @POST("/labsafe/checkResult/back/uploadLabUnUseTitle")
     Observable<Result> uploadUnUseTitle(@Field("recordId") int recordId,@Field("labId") int labId,@Field("titleId") int titleId);
 
 
@@ -230,7 +228,7 @@ public interface HttpApi {
      * @return
      */
     @Multipart
-    @POST("labsafe/checkResult/back/uploadNewCheckResult")
+    @POST("/labsafe/checkResult/back/uploadNewCheckResult")
     Observable<Result> uploadNewCheckResult(@Part List<MultipartBody.Part> partList);
 
     /**
@@ -239,7 +237,7 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/back/submitCheckRecord")
+    @POST("/labsafe/checkResult/back/submitCheckRecord")
     Observable<Result> submitCheckRecord(@Field("recordId") int recordId);
 
     /**
@@ -249,7 +247,7 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafety/labCheckResult/front/getLabChangeList")
+    @POST("/labsafety/labCheckResult/front/getLabChangeList")
     Observable<MyReformResult<List<MyRectification>>> getMyReformList(@Field("pageSize")int pageSize,
                                                                       @Field("pageNum") int pageNum);
 
@@ -260,7 +258,7 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/front/getChangingCheckResultList")
+    @POST("/labsafe/checkResult/front/getChangingCheckResultList")
     Observable<MyReformResult<List<MyRectification>>> getInReformList(@Field("pageSize")int pageSize,
                                                                        @Field("pageNum") int pageNum);
 
@@ -270,8 +268,8 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/front/getChangingDetail")
-    Observable<Result<ReformDetail>> getChangingDetail(@Field("changeId") int changeId);
+    @POST("/labsafe/checkResult/front/getChangingDetail")
+    Observable<InReformResult<CheckRecordDetail>> getChangingDetail(@Field("changeId") int changeId);
 
     /**
      * 获取等待复查列表
@@ -280,9 +278,27 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/front/getWaitCheckResultList")
+    @POST("/labsafe/checkResult/front/getWaitCheckResultList")
     Observable<MyReformResult<List<MyRectification>>> getReviewList(@Field("pageSize")int pageSize,
                                                                     @Field("pageNum") int pageNum);
+
+    /**
+     * 获取等待复检详情
+     * @param changeId
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/labsafe/checkResult/front/getWaitCheckDetail")
+    Observable<ReviewResult> getWaitCheckDetail(@Field("changeId") int changeId);
+
+    /**
+     * 申请复检
+     * @param partList
+     * @return
+     */
+    @Multipart
+    @POST("/labsafe/checkResult/back/labUploadChangeRecord")
+    Observable<Result> uploadChangeRecord(@Part List<MultipartBody.Part> partList);
 
     /**
      * 复查通过
@@ -290,7 +306,7 @@ public interface HttpApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("labsafe/checkResult/back/reCheckPass")
+    @POST("/labsafe/checkResult/back/reCheckPass")
     Observable<Result> reCheckPass(@Field("recordId") int recordId);
 
     /**
@@ -299,7 +315,7 @@ public interface HttpApi {
      * @return
      */
     @Multipart
-    @POST("labsafe/checkResult/back/reCheckRefuse")
+    @POST("/labsafe/checkResult/back/reCheckRefuse")
     Observable<Result> reCheckRefuse(@Part List<MultipartBody.Part> partList);
 
 

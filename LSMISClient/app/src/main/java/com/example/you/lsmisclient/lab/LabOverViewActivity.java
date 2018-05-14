@@ -77,7 +77,7 @@ public class LabOverViewActivity extends AppCompatActivity implements View.OnCli
         //绑定控件
         ButterKnife.bind(this);
         mTask=new HttpTask();
-        labid=getIntent().getIntExtra("labId",4);
+        labid=getIntent().getIntExtra("labId",1);
         //toolbar
         toolbarTextView.setText("实验室概览");
         setSupportActionBar(labOverViewToolbar);

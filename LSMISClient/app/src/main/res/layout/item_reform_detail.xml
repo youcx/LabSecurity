@@ -60,11 +60,19 @@
         android:layout_below="@id/view5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <com.jaeger.ninegridimageview.NineGridImageView
+        android:id="@+id/nine_grid_img"
+        android:layout_below="@+id/reform_neirong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:imgGap="4dp"></com.jaeger.ninegridimageview.NineGridImageView>
+
     <TextView
         android:id="@+id/check_result"
         android:drawableLeft="@drawable/ic_create_black_12dp"
         android:text="检查结果"
-        android:layout_below="@+id/reform_neirong"
+        android:layout_below="@+id/nine_grid_img"
         android:paddingLeft="8dp"
         android:clickable="true"
         android:onClick="onClick"
@@ -106,6 +114,7 @@
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/reform_time"
+        android:textColor="@color/redWarn"
         android:paddingBottom="10dp"
         android:paddingLeft="8dp"
         android:layout_below="@+id/check_time"
@@ -152,6 +161,7 @@
     <Button
         android:id="@+id/reform_btn"
         android:text="申请复查"
+        android:background="@drawable/backgroud_color2"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:layout_below="@+id/reform_result"
@@ -165,6 +175,13 @@
         android:layout_below="@+id/reform_btn"
         android:layout_width="match_parent"
         android:layout_height="8dp"/>
+    <ImageView
+        android:id="@+id/big_pic"
+        android:visibility="gone"
+        android:scaleType="fitCenter"
+        android:background="@drawable/backgroud_color2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 

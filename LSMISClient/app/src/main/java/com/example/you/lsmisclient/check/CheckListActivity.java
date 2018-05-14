@@ -437,13 +437,19 @@ public class  CheckListActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if(keyCode==KeyEvent.KEYCODE_BACK)
+//        {
+//            showBackDialog();
+//        }
+//        return false;
+//    }
+
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode==KeyEvent.KEYCODE_BACK)
-        {
-            showBackDialog();
-        }
-        return false;
+    public void onBackPressed() {
+        showBackDialog();
+        //super.onBackPressed();
     }
 
     /**

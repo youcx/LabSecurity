@@ -102,6 +102,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
     <fragment
+        android:id="@+id/photoFragment"
         android:name="com.example.you.lsmisclient.fragment.photopicker.PhotoPickerFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></fragment>

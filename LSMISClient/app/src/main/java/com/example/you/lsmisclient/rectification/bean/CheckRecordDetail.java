@@ -20,7 +20,7 @@ package com.example.you.lsmisclient.rectification.bean;
     checkTitle	        string	对应的检查项的标题
  */
 
-public class ReformDetail {
+public class CheckRecordDetail {
     private int changeId;
     private String questionDesc;
     private String changeAdvice;

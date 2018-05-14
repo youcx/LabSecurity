@@ -47,6 +47,7 @@ import butterknife.ButterKnife;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 
 public class CheckActivity extends AppCompatActivity implements View.OnClickListener{
@@ -433,7 +434,19 @@ public class CheckActivity extends AppCompatActivity implements View.OnClickList
 
                     @Override
                     public void onError(Throwable e) {
+                        e.printStackTrace();if ( e instanceof HttpException){
+                            HttpException httpException= (HttpException) e;
+                            int code=httpException.code();
+                            String msg=httpException.getMessage();
+                            if (code==504){
+                                msg="网络不给力";
+                            }else if(code==404){
+                                msg="请求内容不存在！";
+                            }
+                            showToast(msg);
+                        }else {
 
+                        }
                     }
 
                     @Override

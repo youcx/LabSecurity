@@ -149,6 +149,14 @@ public class QrScannerActivity extends AppCompatActivity implements ZXingScanner
         super.onDestroy();
         mScannerView.stopCamera();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra(CODE_RESULT,"back");
+        this.setResult(RESULT_OK, intent);
+        finish();
+    }
 }
 
 

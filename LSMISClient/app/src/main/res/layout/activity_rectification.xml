@@ -10,43 +10,16 @@
     <include
         layout="@layout/widget_layout"
         android:id="@+id/mToolbar"/>
-    <LinearLayout
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        app:tabMode="scrollable"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/myReform"
-            android:layout_weight="1"
-            android:text="我的整改"
-            android:textColor="@color/colorPrimary"
-            android:background="@color/titleColor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/inReform"
-            android:layout_weight="1"
-            android:text="正在整改"
-            android:textColor="@color/colorPrimary"
-            android:background="@color/titleColor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/review"
-            android:layout_weight="1"
-            android:text="等待复查"
-            android:textColor="@color/colorPrimary"
-            android:background="@color/titleColor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
+        android:layout_height="wrap_content"></android.support.design.widget.TabLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
+
 
 </LinearLayout>

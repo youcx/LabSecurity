@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HttpManager {
     //服务端基地址
     public static final String BASE_URL="http://47.104.85.89/";
-    //public static final String BASE_URL="http://119.29.201.35:8083/";
+    //public static final String BASE_URL="http://119.29.201.35";
     //请求超时时间
     private static final int DEFAULT_TIME_OUT=5;
     //retrofit
@@ -87,7 +87,7 @@ public class HttpManager {
 
             Log.i("拦截器",request.toString());
             Log.i("请求头",request.headers().toString());
-            Log.i("请求体",request.body().toString());
+           // Log.i("请求体",request.body().toString());
             okhttp3.Response response = chain.proceed(chain.request());
             okhttp3.MediaType mediaType = response.body().contentType();
             String content = response.body().string();

@@ -1,10 +1,8 @@
 package com.example.you.lsmisclient.http;
 
-import com.example.you.lsmisclient.R;
 import com.example.you.lsmisclient.bean.CheckMission;
 import com.example.you.lsmisclient.bean.Lab;
 import com.example.you.lsmisclient.bean.LabDetailLevel;
-import com.example.you.lsmisclient.bean.LabId;
 import com.example.you.lsmisclient.bean.LabInfo;
 import com.example.you.lsmisclient.bean.LabLevel;
 import com.example.you.lsmisclient.bean.Result;
@@ -12,20 +10,16 @@ import com.example.you.lsmisclient.check.bean.CheckItem;
 import com.example.you.lsmisclient.check.bean.FirstCheckList;
 import com.example.you.lsmisclient.check.bean.SecondCheckList;
 import com.example.you.lsmisclient.lab.bean.LabInforResult;
+import com.example.you.lsmisclient.rectification.bean.InReformResult;
 import com.example.you.lsmisclient.rectification.bean.MyRectification;
 import com.example.you.lsmisclient.rectification.bean.MyReformResult;
-import com.example.you.lsmisclient.rectification.bean.ReformDetail;
+import com.example.you.lsmisclient.rectification.bean.CheckRecordDetail;
+import com.example.you.lsmisclient.rectification.bean.ReviewResult;
 
-import org.json.JSONObject;
-
-import java.io.File;
-import java.sql.Ref;
 import java.util.List;
 
 import okhttp3.MultipartBody;
-import retrofit2.http.Multipart;
 import rx.Observable;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -377,7 +371,7 @@ public class HttpTask {
      * @param changeId
      * @return
      */
-    public Observable<Result<ReformDetail>> getChangingDetail(int changeId)
+    public Observable<InReformResult<CheckRecordDetail>> getChangingDetail(int changeId)
     {
         return HttpManager
                 .getApi()
@@ -402,6 +396,33 @@ public class HttpTask {
     }
 
     /**
+     * 获取等待复检详情
+     * @param changeId
+     * @return
+     */
+    public Observable<ReviewResult> getWaitCheckDetail(int changeId)
+    {
+        return HttpManager
+                .getApi()
+                .getWaitCheckDetail(changeId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 申请复检
+     * @param partList
+     * @return
+     */
+    public Observable<Result> uploadChangeRecord(List<MultipartBody.Part> partList){
+        return HttpManager
+                .getApi()
+                .uploadChangeRecord(partList)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
      * 复检通过
      * @param recordId
      * @return
@@ -411,6 +432,19 @@ public class HttpTask {
         return HttpManager
                 .getApi()
                 .reCheckPass(recordId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 复检不通过，上传驳回原因
+     * @param partList
+     * @return
+     */
+    public Observable<Result> reCheckRefuse(List<MultipartBody.Part> partList){
+        return HttpManager
+                .getApi()
+                .reCheckRefuse(partList)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

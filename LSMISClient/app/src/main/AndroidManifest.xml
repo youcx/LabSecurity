@@ -55,7 +55,13 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
             android:exported="true" />
         <activity android:name=".rectification.ReformDetailActivity" />
         <activity android:name=".rectification.FillInReformActivity" />
-        <activity android:name=".check.CheckListActivity"></activity>
+        <activity android:name=".check.CheckListActivity" />
+        <activity android:name=".rectification.ReviewActivity" />
+        <activity android:name=".rectification.ReformActivity" />
+        <activity android:name=".rectification.ReviewDetailActivity" />
+        <activity android:name=".utils.PicShowActivity" />
+        <activity android:name=".MyTestActivity"
+            android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>

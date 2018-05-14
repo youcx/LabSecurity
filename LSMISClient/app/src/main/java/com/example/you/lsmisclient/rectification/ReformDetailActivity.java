@@ -17,7 +17,9 @@ import com.example.you.lsmisclient.bean.Result;
 import com.example.you.lsmisclient.http.HttpTask;
 import com.example.you.lsmisclient.rectification.adapter.InReformDetailAdapter;
 import com.example.you.lsmisclient.rectification.adapter.ReformDetailAdapter;
-import com.example.you.lsmisclient.rectification.bean.ReformDetail;
+import com.example.you.lsmisclient.rectification.bean.CheckRecordDetail;
+import com.example.you.lsmisclient.rectification.bean.InReformResult;
+import com.example.you.lsmisclient.rectification.bean.ReviewResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,13 +45,17 @@ public class ReformDetailActivity extends AppCompatActivity {
     ReformDetailAdapter reformDetailAdapter;
     InReformDetailAdapter inReformDetailAdapter;
     //数据
-    List<ReformDetail> datas;
+    List<CheckRecordDetail> datas;
     private int changeId;
     private String labName;
     private int reformFlag;
     private final int MY_REFORM=1;
     private final int IN_REFORM=2;
     private final int WAITING_FOR_REVIEW=3;
+
+    //recordId用于复查合格
+    private int recordId;
+
     //http
     HttpTask mTask;
 
@@ -60,11 +66,10 @@ public class ReformDetailActivity extends AppCompatActivity {
         //bind
         ButterKnife.bind(this);
         toolbarTextView.setText("整改 ");
-        Bundle bundle = getIntent().getExtras();
-        changeId = bundle.getInt("changeId");
-        labName = bundle.getString("labName");
-        reformFlag = bundle.getInt("reformFlag");
-        Log.i("changeId",""+changeId+",labName:"+labName+",reformFlag:"+reformFlag);
+
+        getDatasFromLastActivity();
+
+
         labNameTv.setText(labName);
         //Toolbar
         setSupportActionBar(mToolbar);
@@ -79,10 +84,38 @@ public class ReformDetailActivity extends AppCompatActivity {
         //init
         mTask=new HttpTask();
         datas=new ArrayList<>();
+
+        initRecyclerView();
+
+        initSwipeRefreshLayout();
+        //init();
+
+
+        //
+
+
+
+    }
+
+    /**
+     * 获取上个活动传来的数据
+     */
+    private void getDatasFromLastActivity(){
+        Bundle bundle = getIntent().getExtras();
+        changeId = bundle.getInt("changeId");
+        labName = bundle.getString("labName");
+        reformFlag = bundle.getInt("reformFlag");
+        Log.i("changeId",""+changeId+",labName:"+labName+",reformFlag:"+reformFlag);
+    }
+
+    /**
+     * 初始化RecyclerView,设置适配器,设置适配器监听
+     */
+    private void initRecyclerView(){
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         if(reformFlag==MY_REFORM)
         {
-            reformDetailAdapter=new ReformDetailAdapter();
+            reformDetailAdapter=new ReformDetailAdapter(this);
             reformDetailAdapter.setOnBtnClick(new ReformDetailAdapter.BtnClickInterface() {
                 @Override
                 public void onclick(View view, int postion) {
@@ -96,7 +129,7 @@ public class ReformDetailActivity extends AppCompatActivity {
             inReformDetailAdapter.setOnBtnClickListener(new InReformDetailAdapter.BtnClickListener() {
                 @Override
                 public void onclick(View view, int postion) {
-                   switchClick(view);
+                    switchClick(view);
                 }
             });
             mRecyclerView.setAdapter(inReformDetailAdapter);
@@ -110,28 +143,45 @@ public class ReformDetailActivity extends AppCompatActivity {
             });
             mRecyclerView.setAdapter(inReformDetailAdapter);
         }
+    }
 
+    /**
+     * 初始化下拉控件
+     */
+    private void initSwipeRefreshLayout(){
         swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
                 swipeRefreshLayout.setRefreshing(true);
-                startGetReformDetail();
+                switch (reformFlag){
+                    case MY_REFORM:
+                    case IN_REFORM:
+                        startGetReformDetail();
+                        break;
+                    case WAITING_FOR_REVIEW:
+                        startGetReviewDetail();
+                        break;
+
+                }
+
             }
         });
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                startGetReformDetail();
+                switch (reformFlag){
+                    case MY_REFORM:
+                    case IN_REFORM:
+                        startGetReformDetail();
+                        break;
+                    case WAITING_FOR_REVIEW:
+                        startGetReviewDetail();
+                        break;
+
+                }
             }
         });
-        //init();
-
-
-        //
-
-
-
     }
 
     /**
@@ -140,7 +190,7 @@ public class ReformDetailActivity extends AppCompatActivity {
     private void startGetReformDetail()
     {
         mTask.getChangingDetail(changeId)
-                .subscribe(new Subscriber<Result<ReformDetail>>() {
+                .subscribe(new Subscriber<InReformResult<CheckRecordDetail>>() {
                     @Override
                     public void onCompleted() {
 
@@ -164,7 +214,7 @@ public class ReformDetailActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(Result<ReformDetail> reformDetailResult) {
+                    public void onNext(InReformResult<CheckRecordDetail> reformDetailResult) {
                         swipeRefreshLayout.setRefreshing(false);
                         if(reformDetailResult!=null)
                         {
@@ -173,6 +223,7 @@ public class ReformDetailActivity extends AppCompatActivity {
                                 if(reformDetailResult.getData()!=null)
                                 {
                                     initReformDetail(reformDetailResult.getData());
+                                    reformDetailAdapter.setImageBaseUrl(reformDetailResult.getParentPath());
                                 }
                             }else{
                                 showToast(reformDetailResult.getMessage());
@@ -183,10 +234,55 @@ public class ReformDetailActivity extends AppCompatActivity {
     }
 
     /**
+     * 获取复检项详情
+     */
+    private void startGetReviewDetail(){
+        mTask.getWaitCheckDetail(changeId)
+                .subscribe(new Subscriber<ReviewResult>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();if ( e instanceof HttpException){
+                            HttpException httpException= (HttpException) e;
+                            int code=httpException.code();
+                            String msg=httpException.getMessage();
+                            if (code==504){
+                                msg="网络不给力";
+                            }else if(code==404){
+                                msg="请求内容不存在！";
+                            }
+                            showToast(msg);
+                        }else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onNext(ReviewResult reviewResult) {
+                        swipeRefreshLayout.setRefreshing(false);
+                        if(reviewResult!=null){
+                            if(reviewResult.getStatus() == 200){
+                                recordId = reviewResult.getChangeRecord().getRecordId();
+                                if(reviewResult.getAdvice()!=null){
+                                    initReformDetail(reviewResult.getAdvice());
+                                }
+                            }else{
+                                showToast(reviewResult.getMsg());
+                            }
+                        }
+                    }
+                });
+    }
+
+    /**
      * 设置布局
      * @param detailDatas
      */
-    private void initReformDetail(ReformDetail detailDatas)
+    private void initReformDetail(CheckRecordDetail detailDatas)
     {
         if(reformFlag==MY_REFORM)
         {
@@ -233,6 +329,9 @@ public class ReformDetailActivity extends AppCompatActivity {
                 break;
             case R.id.reform_btn:
                 Intent intent=new Intent(getBaseContext(),FillInReformActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("changeId",changeId);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
             //复查
@@ -252,11 +351,46 @@ public class ReformDetailActivity extends AppCompatActivity {
                 Log.i("Adatper按钮","复查失败");
                 break;
             case R.id.btn_review_success:
-                Log.i("Adatper按钮","复查成功");
+                Log.i("Adatper按钮","复查合格");
+                ReviewPass();
                 break;
             default:
                 break;
         }
+    }
+
+    private void ReviewPass(){
+        mTask.reCheckPass(recordId)
+                .subscribe(new Subscriber<Result>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();if ( e instanceof HttpException){
+                            HttpException httpException= (HttpException) e;
+                            int code=httpException.code();
+                            String msg=httpException.getMessage();
+                            if (code==504){
+                                msg="网络不给力";
+                            }else if(code==404){
+                                msg="请求内容不存在！";
+                            }
+                            showToast(msg);
+                        }else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        if(result!=null){
+                            showToast(result.getMessage());
+                        }
+                    }
+                });
     }
 
 

@@ -159,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
         {
             case R.id.toolbar_scan:
                 Intent intent=new Intent(this, QrScannerActivity.class);
+                //Intent intent=new Intent(this, MyTestActivity.class);
                 startActivityForResult(intent,REQUEST_CODE);
                 break;
         }
@@ -170,7 +171,8 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode)
         {
             case REQUEST_CODE:
-                showToast(data.getStringExtra("qrValue"));
+                if(data.getStringExtra("qrValue")!=null)
+                    showToast(data.getStringExtra("qrValue"));
                 break;
             default:
                 break;

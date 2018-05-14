@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View
+        android:id="@+id/view1"
+        android:background="#eeeeee"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <TextView
+        android:id="@+id/reform_title"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/view1"
+        android:textColor="@color/blackWord"
+        android:background="@drawable/backgroud_color1"
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/view2"
+        android:background="#eeeeee"
+        android:layout_below="@+id/reform_title"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <TextView
+        android:id="@+id/reform_item"
+        android:layout_below="@+id/view2"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/redWarn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/view5"
+        android:background="#eeeeee"
+        android:layout_below="@+id/reform_item"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <TextView
+        android:id="@+id/reform_neirong"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <com.jaeger.ninegridimageview.NineGridImageView
+        android:id="@+id/check_nine_grid_img"
+        app:imgGap="3dp"
+        android:layout_below="@+id/reform_neirong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></com.jaeger.ninegridimageview.NineGridImageView>
+    <TextView
+        android:id="@+id/check_result"
+        android:drawableLeft="@drawable/ic_create_black_12dp"
+        android:text="检查结果"
+        android:layout_below="@+id/check_nine_grid_img"
+        android:paddingLeft="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/pic"
+        android:drawableLeft="@drawable/ic_camera_alt_black_12dp"
+        android:layout_alignTop="@+id/check_result"
+        android:layout_centerHorizontal="true"
+        android:text="相关照片"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/document"
+        android:drawableLeft="@drawable/ic_folder_open_black_24dp"
+        android:layout_alignTop="@+id/check_result"
+        android:layout_alignParentRight="true"
+        android:text="相关文档"
+        android:paddingRight="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/check_person"
+        android:paddingTop="10dp"
+        android:paddingLeft="8dp"
+        android:layout_below="@+id/check_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/check_time"
+        android:paddingLeft="8dp"
+        android:layout_below="@+id/check_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/reform_deadline"
+        android:paddingBottom="10dp"
+        android:textColor="@color/redWarn"
+        android:paddingLeft="8dp"
+        android:layout_below="@+id/check_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/view3"
+        android:background="#eeeeee"
+        android:layout_below="@+id/reform_deadline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <TextView
+        android:id="@+id/reform_content"
+        android:padding="8dp"
+        android:layout_below="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.jaeger.ninegridimageview.NineGridImageView
+        android:id="@+id/reform_nine_grid_img"
+        app:imgGap="3dp"
+        android:layout_below="@+id/reform_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.jaeger.ninegridimageview.NineGridImageView>
+    <TextView
+        android:id="@+id/review_result"
+        android:layout_below="@+id/reform_nine_grid_img"
+        android:drawableLeft="@drawable/ic_create_black_12dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="8dp"
+        android:text="复查结果"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/review_pic"
+        android:drawableLeft="@drawable/ic_camera_alt_black_12dp"
+        android:layout_alignTop="@+id/review_result"
+        android:layout_centerHorizontal="true"
+        android:text="复查照片"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"  />
+    <TextView
+        android:id="@+id/review_document"
+        android:drawableLeft="@drawable/ic_folder_open_black_24dp"
+        android:layout_alignTop="@+id/review_result"
+        android:layout_alignParentRight="true"
+        android:paddingRight="8dp"
+        android:text="复查文档"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/reform_person"
+        android:paddingTop="10dp"
+        android:paddingLeft="8dp"
+        android:layout_below="@+id/review_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/reform_time"
+        android:paddingBottom="10dp"
+        android:paddingLeft="8dp"
+        android:layout_below="@+id/reform_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_change_checker"
+        android:text="更换复查人"
+        android:background="@drawable/background_yellow"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_below="@+id/reform_time"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_review_fail"
+        android:text="复查失败"
+        android:background="@drawable/background_red"
+        android:layout_alignTop="@+id/btn_change_checker"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_review_success"
+        android:text="复查合格"
+        android:background="@drawable/backgroud_green"
+        android:layout_alignTop="@+id/btn_change_checker"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/view4"
+        android:background="#eeeeee"
+        android:layout_below="@+id/btn_change_checker"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+
+</RelativeLayout>

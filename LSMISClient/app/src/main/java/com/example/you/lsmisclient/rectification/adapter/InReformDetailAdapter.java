@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.you.lsmisclient.R;
-import com.example.you.lsmisclient.rectification.bean.ReformDetail;
+import com.example.you.lsmisclient.rectification.bean.CheckRecordDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 public class InReformDetailAdapter extends RecyclerView.Adapter<InReformDetailAdapter.InReformViewHolder>{
 
     //数据
-    List<ReformDetail> mDatas;
+    List<CheckRecordDetail> mDatas;
     //点击
     private BtnClickListener btnClickListener;
 
@@ -32,7 +32,7 @@ public class InReformDetailAdapter extends RecyclerView.Adapter<InReformDetailAd
      * 构造函数
      * @param mDatas
      */
-    public InReformDetailAdapter(List<ReformDetail> mDatas) {
+    public InReformDetailAdapter(List<CheckRecordDetail> mDatas) {
         this.mDatas = mDatas;
     }
 
@@ -43,11 +43,11 @@ public class InReformDetailAdapter extends RecyclerView.Adapter<InReformDetailAd
         mDatas=new ArrayList<>();
     }
 
-    public List<ReformDetail> getmDatas() {
+    public List<CheckRecordDetail> getmDatas() {
         return mDatas;
     }
 
-    public void setmDatas(List<ReformDetail> mDatas) {
+    public void setmDatas(List<CheckRecordDetail> mDatas) {
         this.mDatas = mDatas;
         notifyDataSetChanged();
     }
